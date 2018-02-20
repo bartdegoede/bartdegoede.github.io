@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bart de Goede</title>
-    <link>http://bart.degoe.de/</link>
+    <link>https://bart.degoe.de/</link>
     <description>Recent content on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="http://bart.degoe.de/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://bart.degoe.de/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
