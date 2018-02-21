@@ -3,7 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://bart.degoe.de/about/</loc>
+    <lastmod>2018-02-21T22:40:33+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://bart.degoe.de/</loc>
+    <lastmod>2018-02-21T22:40:33+01:00</lastmod>
     <priority>0</priority>
   </url>
   
