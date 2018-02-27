@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-  <title>About &middot; Bart de Goede</title>
+  <title>Python &middot; Bart de Goede</title>
 
   
   <link rel="stylesheet" href="http://bart.degoe.de/css/poole.css">
@@ -27,7 +27,7 @@
   
   
   
-  
+  <link href="http://bart.degoe.de/tags/python/index.xml" rel="alternate" type="application/rss+xml" title="Bart de Goede &middot; Bart de Goede" />
 
   <meta name="description" content="">
   <meta name="keywords" content="">
@@ -82,87 +82,16 @@
 
 
 <div class="content container">
-  <div class="post">
-    <h1 class="post-title">About</h1>
-    <p>Hi! My name is Bart de Goede, and I write software for a living. Besides that, I like a lot of other things, such as traveling, eating (nice) food or go for a drink with my friends.</p>
-
-<p>Find me on <a href="https://github.com/bartdegoede">GitHub</a>, <a href="https://www.linkedin.com/in/bart-de-goede-597a5232/">LinkedIn</a> or <a href="https://twitter.com/bartdegoede">Twitter</a>.</p>
-
-  </div>
+  <ul class="posts">
+  
+    <li><a href="http://bart.degoe.de/hello-and-doing-some-bubble-sorting-in-python/">Hello, and doing some bubble sorting in Python</a>
+    </span>
+    &middot; <time>Feb 23, 2018</time></li>
+  
+  </ul>
 </div>
 <script src="http://bart.degoe.de/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="js/vendor/lunr.min.js"></script>
-<script>
-  var lunrIndex,
-      $results,
-      pagesIndex;
-
-  function initLunr() {
-    $.getJSON('js/lunr/PagesIndex.json')
-        .done(function(documents) {
-            console.log('index:', documents);
-            pagesIndex = documents;
-            lunrIndex = lunr(function() {
-                this.field('title');
-                this.field('tags');
-                this.field('content');
-                this.ref('href');
-
-                for (var i = 0; i < documents.length; ++i) {
-                    this.add(documents[i])
-                }
-            });
-        }).fail(function(jqxhr, textStatus, error) {
-            var err = textStatus + ', ' + error;
-            console.error('Error getting index file:', err);
-        });
-  }
-
-  function initUI() {
-    $results = $('#results');
-    $('#search').keyup(function() {
-        $results.empty();
-        
-        var query = $(this).val();
-        if (query.length < 2) {
-            return;
-        }
-        var results = searchSite(query);
-        renderResults(results);
-    });
-  }
-
-  function searchSite(query) {
-    return lunrIndex.search(query).map(function(result) {
-        return pagesIndex.filter(function(page) {
-            return page.href === result.ref;
-        })[0];
-    });
-  }
-
-  function renderResults(results) {
-    if (!results.length) {
-        return;
-    }
-
-    results.slice(0, 10).forEach(function(result) {
-        var $result = $('<li>');
-        $result.append($('<a>', {
-            href: result.href,
-            text: '» ' + result.title
-        }));
-        $results.append($result);
-    });
-  }
-
-  initLunr();
-
-  $(document).ready(function() {
-    initUI();
-  });
-</script>
 </body>
 </html>
 
