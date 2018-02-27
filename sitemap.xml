@@ -3,8 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://bart.degoe.de/hello-and-doing-some-bubble-sorting-in-python/</loc>
-    <lastmod>2018-02-23T18:58:17+01:00</lastmod>
+    <loc>http://bart.degoe.de/doing-some-bubble-sorting-in-python/</loc>
+    <lastmod>2018-02-27T18:58:17+01:00</lastmod>
   </url>
   
   <url>
@@ -14,7 +14,7 @@
   
   <url>
     <loc>http://bart.degoe.de/</loc>
-    <lastmod>2018-02-23T18:58:17+01:00</lastmod>
+    <lastmod>2018-02-27T18:58:17+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -25,19 +25,19 @@
   
   <url>
     <loc>http://bart.degoe.de/post/</loc>
-    <lastmod>2018-02-23T18:58:17+01:00</lastmod>
+    <lastmod>2018-02-27T18:58:17+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://bart.degoe.de/categories/python/</loc>
-    <lastmod>2018-02-23T18:58:17+01:00</lastmod>
+    <lastmod>2018-02-27T18:58:17+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://bart.degoe.de/categories/sort/</loc>
-    <lastmod>2018-02-23T18:58:17+01:00</lastmod>
+    <lastmod>2018-02-27T18:58:17+01:00</lastmod>
     <priority>0</priority>
   </url>
   
