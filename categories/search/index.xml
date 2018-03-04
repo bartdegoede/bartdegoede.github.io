@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Bart de Goede</title>
-    <link>http://bart.degoe.de/</link>
-    <description>Recent content on Bart de Goede</description>
+    <title>Search on Bart de Goede</title>
+    <link>http://bart.degoe.de/categories/search/</link>
+    <description>Recent content in Search on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 04 Mar 2018 23:38:44 +0100</lastBuildDate>
     
-	<atom:link href="http://bart.degoe.de/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://bart.degoe.de/categories/search/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,16 +18,6 @@
       
       <guid>http://bart.degoe.de/searching-your-hugo-site-with-lunr/</guid>
       <description>&lt;p&gt;Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &amp;ldquo;How To Do Things™&amp;rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>http://bart.degoe.de/about/</link>
-      <pubDate>Wed, 21 Feb 2018 22:40:33 +0100</pubDate>
-      
-      <guid>http://bart.degoe.de/about/</guid>
-      <description>Hi! My name is Bart de Goede, and I write software for a living. Besides that, I like a lot of other things, such as traveling, eating (nice) food or go for a drink with my friends.
-Find me on GitHub, LinkedIn or Twitter.</description>
     </item>
     
   </channel>

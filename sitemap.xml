@@ -3,18 +3,53 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://bart.degoe.de/searching-your-hugo-site-with-lunr/</loc>
+    <lastmod>2018-03-04T23:38:44+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://bart.degoe.de/about/</loc>
     <lastmod>2018-02-21T22:40:33+01:00</lastmod>
   </url>
   
   <url>
     <loc>http://bart.degoe.de/</loc>
-    <lastmod>2018-02-21T22:40:33+01:00</lastmod>
+    <lastmod>2018-03-04T23:38:44+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://bart.degoe.de/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://bart.degoe.de/categories/hugo/</loc>
+    <lastmod>2018-03-04T23:38:44+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://bart.degoe.de/categories/javascript/</loc>
+    <lastmod>2018-03-04T23:38:44+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://bart.degoe.de/categories/lunr/</loc>
+    <lastmod>2018-03-04T23:38:44+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://bart.degoe.de/post/</loc>
+    <lastmod>2018-03-04T23:38:44+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://bart.degoe.de/categories/search/</loc>
+    <lastmod>2018-03-04T23:38:44+01:00</lastmod>
     <priority>0</priority>
   </url>
   

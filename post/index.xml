@@ -6,19 +6,18 @@
     <description>Recent content in Posts on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 27 Feb 2018 18:58:17 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 04 Mar 2018 23:38:44 +0100</lastBuildDate>
     
 	<atom:link href="http://bart.degoe.de/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Doing some bubble sorting in Python</title>
-      <link>http://bart.degoe.de/doing-some-bubble-sorting-in-python/</link>
-      <pubDate>Tue, 27 Feb 2018 18:58:17 +0100</pubDate>
+      <title>Searching your Hugo site with Lunr</title>
+      <link>http://bart.degoe.de/searching-your-hugo-site-with-lunr/</link>
+      <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
-      <guid>http://bart.degoe.de/doing-some-bubble-sorting-in-python/</guid>
-      <description>Bubble sorting is one of the more simple sorting algorithms out there. It generally is one of the slowest algorithms out there, going through the data it is sorting repeatedly, swapping elements as it goes until no more swaps are needed, which indicates that the data is (finally) sorted.
-Why would you even want to use bubble sort? Excellent question.</description>
+      <guid>http://bart.degoe.de/searching-your-hugo-site-with-lunr/</guid>
+      <description>&lt;p&gt;Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &amp;ldquo;How To Do Things™&amp;rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.&lt;/p&gt;</description>
     </item>
     
   </channel>
