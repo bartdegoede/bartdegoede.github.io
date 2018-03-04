@@ -1,0 +1,25 @@
+.search-container {
+    position: relative;
+    padding-bottom: 2rem;
+    margin-top: -2rem;
+}
+
+.search-container .fa-search {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    font-size: 125%;
+    color: #515151;
+}
+
+.search-input {
+    font-size: 24px;
+    line-height: 1.25;
+    padding: 0.5rem 1rem;
+    text-indent: 32px;
+    color: #515151;
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background-clip: padding-box;
+}
