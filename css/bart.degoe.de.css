@@ -23,3 +23,43 @@
     border: 1px solid rgba(0, 0, 0, 0.15);
     background-clip: padding-box;
 }
+
+.input-container {
+    width: 100%;
+}
+
+.input-container .input {
+    font-size: 20px;
+    line-height: 1.25;
+    padding: 0.5rem 1rem;
+    color: #515151;
+    width: 80%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background-clip: padding-box;
+    float: left;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.input-container button {
+    width: 20%;
+    float: left;
+    font-size: 20px;
+    line-height: 1.25;
+    padding: 0.5rem 1rem;
+    color: #515151;
+    background-color: #f8f9fa;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-left-style: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.input-container button:hover {
+    background-color: #e2e6ea;
+}

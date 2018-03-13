@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Bart de Goede</title>
-    <link>http://bart.degoe.de/post/</link>
+    <link>//bart.degoe.de/post/</link>
     <description>Recent content in Posts on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 04 Mar 2018 23:38:44 +0100</lastBuildDate>
     
-	<atom:link href="http://bart.degoe.de/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//bart.degoe.de/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Searching your Hugo site with Lunr</title>
-      <link>http://bart.degoe.de/searching-your-hugo-site-with-lunr/</link>
+      <link>//bart.degoe.de/searching-your-hugo-site-with-lunr/</link>
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
-      <guid>http://bart.degoe.de/searching-your-hugo-site-with-lunr/</guid>
+      <guid>//bart.degoe.de/searching-your-hugo-site-with-lunr/</guid>
       <description>&lt;p&gt;Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &amp;ldquo;How To Do Things™&amp;rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.&lt;/p&gt;</description>
     </item>
     

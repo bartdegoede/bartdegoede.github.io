@@ -2,47 +2,47 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Bart de Goede</title>
-    <link>http://bart.degoe.de/categories/</link>
+    <link>//bart.degoe.de/categories/</link>
     <description>Recent content in Categories on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="http://bart.degoe.de/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//bart.degoe.de/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hugo</title>
-      <link>http://bart.degoe.de/categories/hugo/</link>
+      <link>//bart.degoe.de/categories/hugo/</link>
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
-      <guid>http://bart.degoe.de/categories/hugo/</guid>
+      <guid>//bart.degoe.de/categories/hugo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Javascript</title>
-      <link>http://bart.degoe.de/categories/javascript/</link>
+      <link>//bart.degoe.de/categories/javascript/</link>
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
-      <guid>http://bart.degoe.de/categories/javascript/</guid>
+      <guid>//bart.degoe.de/categories/javascript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Lunr</title>
-      <link>http://bart.degoe.de/categories/lunr/</link>
+      <link>//bart.degoe.de/categories/lunr/</link>
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
-      <guid>http://bart.degoe.de/categories/lunr/</guid>
+      <guid>//bart.degoe.de/categories/lunr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Search</title>
-      <link>http://bart.degoe.de/categories/search/</link>
+      <link>//bart.degoe.de/categories/search/</link>
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
-      <guid>http://bart.degoe.de/categories/search/</guid>
+      <guid>//bart.degoe.de/categories/search/</guid>
       <description></description>
     </item>
     
