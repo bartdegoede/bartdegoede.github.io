@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Bart de Goede</title>
-    <link>//bart.degoe.de/post/</link>
-    <description>Recent content in Posts on Bart de Goede</description>
+    <title>Python on Bart de Goede</title>
+    <link>//bart.degoe.de/categories/python/</link>
+    <description>Recent content in Python on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 23 Mar 2018 15:00:00 +0100</lastBuildDate>
     
-	<atom:link href="//bart.degoe.de/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//bart.degoe.de/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -19,15 +19,6 @@
       <guid>//bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</guid>
       <description>Bloom filters are cool. In my experience, it&amp;rsquo;s a somewhat underestimated data structure that sounds more complex than it actually is. In this post I&amp;rsquo;ll go over what they are, how they work (I&amp;rsquo;ve hacked together an interactive example to help visualise what happens behind the scenes) and go over some of their usecases in the wild.
 What is a Bloom filter? A Bloom filter is a data structure designed to quickly tell you whether an element is not in a set.</description>
-    </item>
-    
-    <item>
-      <title>Searching your Hugo site with Lunr</title>
-      <link>//bart.degoe.de/searching-your-hugo-site-with-lunr/</link>
-      <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
-      
-      <guid>//bart.degoe.de/searching-your-hugo-site-with-lunr/</guid>
-      <description>&lt;p&gt;Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &amp;ldquo;How To Do Things™&amp;rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.&lt;/p&gt;</description>
     </item>
     
   </channel>

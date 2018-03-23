@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Bloom filters, using bit arrays for recommendations, caches and Bitcoin &middot; Bart de Goede</title>
+
+  
+  <link rel="stylesheet" href="//bart.degoe.de/css/poole.css">
+  <link rel="stylesheet" href="//bart.degoe.de/css/hyde.css">
+  <link rel="stylesheet" href="//bart.degoe.de/css/poole-overrides.css">
+  <link rel="stylesheet" href="//bart.degoe.de/css/hyde-overrides.css">
+  <link rel="stylesheet" href="//bart.degoe.de/css/hyde-x.css">
+  <link rel="stylesheet" href="//bart.degoe.de/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/bart.degoe.de.css">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="//bart.degoe.de/touch-icon-144-precomposed.png">
+  <link href="//bart.degoe.de/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-70807628-2', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Bart de Goede</h1>
+      <p class="lead">There are two hard things in computer science: naming things, being funny, and off-by-one errors.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="//bart.degoe.de/">Home</a></li>
+      
+      <li class="sidebar-nav-item"><a href="//bart.degoe.de/about/">About</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      <a href="https://github.com/bartdegoede"><i class="fa fa-github-square fa-3x"></i></a>
+      
+      
+      <a href="https://www.linkedin.com/in/bart-de-goede-597a5232/"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      
+      
+      <a href="https://twitter.com/bartdegoede"><i class="fa fa-twitter-square fa-3x"></i></a>
+      
+      <a href="//bart.degoe.de/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
+      </li>
+    </ul>
+
+    
+
+    <p>Copyright &copy; 2018 </p>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">Bloom filters, using bit arrays for recommendations, caches and Bitcoin</h1>
+    <span class="post-date">Mar 23, 2018 &middot; <a href="//bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/#disqus_thread">Comments</a>
+    
+    <br/>
+    <a class="label" href="//bart.degoe.de/categories/python">python</a><a class="label" href="//bart.degoe.de/categories/bloom-filter">bloom filter</a><a class="label" href="//bart.degoe.de/categories/how-to">how-to</a>
+    </span>
+    
+
+<p>Bloom filters are cool. In my experience, it&rsquo;s a somewhat underestimated data structure that sounds more complex than it actually is. In this post I&rsquo;ll go over what they are, how they work (I&rsquo;ve hacked together an <a href="#interactive_example">interactive example</a> to help visualise what happens behind the scenes) and go over some of their usecases in the wild.</p>
+
+<h2 id="what-is-a-bloom-filter">What is a Bloom filter?</h2>
+
+<p>A Bloom filter is a data structure designed to quickly tell you whether an element is not in a set. What&rsquo;s even nicer, it does so within the memory constraints you specify. It doesn&rsquo;t actually store the data itself, only trimmed down version of it. This gives it the desirable property that it has a <em>constant time complexity</em><sup class="footnote-ref" id="fnref:BigO"><a href="#fn:BigO">1</a></sup> for both adding a value to the filter <em>and</em> for checking whether a value is present in the filter. The cool part is that this is <em>independent</em> of how many elements already in the filter.</p>
+
+<p>Like with most things that offer great benefits, there is a trade-off: Bloom filters are probabilistic in nature. On rare occassions, it will respond with <em>yes</em> to the question if the element is in the set (<em>false positives</em> are a possibility), although it will never respond with <em>no</em> if the value is actually present (<em>false negatives</em> can&rsquo;t happen).</p>
+
+<p>You can actually control how rare those occassions are, by setting the size of the Bloom filter bit array and the amount of hash functions depending on the amount of elements you expect to add<sup class="footnote-ref" id="fnref:optimal-hash-functions"><a href="#fn:optimal-hash-functions">2</a></sup>. Also, note that you can&rsquo;t remove items from a Bloom filter.</p>
+
+<h2 id="how-does-it-work">How does it work?</h2>
+
+<p>An empty Bloom filter is a bit array of a particular size (let&rsquo;s call that size <em>m</em>) where all the bits are set to 0. In addition, there must be a number (let&rsquo;s call the number <em>k</em>) of hashing functions defined. Each of these functions hashes a value to one of the positions in our array <em>m</em>, distributing the values uniformly over the array.</p>
+
+<p>We&rsquo;ll do a very simple Python implementation<sup class="footnote-ref" id="fnref:bloom-gist"><a href="#fn:bloom-gist">3</a></sup> of a Bloom filter. For simplicity&rsquo;s sake, we&rsquo;ll use a bit array<sup class="footnote-ref" id="fnref:bitarraydisclaimer"><a href="#fn:bitarraydisclaimer">4</a></sup> with 15 bits (<code>m=15</code>) and 3 hashing functions (<code>k=3</code>) for the running example.</p>
+
+<pre><code>import mmh3
+
+class Bloomfilter(object):
+    def __init__(self, m=15, k=3):
+        self.m = m
+        self.k = k
+        # we use a list of Booleans to represent our
+        # bit array for simplicity
+        self.bit_array = [False for i in range(self.m)]
+
+    def add(self, element):
+        ...
+
+    def check(self, element):
+        ...
+</code></pre>
+
+<p>To add elements to the array, our <code>add</code> method needs to run <code>k</code> hashing functions on the input that each will almost randomly pick an index in our bit array. We&rsquo;ll use the <a href="https://pypi.python.org/pypi/mmh3"><code>mmh3</code></a> library to hash our <code>element</code>, and use the amount of hash functions we want to apply as a seed to give us different hashes for each of them. Finally, we compute the remainder of the hash divided by the size of the bit array to obtain the position we want to set.<sup class="footnote-ref" id="fnref:signedisfalse"><a href="#fn:signedisfalse">5</a></sup></p>
+
+<pre><code>def add(self, element):
+    &quot;&quot;&quot;
+    Add an element to the filter. Murmurhash3 gives us hash values
+    distributed uniformly enough we can use different seeds to
+    represent different hash functions
+    &quot;&quot;&quot;
+    for i in range(self.k):
+        # this will give us a number between 0 and m - 1
+        digest = mmh3.hash(element, i, signed=False) % self.m
+        self.bit_array[digest] = True
+</code></pre>
+
+<p>In our case (<code>m=15</code> and <code>k=3</code>), we would set the bits at index 1, 7 and 10 to one for the string <code>hello</code>.</p>
+
+<pre><code>In [1]: mmh3.hash('hello', 0, signed=False) % 15
+Out[1]: 1
+
+In [2]: mmh3.hash('hello', 1, signed=False) % 15
+Out[2]: 7
+
+In [3]: mmh3.hash('hello', 2, signed=False) % 15
+Out[3]: 10
+</code></pre>
+
+<p>Now, to determine if an element is in the bloom filter, we apply the same hash functions to the element, and see whether the bits at the resulting indices are all 1. If one of them is <em>not</em> 1, then the element has not been added to the filter (because otherwise we&rsquo;d see a value of 1 for all hash functions!).</p>
+
+<pre><code>def check(self, element):
+    &quot;&quot;&quot;
+    To check whether element is in the filter, we hash the element with
+    the same hash functions as the add functions (using the seed). If one
+    of them doesn't occur in our bit_array, the element is not in there
+    (only a value that hashes to all of the same indices we've already
+    seen before).
+    &quot;&quot;&quot;
+    for i in range(self.k):
+        digest = mmh3.hash(element, i, signed=False) % self.m
+        if self.bit_array[digest] == False:
+            # if any of the bits hasn't been set, then it's not in
+            # the filter
+            return False
+    return True
+</code></pre>
+
+<p>You can see how this approach guarantuees that there will be no <em>false negatives</em>, but that there might be <em>false positives</em>; especially in our toy example with the small bit array, the more elements you add to the filter, the more likely it gets that the three bits we hash an element to are set other elements (running one of the hash functions on the string <code>world</code> will also set the bit at index 6 to 1):</p>
+
+<pre><code>In [4]: mmh3.hash('world', 0, signed=False) % 15
+Out[4]: 7
+
+In [5]: mmh3.hash('world', 1, signed=False) % 15
+Out[5]: 4
+
+In [6]: mmh3.hash('world', 2, signed=False) % 15
+Out[6]: 9
+</code></pre>
+
+<p>We can actually <a href="https://en.wikipedia.org/wiki/Bloom_filter#Probability_of_false_positives">compute the probability</a> of our Bloom filter returning a false positive, as it is a function of the number of bits used in the bit array divided by the length of the bit array (<code>m</code>) to the power of hash functions we&rsquo;re using <code>k</code> (we&rsquo;ll leave that for a future post though). The more values we add, the higher the probability of false positives becomes.</p>
+
+<h2 id="a-name-interactive-example-a-interactive-example"><a name="interactive_example"></a>Interactive example</h2>
+
+<p>To further drive home how Bloom filters work, I&rsquo;ve hacked together a Bloom filter in JavaScript that uses the cells in the table below as a &ldquo;bit array&rdquo; to visualise how adding more values will fill up the filter and increase the probability of a false positive (a full Bloom filter will always return &ldquo;yes&rdquo; for whatever value you throw at it).</p>
+
+<p><table id="bitvector" border="1">
+    <tbody>
+        <tr id="bits"></tr>
+        <tr id="labels"></tr>
+    </tbody>
+</table>
+<div class="input-container">
+    <input placeholder="Add an element" id="bloom_input" class="input">
+    <button id="add_value_to_bloom_filter">Add</button>
+</div>
+<div id="hashes">
+    <b>Hash value 1:</b> <span id="hash0"></span><br>
+    <b>Hash value 2:</b> <span id="hash1"></span><br>
+    <b>Hash value 3:</b> <span id="hash2"></span><br><br>
+    <b>Elements in the filter:</b> [<span id="elements"></span>]<br>
+    <b>Probability of false positives:</b> <span id="false_positive_probability">0%</span>
+</div>
+<div class="input-container">
+    <input placeholder="Element in filter?" id="bloom_input_test" class="input">
+    <button id="test_value_in_bloom_filter">Test</button>
+</div>
+<div id="in_bloom_filter">
+    <b>In Bloom filter:</b> <span></span>
+</div>
+<hr></p>
+
+<h2 id="what-can-i-use-it-for">What can I use it for?</h2>
+
+<p>Given that a Bloom filter is really good at telling you whether something is in a set or not, caching is a prime candidate for using a Bloom filter. CDN providers like Akamai<sup class="footnote-ref" id="fnref:akamai-ref"><a href="#fn:akamai-ref">6</a></sup> use it to optimise their disk caches; nearly 75% of the URLs that are accessed in their web caches is accessed only once and then never again. To prevent caching these &ldquo;one-hit wonders&rdquo; and massively saving disk space requirements, Akamai uses a Bloom filter to store all URLs that are accessed. If a URL is found in the Bloom filter, it means it was requested before, and should be stored in their disk cache.</p>
+
+<p>Blogging platform Medium <a href="https://blog.medium.com/what-are-bloom-filters-1ec2a50c68ff">uses Bloom filters</a><sup class="footnote-ref" id="fnref:medium-bloom"><a href="#fn:medium-bloom">7</a></sup> to filter out posts that users have already read from their personalised reading lists. They create a Bloom filter for every user, and add every article they read to the filter. When a reading list is generated, they can check the filter whether the user has seen the article. The trade-off for false positives (i.e. an article they <em>haven&rsquo;t</em> read before) is more than acceptable, because in that case the user won&rsquo;t be shown an article that they haven&rsquo;t read yet (so they will never know).</p>
+
+<p>Quora does something similar to filter out stories users have seen before, and <a href="https://www.facebook.com/Engineering/videos/432864835468/">Facebook</a> and <a href="https://engineering.linkedin.com/open-source/cleo-open-source-technology-behind-linkedins-typeahead-search">LinkedIn</a> use Bloom filters in their typeahead searches (it basically provides a fast and memory-efficient way to filter out documents that can&rsquo;t match on the prefix of the query terms).</p>
+
+<p>Bitcoin relies strongly on a peer-to-peer style of communication, instead of a client-server architecture in the examples above. Every node in the network is a server, and everyone in the network has a copy of everone else&rsquo;s transactions. For big beefy servers in a data center that&rsquo;s fine, but what if you don&rsquo;t necessarily care about <em>all</em> transactions? Think of a mobile wallet application for example, you don&rsquo;t want all transactions on the blockchain, especially when you have to download them on a mobile connection. To address this, Bitcoin has an option called <a href="https://en.bitcoin.it/wiki/Scalability#Simplified_payment_verification">Simplified Payment Verification</a> (SPV) which lets your (mobile) node request only the transactions it&rsquo;s interested in (i.e. payments from or to your wallet address). The SPV client calculates a Bloom filter for the transactions it cares about, so the &ldquo;full node&rdquo; has an efficient way to answer &ldquo;is this client interested in this transation?&rdquo;. The cost of false positives (i.e. a client is actually <em>not</em> interested in a transaction) is minimal, because when the client processes the transactions returned by the full node it can simply discard the ones it doesn&rsquo;t care about.</p>
+
+<h2 id="closing-thoughts">Closing thoughts</h2>
+
+<p>There are <a href="https://www.quora.com/What-are-the-best-applications-of-Bloom-filters">a lot more applications</a> for Bloom filters out there, and I can&rsquo;t list them all here. I hope a gave you a whirlwind overview of how Bloom filters work and how they might be useful to you.</p>
+
+<p>Feel free to <a href="/about/">drop me a line</a> or comment below if you have nice examples of where they&rsquo;re used, or if you have any feedback, comments, or just want to say hi :-)</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:BigO">The runtime for both inserting and checking is defined by the number of hash functions (<code>k</code>) we have to execute. So, <code>O(k)</code>. Space complexity is more difficult to quantify, because that depends on how many false positives you&rsquo;re willing to tolerate; allocating more space will lower the false positive rate.
+ <a class="footnote-return" href="#fnref:BigO"><sup>[return]</sup></a></li>
+<li id="fn:optimal-hash-functions">Going over the math is a bit much for this post, so check <a href="https://en.wikipedia.org/wiki/Bloom_filter#Optimal_number_of_hash_functions">Wikipedia</a> for all the formulas 😄.
+ <a class="footnote-return" href="#fnref:optimal-hash-functions"><sup>[return]</sup></a></li>
+<li id="fn:bloom-gist">Full implementation on <a href="https://gist.github.com/bartdegoede/42ef7a265d946a9a75617a89ecbaf674">GitHub</a>.
+ <a class="footnote-return" href="#fnref:bloom-gist"><sup>[return]</sup></a></li>
+<li id="fn:bitarraydisclaimer">Our implementation won&rsquo;t use an actual bit array but a Python list containing Booleans for the sake of readability.
+ <a class="footnote-return" href="#fnref:bitarraydisclaimer"><sup>[return]</sup></a></li>
+<li id="fn:signedisfalse">Note that there&rsquo;s a slight difference between the Python and Javascript Murmurhash implementation in the libraries I&rsquo;ve used; the <a href="http://pid.github.io/murmurHash3js/">Javascript library I used</a> returns a 32 bit <em>unsigned</em> integer, where the <a href="https://github.com/hajimes/mmh3">Python library</a> returns a 32 bit <em>signed</em> integer by default. To keep the Python example consistent with the Javascript, I opted to use unsigned integers there too; there is no impact for the working of the Bloom filter.
+ <a class="footnote-return" href="#fnref:signedisfalse"><sup>[return]</sup></a></li>
+<li id="fn:akamai-ref">Maggs, Bruce M.; Sitaraman, Ramesh K. (July 2015), &ldquo;Algorithmic nuggets in content delivery&rdquo;, <em>SIGCOMM Computer Communication Review</em>, New York, NY, USA: ACM, 45 (3): 52–66, <a href="https://doi.org/10.1145%2F2805789.2805800"><code>doi:10.1145/2805789.2805800</code></a>
+ <a class="footnote-return" href="#fnref:akamai-ref"><sup>[return]</sup></a></li>
+<li id="fn:medium-bloom">Read the article. It&rsquo;s really good.
+ <a class="footnote-return" href="#fnref:medium-bloom"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "bartdegoede";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "bartdegoede";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="//bart.degoe.de/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="/js/vendor/lunr.min.js"></script>
+<script type="text/javascript" src="/js/search/search.js"></script>
+<script src="/js/posts/2018-03-22-bloom-filters-bit-arrays-recommendations-caches-bitcoin/murmurhash3js.min.js"></script><script src="/js/posts/2018-03-22-bloom-filters-bit-arrays-recommendations-caches-bitcoin/bloomfilters.js"></script>
+</body>
+</html>
+

@@ -6,9 +6,28 @@
     <description>Recent content in Categories on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Fri, 23 Mar 2018 15:00:00 +0100</lastBuildDate>
     
 	<atom:link href="//bart.degoe.de/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bloom Filter</title>
+      <link>//bart.degoe.de/categories/bloom-filter/</link>
+      <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
+      
+      <guid>//bart.degoe.de/categories/bloom-filter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>How To</title>
+      <link>//bart.degoe.de/categories/how-to/</link>
+      <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
+      
+      <guid>//bart.degoe.de/categories/how-to/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Hugo</title>
@@ -34,6 +53,15 @@
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
       <guid>//bart.degoe.de/categories/lunr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>//bart.degoe.de/categories/python/</link>
+      <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
+      
+      <guid>//bart.degoe.de/categories/python/</guid>
       <description></description>
     </item>
     

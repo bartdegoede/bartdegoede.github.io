@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>//bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</loc>
+    <lastmod>2018-03-23T15:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>//bart.degoe.de/searching-your-hugo-site-with-lunr/</loc>
     <lastmod>2018-03-04T23:38:44+01:00</lastmod>
   </url>
@@ -14,12 +19,25 @@
   
   <url>
     <loc>//bart.degoe.de/</loc>
-    <lastmod>2018-03-04T23:38:44+01:00</lastmod>
+    <lastmod>2018-03-23T15:00:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//bart.degoe.de/categories/bloom-filter/</loc>
+    <lastmod>2018-03-23T15:00:00+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>//bart.degoe.de/categories/</loc>
+    <lastmod>2018-03-23T15:00:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//bart.degoe.de/categories/how-to/</loc>
+    <lastmod>2018-03-23T15:00:00+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -43,7 +61,13 @@
   
   <url>
     <loc>//bart.degoe.de/post/</loc>
-    <lastmod>2018-03-04T23:38:44+01:00</lastmod>
+    <lastmod>2018-03-23T15:00:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//bart.degoe.de/categories/python/</loc>
+    <lastmod>2018-03-23T15:00:00+01:00</lastmod>
     <priority>0</priority>
   </url>
   
