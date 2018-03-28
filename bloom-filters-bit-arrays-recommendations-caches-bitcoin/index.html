@@ -90,11 +90,9 @@
     <br/>
     <a class="label" href="//bart.degoe.de/categories/python">python</a><a class="label" href="//bart.degoe.de/categories/bloom-filter">bloom filter</a><a class="label" href="//bart.degoe.de/categories/how-to">how-to</a>
     </span>
-    
+    <p>Bloom filters are cool. In my experience, it&rsquo;s a somewhat underestimated data structure that sounds more complex than it actually is. In this post I&rsquo;ll go over what they are, how they work (I&rsquo;ve hacked together an <a href="#interactive_example">interactive example</a> to help visualise what happens behind the scenes) and go over some of their usecases in the wild.</p>
 
-<p>Bloom filters are cool. In my experience, it&rsquo;s a somewhat underestimated data structure that sounds more complex than it actually is. In this post I&rsquo;ll go over what they are, how they work (I&rsquo;ve hacked together an <a href="#interactive_example">interactive example</a> to help visualise what happens behind the scenes) and go over some of their usecases in the wild.</p>
-
-<h2 id="what-is-a-bloom-filter">What is a Bloom filter?</h2>
+<h1 id="what-is-a-bloom-filter">What is a Bloom filter?</h1>
 
 <p>A Bloom filter is a data structure designed to quickly tell you whether an element is not in a set. What&rsquo;s even nicer, it does so within the memory constraints you specify. It doesn&rsquo;t actually store the data itself, only trimmed down version of it. This gives it the desirable property that it has a <em>constant time complexity</em><sup class="footnote-ref" id="fnref:BigO"><a href="#fn:BigO">1</a></sup> for both adding a value to the filter <em>and</em> for checking whether a value is present in the filter. The cool part is that this is <em>independent</em> of how many elements already in the filter.</p>
 
@@ -102,7 +100,7 @@
 
 <p>You can actually control how rare those occassions are, by setting the size of the Bloom filter bit array and the amount of hash functions depending on the amount of elements you expect to add<sup class="footnote-ref" id="fnref:optimal-hash-functions"><a href="#fn:optimal-hash-functions">2</a></sup>. Also, note that you can&rsquo;t remove items from a Bloom filter.</p>
 
-<h2 id="how-does-it-work">How does it work?</h2>
+<h1 id="how-does-it-work">How does it work?</h1>
 
 <p>An empty Bloom filter is a bit array of a particular size (let&rsquo;s call that size <em>m</em>) where all the bits are set to 0. In addition, there must be a number (let&rsquo;s call the number <em>k</em>) of hashing functions defined. Each of these functions hashes a value to one of the positions in our array <em>m</em>, distributing the values uniformly over the array.</p>
 
@@ -184,7 +182,7 @@ Out[6]: 9
 
 <p>We can actually <a href="https://en.wikipedia.org/wiki/Bloom_filter#Probability_of_false_positives">compute the probability</a> of our Bloom filter returning a false positive, as it is a function of the number of bits used in the bit array divided by the length of the bit array (<code>m</code>) to the power of hash functions we&rsquo;re using <code>k</code> (we&rsquo;ll leave that for a future post though). The more values we add, the higher the probability of false positives becomes.</p>
 
-<h2 id="a-name-interactive-example-a-interactive-example"><a name="interactive_example"></a>Interactive example</h2>
+<h1 id="a-name-interactive-example-a-interactive-example"><a name="interactive_example"></a>Interactive example</h1>
 
 <p>To further drive home how Bloom filters work, I&rsquo;ve hacked together a Bloom filter in JavaScript that uses the cells in the table below as a &ldquo;bit array&rdquo; to visualise how adding more values will fill up the filter and increase the probability of a false positive (a full Bloom filter will always return &ldquo;yes&rdquo; for whatever value you throw at it).</p>
 
@@ -214,7 +212,7 @@ Out[6]: 9
 </div>
 <hr></p>
 
-<h2 id="what-can-i-use-it-for">What can I use it for?</h2>
+<h1 id="what-can-i-use-it-for">What can I use it for?</h1>
 
 <p>Given that a Bloom filter is really good at telling you whether something is in a set or not, caching is a prime candidate for using a Bloom filter. CDN providers like Akamai<sup class="footnote-ref" id="fnref:akamai-ref"><a href="#fn:akamai-ref">6</a></sup> use it to optimise their disk caches; nearly 75% of the URLs that are accessed in their web caches is accessed only once and then never again. To prevent caching these &ldquo;one-hit wonders&rdquo; and massively saving disk space requirements, Akamai uses a Bloom filter to store all URLs that are accessed. If a URL is found in the Bloom filter, it means it was requested before, and should be stored in their disk cache.</p>
 
@@ -224,7 +222,7 @@ Out[6]: 9
 
 <p>Bitcoin relies strongly on a peer-to-peer style of communication, instead of a client-server architecture in the examples above. Every node in the network is a server, and everyone in the network has a copy of everone else&rsquo;s transactions. For big beefy servers in a data center that&rsquo;s fine, but what if you don&rsquo;t necessarily care about <em>all</em> transactions? Think of a mobile wallet application for example, you don&rsquo;t want all transactions on the blockchain, especially when you have to download them on a mobile connection. To address this, Bitcoin has an option called <a href="https://en.bitcoin.it/wiki/Scalability#Simplified_payment_verification">Simplified Payment Verification</a> (SPV) which lets your (mobile) node request only the transactions it&rsquo;s interested in (i.e. payments from or to your wallet address). The SPV client calculates a Bloom filter for the transactions it cares about, so the &ldquo;full node&rdquo; has an efficient way to answer &ldquo;is this client interested in this transation?&rdquo;. The cost of false positives (i.e. a client is actually <em>not</em> interested in a transaction) is minimal, because when the client processes the transactions returned by the full node it can simply discard the ones it doesn&rsquo;t care about.</p>
 
-<h2 id="closing-thoughts">Closing thoughts</h2>
+<h1 id="closing-thoughts">Closing thoughts</h1>
 
 <p>There are <a href="https://www.quora.com/What-are-the-best-applications-of-Bloom-filters">a lot more applications</a> for Bloom filters out there, and I can&rsquo;t list them all here. I hope a gave you a whirlwind overview of how Bloom filters work and how they might be useful to you.</p>
 
@@ -250,7 +248,6 @@ Out[6]: 9
  <a class="footnote-return" href="#fnref:medium-bloom"><sup>[return]</sup></a></li>
 </ol>
 </div>
-
   </div>
   <div id="disqus_thread"></div>
 </div>

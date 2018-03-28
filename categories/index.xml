@@ -21,18 +21,36 @@
     </item>
     
     <item>
+      <title>Gh Pages</title>
+      <link>//bart.degoe.de/categories/gh-pages/</link>
+      <pubDate>Wed, 28 Mar 2018 23:55:40 +0200</pubDate>
+      
+      <guid>//bart.degoe.de/categories/gh-pages/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>How To</title>
       <link>//bart.degoe.de/categories/how-to/</link>
-      <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
+      <pubDate>Wed, 28 Mar 2018 23:55:40 +0200</pubDate>
       
       <guid>//bart.degoe.de/categories/how-to/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Https</title>
+      <link>//bart.degoe.de/categories/https/</link>
+      <pubDate>Wed, 28 Mar 2018 23:55:40 +0200</pubDate>
+      
+      <guid>//bart.degoe.de/categories/https/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Hugo</title>
       <link>//bart.degoe.de/categories/hugo/</link>
-      <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
+      <pubDate>Wed, 28 Mar 2018 23:55:40 +0200</pubDate>
       
       <guid>//bart.degoe.de/categories/hugo/</guid>
       <description></description>
@@ -71,6 +89,15 @@
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
       <guid>//bart.degoe.de/categories/search/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ssl</title>
+      <link>//bart.degoe.de/categories/ssl/</link>
+      <pubDate>Wed, 28 Mar 2018 23:55:40 +0200</pubDate>
+      
+      <guid>//bart.degoe.de/categories/ssl/</guid>
       <description></description>
     </item>
     

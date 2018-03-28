@@ -17,8 +17,7 @@
       <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
       
       <guid>//bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</guid>
-      <description>Bloom filters are cool. In my experience, it&amp;rsquo;s a somewhat underestimated data structure that sounds more complex than it actually is. In this post I&amp;rsquo;ll go over what they are, how they work (I&amp;rsquo;ve hacked together an interactive example to help visualise what happens behind the scenes) and go over some of their usecases in the wild.
-What is a Bloom filter? A Bloom filter is a data structure designed to quickly tell you whether an element is not in a set.</description>
+      <description>&lt;p&gt;Bloom filters are cool. In my experience, it&amp;rsquo;s a somewhat underestimated data structure that sounds more complex than it actually is. In this post I&amp;rsquo;ll go over what they are, how they work (I&amp;rsquo;ve hacked together an &lt;a href=&#34;#interactive_example&#34;&gt;interactive example&lt;/a&gt; to help visualise what happens behind the scenes) and go over some of their usecases in the wild.&lt;/p&gt;</description>
     </item>
     
   </channel>

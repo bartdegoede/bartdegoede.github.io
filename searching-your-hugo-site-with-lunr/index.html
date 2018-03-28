@@ -88,7 +88,7 @@
     <span class="post-date">Mar 4, 2018 &middot; <a href="//bart.degoe.de/searching-your-hugo-site-with-lunr/#disqus_thread">Comments</a>
     
     <br/>
-    <a class="label" href="//bart.degoe.de/categories/hugo">hugo</a><a class="label" href="//bart.degoe.de/categories/search">search</a><a class="label" href="//bart.degoe.de/categories/lunr">lunr</a><a class="label" href="//bart.degoe.de/categories/javascript">javascript</a>
+    <a class="label" href="//bart.degoe.de/categories/hugo">hugo</a><a class="label" href="//bart.degoe.de/categories/search">search</a><a class="label" href="//bart.degoe.de/categories/lunr">lunr</a><a class="label" href="//bart.degoe.de/categories/javascript">javascript</a><a class="label" href="//bart.degoe.de/categories/how-to">how-to</a>
     </span>
     <p>Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &ldquo;How To Do Things™&rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.</p>
 
@@ -107,13 +107,13 @@
 <br>Having a static side, it makes sense to move all the user interaction to the client. We depend on the users&rsquo; browser to run Javascript<sup class="footnote-ref" id="fnref:my-users"><a href="#fn:my-users">3</a></sup> and download the searchable data in order to run queries against it, but the upside is that you can control how data is processed and how that data is queried. Fortunately for us, <a href="https://blog.codinghorror.com/the-principle-of-least-power/">Atwood&rsquo;s Law</a> holds true; there&rsquo;s a full-text search library inspired by Lucene/Solr written in Javascript we can use to implement our search engine: <a href="https://lunrjs.com/">Lunr.js</a>.</li>
 </ol>
 
-<h2 id="relevance">Relevance</h2>
+<h1 id="relevance">Relevance</h1>
 
 <p>When thinking about search, the most important question is what users want to find. This sounds very much like an open door, but you&rsquo;d be surprised how often this gets overlooked; what are we looking for (tweets, products, (the fastest route to) a destination?), who is doing the search (lawyers, software engineers, my mom?), what do we hope to get out of it (money, page views?).</p>
 
 <p>In our case, we&rsquo;re searching blog posts that have titles, tags and content (in decreasing order of value to relevance); queries matching titles should be more important than matches in post content<sup class="footnote-ref" id="fnref:relevance"><a href="#fn:relevance">4</a></sup>.</p>
 
-<h2 id="indexing">Indexing</h2>
+<h1 id="indexing">Indexing</h1>
 
 <p>The project folder for my blog<sup class="footnote-ref" id="fnref:github"><a href="#fn:github">5</a></sup> looks roughly like this:</p>
 
@@ -210,7 +210,7 @@ module.exports = function(grunt) {
 ]
 </code></pre>
 
-<h2 id="querying">Querying</h2>
+<h1 id="querying">Querying</h1>
 
 <p>Now we&rsquo;ve built the index, we need a way of obtaining it client-side, and then query it. To do that, I have two partials that include <a href="https://github.com/bartdegoede/blog/blob/master/layouts/partials/search.html">the markup for the search input box</a> and the links to the <a href="https://github.com/bartdegoede/blog/blob/master/layouts/partials/search_scripts.html">relevant Javascript</a>:</p>
 

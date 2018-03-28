@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Free SSL with a custom domain on GitHub Pages &middot; Bart de Goede</title>
+
+  
+  <link rel="stylesheet" href="//bart.degoe.de/css/poole.css">
+  <link rel="stylesheet" href="//bart.degoe.de/css/hyde.css">
+  <link rel="stylesheet" href="//bart.degoe.de/css/poole-overrides.css">
+  <link rel="stylesheet" href="//bart.degoe.de/css/hyde-overrides.css">
+  <link rel="stylesheet" href="//bart.degoe.de/css/hyde-x.css">
+  <link rel="stylesheet" href="//bart.degoe.de/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/bart.degoe.de.css">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="//bart.degoe.de/touch-icon-144-precomposed.png">
+  <link href="//bart.degoe.de/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-70807628-2', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+      <h1>Bart de Goede</h1>
+      <p class="lead">There are two hard things in computer science: naming things, being funny, and off-by-one errors.</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="//bart.degoe.de/">Home</a></li>
+      
+      <li class="sidebar-nav-item"><a href="//bart.degoe.de/about/">About</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      <a href="https://github.com/bartdegoede"><i class="fa fa-github-square fa-3x"></i></a>
+      
+      
+      <a href="https://www.linkedin.com/in/bart-de-goede-597a5232/"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      
+      
+      <a href="https://twitter.com/bartdegoede"><i class="fa fa-twitter-square fa-3x"></i></a>
+      
+      <a href="//bart.degoe.de/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
+      </li>
+    </ul>
+
+    
+
+    <p>Copyright &copy; 2018 </p>
+<style>.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#000000 !important;background-color:#FFFFFF !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 0px 9px !important;font-size: 17px !important;letter-spacing:-0.08px !important;;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Lato', sans-serif !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#000000 !important;}</style><link href="https://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext" rel="stylesheet"><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/bart"><img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a coffee!"><span style="margin-left:5px">Buy me a coffee!</span></a>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">Free SSL with a custom domain on GitHub Pages</h1>
+    <span class="post-date">Mar 28, 2018 &middot; <a href="//bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/#disqus_thread">Comments</a>
+    
+    <br/>
+    <a class="label" href="//bart.degoe.de/categories/ssl">ssl</a><a class="label" href="//bart.degoe.de/categories/hugo">hugo</a><a class="label" href="//bart.degoe.de/categories/how-to">how-to</a><a class="label" href="//bart.degoe.de/categories/gh-pages">gh-pages</a><a class="label" href="//bart.degoe.de/categories/https">https</a>
+    </span>
+    <p><a href="https://pages.github.com/">GitHub Pages</a> is pretty awesome. It lets you push a bunch of static HTML (and/or CSS and Javascript) to a GitHub repository, and they&rsquo;ll host and serve it for you. For free!</p>
+
+<p>You basically set up a specific repository (you have to name it <code>&lt;your_username&gt;.github.io</code>), you push your HTML there, and they will be available at <code>https://&lt;your_username&gt;.github.io</code>. Did I mention that this is free?</p>
+
+<p>While you can perfectly write and push HTML files straight to your GitHub repository, there&rsquo;s a whole <a href="https://jekyllrb.com/docs/home/">bunch</a> of open source <a href="https://gohugo.io/">static</a> <a href="http://hyde.github.io/">site</a> generators available that provide a structured way of organising content, in formats (<a href="https://daringfireball.net/projects/markdown/">Markdown</a> 🙌) that are easier to work with<sup class="footnote-ref" id="fnref:staticsitegenerators"><a href="#fn:staticsitegenerators">1</a></sup>. GitHub even supports one of them (<a href="https://github.com/jekyll/jekyll">Jekyll</a>) out of the box, so you can just push your project as is and they&rsquo;ll take care of building of your HTML too<sup class="footnote-ref" id="fnref:jekyllvshugo"><a href="#fn:jekyllvshugo">2</a></sup>.</p>
+
+<p>You can even set up your own custom domain! Register your domain at your favourite registrar, and change a setting for your repository:</p>
+
+<p><img src="/img/2018-03-28-free-ssl-on-github-pages-with-a-custom-domain/github-repository-settings.png" alt="GitHub settings" /></p>
+
+<p>There, you fill out the custom domain you want your site to be available at (in my case that&rsquo;s <code>bart.degoe.de</code>).</p>
+
+<p><img src="/img/2018-03-28-free-ssl-on-github-pages-with-a-custom-domain/github-pages-settings-custom-domain.png" alt="GitHub custom domain settings" /></p>
+
+<p>Before you rush off to your registrar to point your domain (or subdomain, in my case<sup class="footnote-ref" id="fnref:confession"><a href="#fn:confession">3</a></sup>), make sure you add a <code>CNAME</code> file to the root of your repository. The <a href="https://github.com/bartdegoede/bartdegoede.github.io/blob/master/CNAME"><code>CNAME</code> file</a> should contain the URL your website should be displaying in the browser (this is important for redirects). In my case, the file contains <code>bart.degoe.de</code>, because that&rsquo;s the URL I want my site to be published under.</p>
+
+<h1 id="setting-up-cloudflare-and-ssl">Setting up CloudFlare and SSL</h1>
+
+<p>Then, all you need to do is add a <code>CNAME</code> entry to your domain settings settings. Right? Well, yes and no. Yes, setting up a <code>CNAME</code> DNS record will get your website working under the proper URL (it might take a while for the DNS change to propagate).</p>
+
+<p><img src="/img/2018-03-28-free-ssl-on-github-pages-with-a-custom-domain/registrar-cname.png" alt="Registrar CNAME" /></p>
+
+<p>However, serving your static files from GitHub under your own domain name does pose a problem; GitHub Pages only supports SSL for the <code>github.io</code> domain, not for custom domains (they have a wildcard certificate for their own domain, but supporting HTTPS on custom domains is not trivial<sup class="footnote-ref" id="fnref:opengithubissue"><a href="#fn:opengithubissue">4</a></sup>).</p>
+
+<p>That means that your website can&rsquo;t take advantage of <a href="https://www.mnot.net/blog/2014/01/04/strengthening_http_a_personal_view">HTTP/2 speedups</a>, it will have negative impact on your <a href="https://webmasters.googleblog.com/2014/08/https-as-ranking-signal.html">Google ranking</a>, <a href="https://developers.google.com/web/updates/2016/10/avoid-not-secure-warn">Chrome</a> will show your visitors that your website is <a href="https://security.googleblog.com/2016/09/moving-towards-more-secure-web.html">not secure</a> and even for your static site with <a href="https://bart.degoe.de/searching-your-hugo-site-with-lunr/">fancy Javascript features</a> you do want to protect your users when they&rsquo;re reading your posts on unsecured Wi-Fi networks.</p>
+
+<h2 id="cloudflare">CloudFlare</h2>
+
+<p>Fortunately, there&rsquo;s a way to get this coveted green secure lock on your static website. <a href="https://www.cloudflare.com/">CloudFlare</a><sup class="footnote-ref" id="fnref:cloudflare"><a href="#fn:cloudflare">5</a></sup> provides the (free) feature &ldquo;Universal SSL&rdquo; that will allow your users to access your website over SSL. Sign up for a free account, and enter the (non-SSL-ized) domain name of your website in their scanning tool:</p>
+
+<p><img src="/img/2018-03-28-free-ssl-on-github-pages-with-a-custom-domain/cloudflare.png" alt="CloudFlare setup" /></p>
+
+<p>CloudFlare will fetch your current DNS configuration, and will provide you with instructions on how to enable CloudFlare for your (sub-)domain(s). The idea is that CloudFlare will act as a proxy between your GitHub hosted site and the user. This will allow them to encrypt traffic between <em>their</em> servers and your users (the traffic between GitHub and CloudFlare is also encrypted, but doesn&rsquo;t require you to install an SSL certificate on the GitHub servers; added bonus is that they can cache your content on servers close to your visitors increasing the page speed of your website).</p>
+
+<p>Enable CloudFlare for the (sub)domain you&rsquo;re hosting your website on:</p>
+
+<p><img src="/img/2018-03-28-free-ssl-on-github-pages-with-a-custom-domain/cloudflare-dns.png" alt="CloudFlare DNS" /></p>
+
+<h2 id="enabling-ssl">Enabling SSL</h2>
+
+<p>CloudFlare&rsquo;s Universal SSL lets you provide your website&rsquo;s users with a valid signed SSL certificate. There&rsquo;s several configuration options for Universal SSL (find it in the &ldquo;Crypto&rdquo; tab), and make sure your SSL mode is set to <code>Full SSL</code> (but not <code>Full SSL (Strict)</code>!).</p>
+
+<p><img src="/img/2018-03-28-free-ssl-on-github-pages-with-a-custom-domain/cloudflare-ssl.png" alt="CloudFlare DNS" /></p>
+
+<p>Do note it may take a while (up to 24 hours) for CloudFlare to set you up with your SSL certificates. They will send you an email once they&rsquo;re provisioned and ready to go.</p>
+
+<p>Next, create a Page Rule. Page rules are, surprisingly, rules that apply to a page or a collection of pages. These rules can do a lot of cool things, such as automatically obfuscating emails on the page, control cache settings or add geolocation information to the requests. The rule you&rsquo;re looking for is &ldquo;Always Use HTTPS&rdquo;, which will enforce all requests for pages matching the URL pattern you provide to use SSL:</p>
+
+<p><img src="/img/2018-03-28-free-ssl-on-github-pages-with-a-custom-domain/cloudflare-pagerule.png" alt="CloudFlare pagerule" /></p>
+
+<p>In my case, I only have one URL for my website. However, if you use the <code>www</code> subdomain (i.e. <code>www.example.com</code>), you might want to add a Page Rule that redirects users that type <code>example.com</code> to <code>www.example.com</code>, where you enforce HTTPS to ensure all users benefit from encrypted requests. However, if you add more Page Rules, make sure that the HTTPS rule is the primary (first) page rule. Only one rule will trigger per URL, so you&rsquo;ll want to make sure that this one is listed first!</p>
+
+<h1 id="profit-right">Profit! Right?</h1>
+
+<p>This article has gotten quite meaty for the steps you have to follow, so if you&rsquo;re looking for a more concise set of steps, this Gist by <a href="https://github.com/cvan">@cvan</a> is great:</p>
+
+<script src="//gist.github.com/cvan/8630f847f579f90e0c014dc5199c337b.js"></script>
+
+<p>There&rsquo;s a lot more you can do with CloudFlare and your static site (you could set up caching on CloudFlare&rsquo;s content distribution network, for example), but be aware that even though you&rsquo;ve encrypted your traffic, you should still be <a href="https://help.github.com/articles/what-is-github-pages/">careful</a> in submitting sensitive data to (third-party) APIs with Javascript; &ldquo;GitHub Pages sites shouldn&rsquo;t be used for sensitive transactions like sending passwords or credit card numbers&rdquo;. Your website&rsquo;s source code is publicly available in your GitHub repository, so be mindful of any scripts and content you publish there.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:staticsitegenerators">I use <a href="https://gohugo.io">Hugo</a> for this website, which is written in Golang (&ldquo;fast&rdquo; and &ldquo;easy&rdquo; are keywords I like). There&rsquo;s <a href="https://www.staticgen.com/">a lot</a> of <a href="https://myles.github.io/awesome-static-generators/">different static site generators</a> out there, each with their own focuses, advantages and trade-offs.
+ <a class="footnote-return" href="#fnref:staticsitegenerators"><sup>[return]</sup></a></li>
+<li id="fn:jekyllvshugo">In my setup, I have two <a href="https://github.com/bartdegoede/blog">separate</a> <a href="https://github.com/bartdegoede/bartdegoede.github.io">repositories</a>, where I maintain the Hugo project structure in one (the <code>blog</code> repository), and build and push the static files to the other (the <code>bartdegoede.github.io</code> repository). What I like about that is that it gives me a <a href="https://github.com/bartdegoede/blog/blob/master/deploy.sh">&ldquo;deploy&rdquo; step</a>, so I don&rsquo;t accidentally push something that&rsquo;s not finished yet.
+ <a class="footnote-return" href="#fnref:jekyllvshugo"><sup>[return]</sup></a></li>
+<li id="fn:confession">Skipping this step took me a lot longer to figure out than I&rsquo;m willing to admit.
+ <a class="footnote-return" href="#fnref:confession"><sup>[return]</sup></a></li>
+<li id="fn:opengithubissue">There&rsquo;s been disscusions about this for <a href="https://github.com/isaacs/github/issues/156">a while</a>.
+ <a class="footnote-return" href="#fnref:opengithubissue"><sup>[return]</sup></a></li>
+<li id="fn:cloudflare">CloudFlare is a company that provides a content-delivery network (<a href="https://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>), <a href="https://en.wikipedia.org/wiki/Denial-of-service_attack#Distributed_attack">DDoS</a> protection services, DNS and a whole slew of other services for websites.
+ <a class="footnote-return" href="#fnref:cloudflare"><sup>[return]</sup></a></li>
+</ol>
+</div>
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "bartdegoede";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "bartdegoede";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="//bart.degoe.de/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="/js/vendor/lunr.min.js"></script>
+<script type="text/javascript" src="/js/search/search.js"></script>
+
+</body>
+</html>
+
