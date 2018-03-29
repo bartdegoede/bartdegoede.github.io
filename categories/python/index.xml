@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on Bart de Goede</title>
-    <link>//bart.degoe.de/categories/python/</link>
+    <link>https://bart.degoe.de/categories/python/</link>
     <description>Recent content in Python on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 23 Mar 2018 15:00:00 +0100</lastBuildDate>
     
-	<atom:link href="//bart.degoe.de/categories/python/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://bart.degoe.de/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Bloom filters, using bit arrays for recommendations, caches and Bitcoin</title>
-      <link>//bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</link>
+      <link>https://bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</link>
       <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
       
-      <guid>//bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</guid>
+      <guid>https://bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</guid>
       <description>&lt;p&gt;Bloom filters are cool. In my experience, it&amp;rsquo;s a somewhat underestimated data structure that sounds more complex than it actually is. In this post I&amp;rsquo;ll go over what they are, how they work (I&amp;rsquo;ve hacked together an &lt;a href=&#34;#interactive_example&#34;&gt;interactive example&lt;/a&gt; to help visualise what happens behind the scenes) and go over some of their usecases in the wild.&lt;/p&gt;</description>
     </item>
     

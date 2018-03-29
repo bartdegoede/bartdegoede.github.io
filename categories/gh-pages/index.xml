@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Gh Pages on Bart de Goede</title>
-    <link>//bart.degoe.de/categories/gh-pages/</link>
+    <link>https://bart.degoe.de/categories/gh-pages/</link>
     <description>Recent content in Gh Pages on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 28 Mar 2018 23:55:40 +0200</lastBuildDate>
     
-	<atom:link href="//bart.degoe.de/categories/gh-pages/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://bart.degoe.de/categories/gh-pages/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Free SSL with a custom domain on GitHub Pages</title>
-      <link>//bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/</link>
+      <link>https://bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/</link>
       <pubDate>Wed, 28 Mar 2018 23:55:40 +0200</pubDate>
       
-      <guid>//bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/</guid>
+      <guid>https://bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub Pages&lt;/a&gt; is pretty awesome. It lets you push a bunch of static HTML (and/or CSS and Javascript) to a GitHub repository, and they&amp;rsquo;ll host and serve it for you. For free!&lt;/p&gt;</description>
     </item>
     

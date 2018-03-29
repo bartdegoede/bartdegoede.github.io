@@ -2,102 +2,102 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Bart de Goede</title>
-    <link>//bart.degoe.de/categories/</link>
+    <link>https://bart.degoe.de/categories/</link>
     <description>Recent content in Categories on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 23 Mar 2018 15:00:00 +0100</lastBuildDate>
     
-	<atom:link href="//bart.degoe.de/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://bart.degoe.de/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Bloom Filter</title>
-      <link>//bart.degoe.de/categories/bloom-filter/</link>
+      <link>https://bart.degoe.de/categories/bloom-filter/</link>
       <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
       
-      <guid>//bart.degoe.de/categories/bloom-filter/</guid>
+      <guid>https://bart.degoe.de/categories/bloom-filter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Gh Pages</title>
-      <link>//bart.degoe.de/categories/gh-pages/</link>
+      <link>https://bart.degoe.de/categories/gh-pages/</link>
       <pubDate>Wed, 28 Mar 2018 23:55:40 +0200</pubDate>
       
-      <guid>//bart.degoe.de/categories/gh-pages/</guid>
+      <guid>https://bart.degoe.de/categories/gh-pages/</guid>
       <description></description>
     </item>
     
     <item>
       <title>How To</title>
-      <link>//bart.degoe.de/categories/how-to/</link>
+      <link>https://bart.degoe.de/categories/how-to/</link>
       <pubDate>Wed, 28 Mar 2018 23:55:40 +0200</pubDate>
       
-      <guid>//bart.degoe.de/categories/how-to/</guid>
+      <guid>https://bart.degoe.de/categories/how-to/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Https</title>
-      <link>//bart.degoe.de/categories/https/</link>
+      <link>https://bart.degoe.de/categories/https/</link>
       <pubDate>Wed, 28 Mar 2018 23:55:40 +0200</pubDate>
       
-      <guid>//bart.degoe.de/categories/https/</guid>
+      <guid>https://bart.degoe.de/categories/https/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hugo</title>
-      <link>//bart.degoe.de/categories/hugo/</link>
+      <link>https://bart.degoe.de/categories/hugo/</link>
       <pubDate>Wed, 28 Mar 2018 23:55:40 +0200</pubDate>
       
-      <guid>//bart.degoe.de/categories/hugo/</guid>
+      <guid>https://bart.degoe.de/categories/hugo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Javascript</title>
-      <link>//bart.degoe.de/categories/javascript/</link>
+      <link>https://bart.degoe.de/categories/javascript/</link>
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
-      <guid>//bart.degoe.de/categories/javascript/</guid>
+      <guid>https://bart.degoe.de/categories/javascript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Lunr</title>
-      <link>//bart.degoe.de/categories/lunr/</link>
+      <link>https://bart.degoe.de/categories/lunr/</link>
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
-      <guid>//bart.degoe.de/categories/lunr/</guid>
+      <guid>https://bart.degoe.de/categories/lunr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>//bart.degoe.de/categories/python/</link>
+      <link>https://bart.degoe.de/categories/python/</link>
       <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
       
-      <guid>//bart.degoe.de/categories/python/</guid>
+      <guid>https://bart.degoe.de/categories/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Search</title>
-      <link>//bart.degoe.de/categories/search/</link>
+      <link>https://bart.degoe.de/categories/search/</link>
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
-      <guid>//bart.degoe.de/categories/search/</guid>
+      <guid>https://bart.degoe.de/categories/search/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ssl</title>
-      <link>//bart.degoe.de/categories/ssl/</link>
+      <link>https://bart.degoe.de/categories/ssl/</link>
       <pubDate>Wed, 28 Mar 2018 23:55:40 +0200</pubDate>
       
-      <guid>//bart.degoe.de/categories/ssl/</guid>
+      <guid>https://bart.degoe.de/categories/ssl/</guid>
       <description></description>
     </item>
     

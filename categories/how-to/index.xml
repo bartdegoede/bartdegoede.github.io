@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>How To on Bart de Goede</title>
-    <link>//bart.degoe.de/categories/how-to/</link>
+    <link>https://bart.degoe.de/categories/how-to/</link>
     <description>Recent content in How To on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 28 Mar 2018 23:55:40 +0200</lastBuildDate>
     
-	<atom:link href="//bart.degoe.de/categories/how-to/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://bart.degoe.de/categories/how-to/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Free SSL with a custom domain on GitHub Pages</title>
-      <link>//bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/</link>
+      <link>https://bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/</link>
       <pubDate>Wed, 28 Mar 2018 23:55:40 +0200</pubDate>
       
-      <guid>//bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/</guid>
+      <guid>https://bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub Pages&lt;/a&gt; is pretty awesome. It lets you push a bunch of static HTML (and/or CSS and Javascript) to a GitHub repository, and they&amp;rsquo;ll host and serve it for you. For free!&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Bloom filters, using bit arrays for recommendations, caches and Bitcoin</title>
-      <link>//bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</link>
+      <link>https://bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</link>
       <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
       
-      <guid>//bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</guid>
+      <guid>https://bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</guid>
       <description>&lt;p&gt;Bloom filters are cool. In my experience, it&amp;rsquo;s a somewhat underestimated data structure that sounds more complex than it actually is. In this post I&amp;rsquo;ll go over what they are, how they work (I&amp;rsquo;ve hacked together an &lt;a href=&#34;#interactive_example&#34;&gt;interactive example&lt;/a&gt; to help visualise what happens behind the scenes) and go over some of their usecases in the wild.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Searching your Hugo site with Lunr</title>
-      <link>//bart.degoe.de/searching-your-hugo-site-with-lunr/</link>
+      <link>https://bart.degoe.de/searching-your-hugo-site-with-lunr/</link>
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
-      <guid>//bart.degoe.de/searching-your-hugo-site-with-lunr/</guid>
+      <guid>https://bart.degoe.de/searching-your-hugo-site-with-lunr/</guid>
       <description>&lt;p&gt;Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &amp;ldquo;How To Do Things™&amp;rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.&lt;/p&gt;</description>
     </item>
     
