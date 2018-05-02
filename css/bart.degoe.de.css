@@ -1,3 +1,13 @@
+.sidebar-about h1 {
+    padding-bottom: 4rem;
+}
+
+figcaption h4 {
+    font-size: 0.75rem;
+    font-weight: normal;
+    font-style: italic;
+}
+
 .search-container {
     position: relative;
     padding-bottom: 2rem;

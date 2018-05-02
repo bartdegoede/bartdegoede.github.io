@@ -6,10 +6,19 @@
     <description>Recent content in Hugo on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 28 Mar 2018 23:55:40 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 02 May 2018 22:34:06 +0200</lastBuildDate>
     
 	<atom:link href="https://bart.degoe.de/categories/hugo/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Free SSL on Github Pages with a custom domain: Part 2 - Let&#39;s Encrypt</title>
+      <link>https://bart.degoe.de/github-pages-and-lets-encrypt/</link>
+      <pubDate>Wed, 02 May 2018 22:34:06 +0200</pubDate>
+      
+      <guid>https://bart.degoe.de/github-pages-and-lets-encrypt/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub Pages&lt;/a&gt; has just become even more awesome. Since yesterday&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:yesterday&#34;&gt;&lt;a href=&#34;#fn:yesterday&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, GitHub Pages &lt;a href=&#34;https://blog.github.com/2018-05-01-github-pages-custom-domains-https/&#34;&gt;supports HTTPS for custom domains&lt;/a&gt;. And yes, it is still free!&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Free SSL with a custom domain on GitHub Pages</title>

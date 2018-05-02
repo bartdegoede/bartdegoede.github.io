@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://bart.degoe.de/github-pages-and-lets-encrypt/</loc>
+    <lastmod>2018-05-02T22:34:06+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/</loc>
     <lastmod>2018-03-28T23:55:40+02:00</lastmod>
   </url>
@@ -24,7 +29,7 @@
   
   <url>
     <loc>https://bart.degoe.de/</loc>
-    <lastmod>2018-03-28T23:55:40+02:00</lastmod>
+    <lastmod>2018-05-02T22:34:06+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -42,31 +47,37 @@
   
   <url>
     <loc>https://bart.degoe.de/categories/gh-pages/</loc>
-    <lastmod>2018-03-28T23:55:40+02:00</lastmod>
+    <lastmod>2018-05-02T22:34:06+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://bart.degoe.de/categories/how-to/</loc>
-    <lastmod>2018-03-28T23:55:40+02:00</lastmod>
+    <lastmod>2018-05-02T22:34:06+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://bart.degoe.de/categories/https/</loc>
-    <lastmod>2018-03-28T23:55:40+02:00</lastmod>
+    <lastmod>2018-05-02T22:34:06+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://bart.degoe.de/categories/hugo/</loc>
-    <lastmod>2018-03-28T23:55:40+02:00</lastmod>
+    <lastmod>2018-05-02T22:34:06+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://bart.degoe.de/categories/javascript/</loc>
     <lastmod>2018-03-04T23:38:44+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bart.degoe.de/categories/lets-encrypt/</loc>
+    <lastmod>2018-05-02T22:34:06+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -78,7 +89,7 @@
   
   <url>
     <loc>https://bart.degoe.de/post/</loc>
-    <lastmod>2018-03-28T23:55:40+02:00</lastmod>
+    <lastmod>2018-05-02T22:34:06+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -96,7 +107,7 @@
   
   <url>
     <loc>https://bart.degoe.de/categories/ssl/</loc>
-    <lastmod>2018-03-28T23:55:40+02:00</lastmod>
+    <lastmod>2018-05-02T22:34:06+02:00</lastmod>
     <priority>0</priority>
   </url>
   
