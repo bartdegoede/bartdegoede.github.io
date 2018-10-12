@@ -2,7 +2,9 @@ var vectorLength = 15,
     elements = [];
 
 function addToBloomFilter(element) {
-    elements.push(element);
+    if (elements.indexOf(element) == -1) {
+        elements.push(element);
+    }
     $('#elements').html(elements.join(', '));
     $('#bloom_input').val('');
     var a = murmurHash3.x86.hash32(element, 0) % vectorLength;
