@@ -29,8 +29,8 @@
   
   
 
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <meta name="description" content="Random ramblings about programming, tech, and anything else really.">
+  <meta name="keywords" content="hugo,search,lunr,javascript">
   
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -225,7 +225,7 @@ module.exports = function(grunt) {
 <p>This function fetches the index file we&rsquo;ve generated with the Grunt task, initialises the relevant fields, and then adds the each of the documents to the index. The <code>pagesIndex</code> variable will store the documents as we indexed them, and the <code>searchIndex</code> variable will store the statistics and data structures we need to rank our documents for a query efficiently.</p>
 
 <pre><code>function initSearchIndex() {
-  // this file is built by the Grunt task, and 
+  // this file is built by the Grunt task, and
   $.getJSON('js/search/index.json')
     .done(function(documents) {
       pagesIndex = documents;
@@ -236,7 +236,7 @@ module.exports = function(grunt) {
         this.ref('href');
 
         // This will add all the documents to the index. This is
-        // different compared to older versions of Lunr, where 
+        // different compared to older versions of Lunr, where
         // documents could be added after index initialisation
         for (var i = 0; i &lt; documents.length; ++i) {
           this.add(documents[i])
@@ -279,8 +279,8 @@ $(document).ready(function() {
 
 <pre><code>// this function will parse the query_string, which will you
 // to run queries like &quot;title:lunr&quot; (search the title field),
-// &quot;lunr^10&quot; (boost hits with this term by a factor 10) or 
-// &quot;lunr~2&quot; (will match anything within an edit distance of 2, 
+// &quot;lunr^10&quot; (boost hits with this term by a factor 10) or
+// &quot;lunr~2&quot; (will match anything within an edit distance of 2,
 // i.e. &quot;losr&quot; will also match)
 function simpleSearchSite(query_string) {
   return searchIndex.search(query_string).map(function(result) {

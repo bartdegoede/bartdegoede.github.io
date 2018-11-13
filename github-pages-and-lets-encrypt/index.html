@@ -29,8 +29,8 @@
   
   
 
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <meta name="description" content="Random ramblings about programming, tech, and anything else really.">
+  <meta name="keywords" content="ssl,hugo,github pages,https,free ssl,cloudflare,letsencrypt">
   
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -106,33 +106,19 @@
 
 <p>The agent will ask the Let&rsquo;s Encrypt CA what it needs to do to prove that it is, effectively, in control of the domain. The CA will look at the domain, and issue one or more challenges to the agent it needs to complete to prove that it has control over the domain. For example, it can ask the agent to provision a particular DNS record under the domain, or make an HTTP resource available under a particular URL. With these challenges, it provides the agent with a <a href="https://en.wikipedia.org/wiki/Cryptographic_nonce">nonce</a> (some random number that can only be used once for verification purposes).</p>
 
-
 <figure>
-    
-        <img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/howitworks_challenge.png" />
-    
-    
-    <figcaption>
-        <h4>CA issuing a challenge to the certificate management agent (image taken from https://letsencrypt.org/how-it-works/)</h4>
-        
-    </figcaption>
-    
+    <img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/howitworks_challenge.png"/> <figcaption>
+            <h4>CA issuing a challenge to the certificate management agent (image taken from https://letsencrypt.org/how-it-works/)</h4>
+        </figcaption>
 </figure>
 
 
 <p>In the image above, the agent creates a file on a specified path on the web server (in this case, on <code>https://example.com/8303</code>). It creates a key pair it will use to identify itself with the CA, and signs the nonce received from the CA with the private key. Then, it notifies the CA that it has completed the challenge by sending back the signed nonce and is ready for validation. The CA then validates the completion of the challenge by attempting to download the file from the web server and verify that it contains the expected content.</p>
 
-
 <figure>
-    
-        <img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/howitworks_authorization.png" />
-    
-    
-    <figcaption>
-        <h4>Certificate management agent completing a challenge (image taken from https://letsencrypt.org/how-it-works/)</h4>
-        
-    </figcaption>
-    
+    <img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/howitworks_authorization.png"/> <figcaption>
+            <h4>Certificate management agent completing a challenge (image taken from https://letsencrypt.org/how-it-works/)</h4>
+        </figcaption>
 </figure>
 
 
@@ -144,17 +130,10 @@
 
 <p>It can send a <a href="http://tools.ietf.org/html/rfc2986">Certificate Signing Request (CSR)</a> to the CA to request it to issue a SSL certificate for the domain, signed with the authorized key. Let&rsquo;s Encrypt will only have to validate the signatures, and if those check out, a certificate will be issued.</p>
 
-
 <figure>
-    
-        <img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/howitworks_certificate.png" />
-    
-    
-    <figcaption>
-        <h4>Issuing a certificate (image taken from https://letsencrypt.org/how-it-works/)</h4>
-        
-    </figcaption>
-    
+    <img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/howitworks_certificate.png"/> <figcaption>
+            <h4>Issuing a certificate (image taken from https://letsencrypt.org/how-it-works/)</h4>
+        </figcaption>
 </figure>
 
 
@@ -168,12 +147,8 @@
 
 <p>Optionally, you can <a href="https://help.github.com/articles/securing-your-github-pages-site-with-https/">enforce HTTPS</a> in the settings of your repository. This will upgrade all users requesting stuff from your site over HTTP to be automatically redirected to HTTPS.</p>
 
-
 <figure>
-    
-        <img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/github-pages-enforce-https.png" />
-    
-    
+    <img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/github-pages-enforce-https.png"/> 
 </figure>
 
 
