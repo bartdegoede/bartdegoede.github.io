@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Search on Bart de Goede</title>
-    <link>https://bart.degoe.de/categories/search/</link>
-    <description>Recent content in Search on Bart de Goede</description>
+    <title>Opensearch on Bart de Goede</title>
+    <link>https://bart.degoe.de/categories/opensearch/</link>
+    <description>Recent content in Opensearch on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 21 Nov 2018 11:00:00 -0800</lastBuildDate>
     
-	<atom:link href="https://bart.degoe.de/categories/search/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://bart.degoe.de/categories/opensearch/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>https://bart.degoe.de/tab-plus-search-from-your-url-bar-with-opensearch/</guid>
       <description>&lt;p&gt;Almost all modern browsers enable websites to customize the built-in search feature to let the user access their search features directly, without going to your website first and finding the search input box. If your website has search functionality accessible through a basic GET request, it&amp;rsquo;s surprisingly simple to enable this for your website too.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Searching your Hugo site with Lunr</title>
-      <link>https://bart.degoe.de/searching-your-hugo-site-with-lunr/</link>
-      <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
-      
-      <guid>https://bart.degoe.de/searching-your-hugo-site-with-lunr/</guid>
-      <description>&lt;p&gt;Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &amp;ldquo;How To Do Things™&amp;rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.&lt;/p&gt;</description>
     </item>
     
   </channel>

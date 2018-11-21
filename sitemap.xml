@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://bart.degoe.de/tab-plus-search-from-your-url-bar-with-opensearch/</loc>
+    <lastmod>2018-11-21T11:00:00-08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://bart.degoe.de/github-pages-and-lets-encrypt/</loc>
     <lastmod>2018-05-02T22:34:06+02:00</lastmod>
   </url>
@@ -29,7 +34,7 @@
   
   <url>
     <loc>https://bart.degoe.de/</loc>
-    <lastmod>2018-05-02T22:34:06+02:00</lastmod>
+    <lastmod>2018-11-21T11:00:00-08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -53,7 +58,7 @@
   
   <url>
     <loc>https://bart.degoe.de/categories/how-to/</loc>
-    <lastmod>2018-05-02T22:34:06+02:00</lastmod>
+    <lastmod>2018-11-21T11:00:00-08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -88,8 +93,14 @@
   </url>
   
   <url>
+    <loc>https://bart.degoe.de/categories/opensearch/</loc>
+    <lastmod>2018-11-21T11:00:00-08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://bart.degoe.de/post/</loc>
-    <lastmod>2018-05-02T22:34:06+02:00</lastmod>
+    <lastmod>2018-11-21T11:00:00-08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -101,7 +112,7 @@
   
   <url>
     <loc>https://bart.degoe.de/categories/search/</loc>
-    <lastmod>2018-03-04T23:38:44+01:00</lastmod>
+    <lastmod>2018-11-21T11:00:00-08:00</lastmod>
     <priority>0</priority>
   </url>
   

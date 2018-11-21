@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Custom OpenSearch: search from your URL bar &middot; Bart de Goede</title>
+
+  
+  <link rel="stylesheet" href="https://bart.degoe.de/css/poole.css">
+  <link rel="stylesheet" href="https://bart.degoe.de/css/hyde.css">
+  <link rel="stylesheet" href="https://bart.degoe.de/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://bart.degoe.de/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://bart.degoe.de/css/hyde-x.css">
+  <link rel="stylesheet" href="https://bart.degoe.de/css/highlight/sunburst.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/bart.degoe.de.css">
+  <link rel="search" href="https://bart.degoe.de/opensearch.xml" type="application/opensearchdescription+xml" title="Search bart.degoe.de">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://bart.degoe.de/touch-icon-144-precomposed.png">
+  <link href="https://bart.degoe.de/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Random ramblings about programming, tech, and anything else really.">
+  <meta name="keywords" content="search,opensearch,how-to">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-70807628-2', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://bart.degoe.de/">
+        <h1>Bart de Goede</h1>
+      </a>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://bart.degoe.de/">Home</a></li>
+      
+      <li class="sidebar-nav-item"><a href="https://bart.degoe.de/about/">About</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      <a href="https://github.com/bartdegoede"><i class="fa fa-github-square fa-3x"></i></a>
+      
+      <a href="https://www.linkedin.com/in/bart-de-goede/"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      
+      
+      <a href="https://twitter.com/bartdegoede"><i class="fa fa-twitter-square fa-3x"></i></a>
+      <a href="https://bart.degoe.de/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
+      </li>
+    </ul>
+
+    
+
+    <p>Copyright &copy; 2018 </p>
+<style>.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#000000 !important;background-color:#FFFFFF !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 0px 9px !important;font-size: 17px !important;letter-spacing:-0.08px !important;;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Lato', sans-serif !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#000000 !important;}</style><link href="https://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext" rel="stylesheet"><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/bart"><img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a coffee!"><span style="margin-left:5px">Buy me a coffee!</span></a>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">Custom OpenSearch: search from your URL bar</h1>
+    <span class="post-date">Nov 21, 2018 &middot; <a href="https://bart.degoe.de/tab-plus-search-from-your-url-bar-with-opensearch/#disqus_thread">Comments</a>
+    
+    <br/>
+    <a class="label" href="https://bart.degoe.de/categories/search">search</a><a class="label" href="https://bart.degoe.de/categories/opensearch">opensearch</a><a class="label" href="https://bart.degoe.de/categories/how-to">how-to</a>
+    </span>
+    <p>Almost all modern browsers enable websites to customize the built-in search feature to let the user access their search features directly, without going to your website first and finding the search input box. If your website has search functionality accessible through a basic GET request, it&rsquo;s surprisingly simple to enable this for your website too.</p>
+
+<figure>
+    <img src="/img/2018-11-20-tab-plus-search-from-your-url-bar-with-opensearch/opensearch-on-bart-degoe-de.png"/> <figcaption>
+            <h4>Typing &#39;bart&#39; and hitting tab in my Chrome browser lets me search the website directly.</h4>
+        </figcaption>
+</figure>
+
+
+<h1 id="some-browsers-do-it-automatically">Some browsers do it automatically</h1>
+
+<p>If your users are on Chrome, chances are this already works! Chromium <a href="https://dev.chromium.org/tab-to-search">tries really hard</a> to figure out where your search page is and how to access it. A strong hint you can give it is to change the type of the <code>&lt;input&gt;</code> element to <code>&quot;search&quot;</code><sup class="footnote-ref" id="fnref:input"><a href="#fn:input">1</a></sup>:</p>
+
+<pre><code>&lt;input autocapitalize=&quot;off&quot; autocorrect=&quot;off&quot; autocomplete=&quot;off&quot; name=&quot;q&quot; placeholder=&quot;Search&quot; type=&quot;search&quot;&gt;
+</code></pre>
+
+<p>The <code>&quot;name&quot;</code> attribute gives the browser a hint as to what HTTP parameter will hold the query (it is a good idea to <a href="https://support.google.com/analytics/answer/1012264">configure your Google Analytics</a> to pick this up as well!).</p>
+
+<p>This will let the browser add some nice UI elements to the search input box, like a small &ldquo;x&rdquo; button on the right to clear the search input in Safari and Chrome. Enabling the <code>&quot;autocapitalize&quot;</code>, <code>&quot;autocorrect&quot;</code> and <code>&quot;autocomplete&quot;</code> attributes will instruct your browser to modify and correct the user input even further (think of the iOS autocorrect feature, for example).</p>
+
+<figure>
+    <img src="/img/2018-11-20-tab-plus-search-from-your-url-bar-with-opensearch/search-input-ui.png"/> <figcaption>
+            <h4>Just by changing the input type you can hook in to the browsers&#39; native UX.</h4>
+        </figcaption>
+</figure>
+
+
+<h2 id="word-of-warning">Word of warning</h2>
+
+<p>Because once upon a time <a href="https://www.apple.com/">apple.com</a> relied on the <code>type</code> attribute to give their search box a more &ldquo;Mac-like&rdquo; feel, <a href="http://diveintohtml5.info/forms.html#type-search">Safari will basically ignore any CSS</a> applied to <code>&lt;input type=&quot;search&quot;&gt;</code> elements. If you need Safari to treat your search field like any other input field for display purposes, you can add the following to your CSS:</p>
+
+<pre><code>input[type=&quot;search&quot;] {
+  -webkit-appearance: textfield;
+}
+</code></pre>
+
+<p>This will let you apply your own styles to the input box.</p>
+
+<h1 id="others-don-t">Others don&rsquo;t</h1>
+
+<p>Not all browsers do this out of the box, so you need to provide them with a more formalized configuration. Most browsers find out about the search functionality of a website through an OpenSearch XML file that directs them to the right page.</p>
+
+<h2 id="opensearch">OpenSearch</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/OpenSearch">OpenSearch</a> is a standard that was developed by <a href="https://en.wikipedia.org/wiki/A9.com">A9</a>, an Amazon subsidiary developing search engine and search advertising technology, and has been around since Jeff Bezos unveiled it in 2005 at a conference on emerging technologies.</p>
+
+<p>It is nothing more than an XML specification that lets a website describe a search engine for itself, and where a user or browser might find and use it. Firefox, Chrome, Edge, Internet Explorer and Safari all support the OpenSearch standard, with <a href="https://developer.mozilla.org/en-US/docs/Web/OpenSearch">Firefox even supporting features</a> that are not in the standard, such as search suggestions.</p>
+
+<h2 id="xml">XML</h2>
+
+<p>All you need is a small XML file. Below is an example of the one we have at <a href="https://www.scribd.com/opensearch.xml">work</a>:</p>
+
+<pre><code>&lt;OpenSearchDescription xmlns=&quot;http://a9.com/-/spec/opensearch/1.1/&quot; xmlns:moz=&quot;http://www.mozilla.org/2006/browser/search/&quot;&gt;
+    &lt;ShortName&gt;Scribd.com&lt;/ShortName&gt;
+    &lt;Description&gt;Scribd's mission is to create the world's largest open library of documents. Search it.&lt;/Description&gt;
+    &lt;Url type=&quot;text/html&quot; method=&quot;get&quot; template=&quot;https://www.scribd.com/search?query={searchTerms}&quot; /&gt;
+     &lt;Image height=&quot;32&quot; width=&quot;32&quot; type=&quot;image/x-icon&quot;&gt;https://www.scribd.com/favicon.ico&lt;/Image&gt;
+&lt;/OpenSearchDescription&gt;
+</code></pre>
+
+<p>It provides a <code>&lt;ShortName&gt;</code> (there&rsquo;s a <code>&lt;LongName&gt;</code> element too, that&rsquo;s mostly used for aggregators or automatically generated search plugins), a <code>&lt;Description&gt;</code> of what the search will let you do, and most importantly, the <code>&lt;Url&gt;</code> where you can do it.</p>
+
+<p>It tells the browser there&rsquo;s a <code>text/html</code> page that can process an HTTP GET request, and has a <code>template</code> for the browser. <code>{searchTerms}</code> will be interpolated with the query terms the user will type in the browser. You need to host this file somewhere with the rest of your web pages.</p>
+
+<p>But what if you don&rsquo;t have a dedicated search engine for your website? Well, just use Google! Replace the value of the <code>&quot;template&quot;</code> attribute with something like this<sup class="footnote-ref" id="fnref:url"><a href="#fn:url">2</a></sup>:</p>
+
+<pre><code>&lt;Url type=&quot;text/html&quot; method=&quot;get&quot; template=&quot;https://www.google.com/search?q=site:bart.degoe.de {searchTerms}&quot;&gt;
+</code></pre>
+
+<p>This will redirect your user to the Google search results, but those will only display matches from content on your site. That&rsquo;s a lot cheaper than employing a bunch of engineers to build and maintain a custom search engine!</p>
+
+<h1 id="turn-on-autodiscovery">Turn on autodiscovery!</h1>
+
+<p>Now we need to activate the automatic discovery of search engines in the browsers of your users. That sounds a lot cooler and more complicated than it actually is; the only thing you have to do is provide a <code>&lt;link&gt;</code> somewhere in the <code>&lt;head&gt;</code> of your webpages:</p>
+
+<pre><code>&lt;link rel=&quot;search&quot; href=&quot;https://bart.degoe.de/opensearch.xml&quot; type=&quot;application/opensearchdescription+xml&quot; title=&quot;Search bart.degoe.de&quot;&gt;
+</code></pre>
+
+<p>This will alert browsers that load the page that there is a search feature available, described in the linked XML file. Make sure your OpenSearch XML file is available and can be loaded from your webserver, and refresh the page containing the <code>&lt;link&gt;</code>. This will tell the browser where to look, and enable custom search!</p>
+
+<figure>
+    <img src="/img/2018-11-20-tab-plus-search-from-your-url-bar-with-opensearch/opensearch-safari-bart-degoe-de.png"/> <figcaption>
+            <h4>Now tab-searching from the Safari URL bar works too!</h4>
+        </figcaption>
+</figure>
+
+
+<p>The OpenSearch specification <a href="https://github.com/dewitt/opensearch/blob/master/opensearch-1-1-draft-6.md">supports a lot more features</a> than this, ranging from <code>&lt;Tags&gt;</code> to help plugins generated from these standardized descriptions be found better in <a href="https://addons.mozilla.org/en-US/firefox/search-tools/">search plugin aggregators</a>, what <code>&lt;Language&gt;</code> the search engine supports, or whether the search results may contain <code>&lt;AdultContent&gt;</code>. There are many ways to configure and customize OpenSearch that go way beyond the basic example described here, but for my little blog this is more than enough 😄.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:input">The other attributes are to dis-/enable <a href="https://developer.mozilla.org/en-US/docs/Web/OpenSearch">features</a> certain other browsers like Safari have that automatically correct what you type into the search box.
+ <a class="footnote-return" href="#fnref:input"><sup>[return]</sup></a></li>
+<li id="fn:url">Yes, you could absolutely point your search input to my website, but that&rsquo;s not a requirement 😉
+ <a class="footnote-return" href="#fnref:url"><sup>[return]</sup></a></li>
+</ol>
+</div>
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "bartdegoede";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "bartdegoede";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://bart.degoe.de/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="/js/vendor/lunr.min.js"></script>
+<script type="text/javascript" src="/js/search/search.js"></script>
+
+</body>
+</html>
+

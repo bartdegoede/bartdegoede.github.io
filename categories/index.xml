@@ -32,7 +32,7 @@
     <item>
       <title>How To</title>
       <link>https://bart.degoe.de/categories/how-to/</link>
-      <pubDate>Wed, 02 May 2018 22:34:06 +0200</pubDate>
+      <pubDate>Wed, 21 Nov 2018 11:00:00 -0800</pubDate>
       
       <guid>https://bart.degoe.de/categories/how-to/</guid>
       <description></description>
@@ -84,6 +84,15 @@
     </item>
     
     <item>
+      <title>Opensearch</title>
+      <link>https://bart.degoe.de/categories/opensearch/</link>
+      <pubDate>Wed, 21 Nov 2018 11:00:00 -0800</pubDate>
+      
+      <guid>https://bart.degoe.de/categories/opensearch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Python</title>
       <link>https://bart.degoe.de/categories/python/</link>
       <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
@@ -95,7 +104,7 @@
     <item>
       <title>Search</title>
       <link>https://bart.degoe.de/categories/search/</link>
-      <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
+      <pubDate>Wed, 21 Nov 2018 11:00:00 -0800</pubDate>
       
       <guid>https://bart.degoe.de/categories/search/</guid>
       <description></description>

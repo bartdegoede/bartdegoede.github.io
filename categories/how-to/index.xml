@@ -6,10 +6,19 @@
     <description>Recent content in How To on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 May 2018 22:34:06 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 21 Nov 2018 11:00:00 -0800</lastBuildDate>
     
 	<atom:link href="https://bart.degoe.de/categories/how-to/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Custom OpenSearch: search from your URL bar</title>
+      <link>https://bart.degoe.de/tab-plus-search-from-your-url-bar-with-opensearch/</link>
+      <pubDate>Wed, 21 Nov 2018 11:00:00 -0800</pubDate>
+      
+      <guid>https://bart.degoe.de/tab-plus-search-from-your-url-bar-with-opensearch/</guid>
+      <description>&lt;p&gt;Almost all modern browsers enable websites to customize the built-in search feature to let the user access their search features directly, without going to your website first and finding the search input box. If your website has search functionality accessible through a basic GET request, it&amp;rsquo;s surprisingly simple to enable this for your website too.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Free SSL on Github Pages with a custom domain: Part 2 - Let&#39;s Encrypt</title>
