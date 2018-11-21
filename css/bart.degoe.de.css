@@ -73,3 +73,7 @@ figcaption h4 {
 .input-container button:hover {
     background-color: #e2e6ea;
 }
+
+input[type="search"] {
+    -webkit-appearance: textfield;
+}
