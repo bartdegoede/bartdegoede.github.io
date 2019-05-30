@@ -25,13 +25,8 @@ function initUI() {
   $results = $('.posts');
   $('#search').keyup(function() {
     $results.empty();
-    // only search when query has 2 characters or more
     var query = $(this).val();
-    if (query.length < 2) {
-      return;
-    }
-    var results = searchSite(query);
-    renderResults(results);
+    renderResults(searchSite(query));
   });
 }
 
