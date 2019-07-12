@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="msvalidate.01" content="B2157C2C2FEB2476929553F0F61CA34C" />
+  <meta name="yandex-verification" content="7595e668af2a1d92" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Use Hugo Output Formats to generate Lunr index files &middot; Bart de Goede</title>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <link rel="stylesheet" href="https://bart.degoe.de/bundle.min.ca44e8f97eea4682e1e8c13aa9cb9b5d65aea40fbfe43ed5d16099a5c592870f.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="search" href="https://bart.degoe.de/opensearch.xml" type="application/opensearchdescription+xml" title="Search bart.degoe.de">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://bart.degoe.de/touch-icon-144-precomposed.png">
+  <link href="https://bart.degoe.de/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="Random ramblings about programming, tech, and anything else really.">
+  <meta name="keywords" content="search,hugo,lunr,how-to">
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-70807628-2', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+</head>
+<body class="theme-base-08">
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="https://bart.degoe.de/">
+        <h1>Bart de Goede</h1>
+      </a>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://bart.degoe.de/">Home</a></li>
+      
+      <li class="sidebar-nav-item"><a href="https://bart.degoe.de/about/">About</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      <a href="https://github.com/bartdegoede"><i class="fa fa-github-square fa-3x"></i></a>
+      
+      <a href="https://www.linkedin.com/in/bart-de-goede/"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      
+      
+      <a href="https://twitter.com/bartdegoede"><i class="fa fa-twitter-square fa-3x"></i></a>
+      <a href="https://bart.degoe.de/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
+      </li>
+    </ul>
+
+    
+
+    <p>Copyright &copy; 2019 </p>
+<style>.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#000000 !important;background-color:#FFFFFF !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 0px 9px !important;font-size: 17px !important;letter-spacing:-0.08px !important;;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Lato', sans-serif !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#000000 !important;}</style><link href="https://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext" rel="stylesheet"><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/bart"><img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a coffee!"><span style="margin-left:5px">Buy me a coffee!</span></a>
+
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1 class="post-title">Use Hugo Output Formats to generate Lunr index files</h1>
+    <span class="post-date">Jul 12, 2019 &middot; <a href="https://bart.degoe.de/use-hugo-output-formats-to-generate-lunr-index-files/#disqus_thread">Comments</a>
+    
+    <br/>
+    <a class="label" href="https://bart.degoe.de/categories/hugo">hugo</a><a class="label" href="https://bart.degoe.de/categories/search">search</a><a class="label" href="https://bart.degoe.de/categories/lunr">lunr</a><a class="label" href="https://bart.degoe.de/categories/how-to">how-to</a>
+    </span>
+    <p><a href="https://bart.degoe.de/searching-your-hugo-site-with-lunr/">I&rsquo;ve been using Lunr.js</a> to enable some basic site search on this blog. Lunr.js requires an <a href="/index.json">index file</a> that contains all the content you want to make available for search. In order to generate that file, I had a kind of hacky setup, depending on running a <a href="https://github.com/bartdegoede/blog/blob/7eccae434335c6ab6ec5e10240dbc89884a194ad/Gruntfile.js">Grunt script</a> on <a href="https://github.com/bartdegoede/blog/commit/335d19e81016633823ccfb6fbb2038c891182bbb#diff-60254338249f657a0a83f98258a56bfeL9">every deploy</a>, which introduces a dependency on node, and nobody really wants any of that for just a static HTML website.</p>
+
+<p>I have been wanting forever to have Hugo build that file for me instead<sup class="footnote-ref" id="fnref:gh-issue"><a href="#fn:gh-issue">1</a></sup>. As it turns out, <a href="https://gohugo.io/templates/output-formats/#output-formats-for-pages">Output Formats</a><sup class="footnote-ref" id="fnref:hugo"><a href="#fn:hugo">2</a></sup> make building that index file <em>very</em> easy. Output formats let you generate your content in other formats than HTML, such as AMP or <a href="https://bart.degoe.de/index.xml">XML for an RSS feed</a>, and it also speaks JSON.</p>
+
+<p>The search on my blog lives on the homepage, where some <a href="https://github.com/bartdegoede/blog/blob/335d19e81016633823ccfb6fbb2038c891182bbb/static/js/search/search.js">(very ugly) Javascript</a> downloads the index file, parses it contents into an <a href="https://en.wikipedia.org/wiki/Inverted_index">inverted index</a>, and replaces the content on the page with search results whenever someone starts typing. Essentially, I want to create some JSON output on my homepage (<a href="/index.json"><code>index.json</code></a> instead of <a href="/index.html"><code>index.html</code></a>).</p>
+
+<p>I added the following snippet to my <a href="https://github.com/bartdegoede/blog/blob/335d19e81016633823ccfb6fbb2038c891182bbb/config.toml#L24-L26"><code>config.toml</code></a>, that says that besides HTML, the homepage also has JSON output:</p>
+
+<pre><code class="language-toml">[outputs]
+    home = [&quot;HTML&quot;, &quot;JSON&quot;]
+    page = [&quot;HTML&quot;]
+</code></pre>
+
+<p><strong>N.B.:</strong> this means that there won&rsquo;t be a JSON version of the other pages; I just need it on my homepage, because that serves as the search results page too.</p>
+
+<p>Now, I don&rsquo;t want that <code>index.json</code> file to basically be the list of links it is in the HTML version and in the RSS feed, so I <a href="https://github.com/bartdegoede/blog/blob/335d19e81016633823ccfb6fbb2038c891182bbb/layouts/index.json">added an <code>index.json</code> file</a> in my <code>layouts</code> folder with the following content:</p>
+
+<pre><code>[
+    {{ range $index, $page := .Site.Pages }}
+    {{- if eq $page.Type &quot;post&quot; -}}
+        {{- if $page.Plain -}}
+            {{- if and $index (gt $index 0) -}},{{- end }}
+                {
+                    &quot;href&quot;: &quot;{{ $page.Permalink }}&quot;,
+                    &quot;title&quot;: &quot;{{ htmlEscape $page.Title }}&quot;,
+                    &quot;categories&quot;: [{{ range $tindex, $tag := $page.Params.categories }}{{ if $tindex }}, {{ end }}&quot;{{ $tag| htmlEscape }}&quot;{{ end }}],
+                    &quot;content&quot;: {{$page.Plain | jsonify}}
+                }
+            {{- end -}}
+      {{- end -}}
+    {{- end -}}
+]
+</code></pre>
+
+<p>This will render a JSON file (named <a href="/index.json"><code>index.json</code></a>) with an array in the <a href="https://github.com/bartdegoede/bartdegoede.github.io/blob/master/index.json">root directory of my site</a>, and every item in that array is one of the <code>.Site.Pages</code> (i.e. my posts), whenever that page has text in it and it&rsquo;s not the homepage. I didn&rsquo;t bother with minification, because the file is tiny and will be served nicely gzipped by <a href="https://bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/">Cloudflare</a> anyway. Whenever Hugo builds the site, it will reindex all the data (i.e. rebuild this file), and I don&rsquo;t have a dependency on Node and Grunt scripts anymore.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:gh-issue">Ever since someone opened <a href="https://github.com/bartdegoede/blog/issues/1">a GitHub issue</a> about it 😄
+ <a class="footnote-return" href="#fnref:gh-issue"><sup>[return]</sup></a></li>
+<li id="fn:hugo">Ships with Hugo version 0.20.0 or greater.
+ <a class="footnote-return" href="#fnref:hugo"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "bartdegoede";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "bartdegoede";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://bart.degoe.de/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+<script type="text/javascript" src="https://bart.degoe.de/search.min.bd398eeda45cfa16593454b794d6ce3029dddc09e1b8037d5745c8fd459f3c4b.js" integrity="sha256-vTmO7aRc&#43;hZZNFS3lNbOMCnd3AnhuAN9V0XI/UWfPEs="></script>
+
+</body>
+</html>
+
