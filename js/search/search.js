@@ -1,7 +1,7 @@
 var searchIndex, $results, pagesIndex;
 
 function initSearchIndex() {
-  $.getJSON('/js/search/index.json')
+  $.getJSON('/index.json')
   .done(function(documents) {
     pagesIndex = documents;
     searchIndex = lunr(function() {
