@@ -77,3 +77,23 @@ figcaption h4 {
 input[type="search"] {
     -webkit-appearance: textfield;
 }
+
+#player {
+    padding: 20px 20px;
+    margin: 20px 0;
+    border-radius: 3px;
+    box-shadow: 0 0 8px 0 #eee;
+}
+
+#player .listen {
+    color: #19BC9C;
+    margin-bottom: 7px;
+}
+
+#player #waveform img {
+    width: 100%;
+}
+
+#player audio {
+    width: 100%;
+}

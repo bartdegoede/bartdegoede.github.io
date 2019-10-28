@@ -22,7 +22,7 @@
   
   
 
-  <link rel="stylesheet" href="https://bart.degoe.de/bundle.min.ca44e8f97eea4682e1e8c13aa9cb9b5d65aea40fbfe43ed5d16099a5c592870f.css">
+  <link rel="stylesheet" href="https://bart.degoe.de/bundle.min.ad3f1481a1de9cc7bfdfed6a226ff207ee34a5b3c5ce4f86bf1863f136b6596c.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="search" href="https://bart.degoe.de/opensearch.xml" type="application/opensearchdescription+xml" title="Search bart.degoe.de">
@@ -96,6 +96,29 @@
     <a class="label" href="https://bart.degoe.de/categories/hugo">hugo</a><a class="label" href="https://bart.degoe.de/categories/search">search</a><a class="label" href="https://bart.degoe.de/categories/lunr">lunr</a><a class="label" href="https://bart.degoe.de/categories/how-to">how-to</a>
     </span>
     <p><a href="https://bart.degoe.de/searching-your-hugo-site-with-lunr/">I&rsquo;ve been using Lunr.js</a> to enable some basic site search on this blog. Lunr.js requires an <a href="/index.json">index file</a> that contains all the content you want to make available for search. In order to generate that file, I had a kind of hacky setup, depending on running a <a href="https://github.com/bartdegoede/blog/blob/7eccae434335c6ab6ec5e10240dbc89884a194ad/Gruntfile.js">Grunt script</a> on <a href="https://github.com/bartdegoede/blog/commit/335d19e81016633823ccfb6fbb2038c891182bbb#diff-60254338249f657a0a83f98258a56bfeL9">every deploy</a>, which introduces a dependency on node, and nobody really wants any of that for just a static HTML website.</p>
+
+<div id="player">
+    <div class="listen">Listen to this article instead</div>
+    <div id="waveform">
+        
+        <img src="https://bart.degoe.de/img/waveform.min.svg" alt="waveform">
+    </div>
+    <audio controls
+        class="audio_controls "
+        
+        preload="metadata"
+
+        style=""
+        
+    >
+        
+        <source src="/audio/2019-07-12-use-output-format-for-index-generation.mp3"
+            type="audio/mp3">
+        
+        Your browser does not support the audio element
+    </audio>
+</div>
+
 
 <p>I have been wanting forever to have Hugo build that file for me instead<sup class="footnote-ref" id="fnref:gh-issue"><a href="#fn:gh-issue">1</a></sup>. As it turns out, <a href="https://gohugo.io/templates/output-formats/#output-formats-for-pages">Output Formats</a><sup class="footnote-ref" id="fnref:hugo"><a href="#fn:hugo">2</a></sup> make building that index file <em>very</em> easy. Output formats let you generate your content in other formats than HTML, such as AMP or <a href="https://bart.degoe.de/index.xml">XML for an RSS feed</a>, and it also speaks JSON.</p>
 
