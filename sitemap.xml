@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://bart.degoe.de/use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/</loc>
+    <lastmod>2019-10-29T08:00:00-07:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://bart.degoe.de/use-hugo-output-formats-to-generate-lunr-index-files/</loc>
     <lastmod>2019-07-12T15:27:40-07:00</lastmod>
   </url>
@@ -39,7 +44,13 @@
   
   <url>
     <loc>https://bart.degoe.de/</loc>
-    <lastmod>2019-07-12T15:27:40-07:00</lastmod>
+    <lastmod>2019-10-29T08:00:00-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bart.degoe.de/categories/blog/</loc>
+    <lastmod>2019-10-29T08:00:00-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -51,7 +62,7 @@
   
   <url>
     <loc>https://bart.degoe.de/categories/</loc>
-    <lastmod>2018-03-23T15:00:00+01:00</lastmod>
+    <lastmod>2019-10-29T08:00:00-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -63,7 +74,7 @@
   
   <url>
     <loc>https://bart.degoe.de/categories/how-to/</loc>
-    <lastmod>2019-07-12T15:27:40-07:00</lastmod>
+    <lastmod>2019-10-29T08:00:00-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -75,7 +86,7 @@
   
   <url>
     <loc>https://bart.degoe.de/categories/hugo/</loc>
-    <lastmod>2019-07-12T15:27:40-07:00</lastmod>
+    <lastmod>2019-10-29T08:00:00-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -105,7 +116,7 @@
   
   <url>
     <loc>https://bart.degoe.de/post/</loc>
-    <lastmod>2019-07-12T15:27:40-07:00</lastmod>
+    <lastmod>2019-10-29T08:00:00-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -124,6 +135,12 @@
   <url>
     <loc>https://bart.degoe.de/categories/ssl/</loc>
     <lastmod>2018-05-02T22:34:06+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://bart.degoe.de/categories/text-to-speech/</loc>
+    <lastmod>2019-10-29T08:00:00-07:00</lastmod>
     <priority>0</priority>
   </url>
   
