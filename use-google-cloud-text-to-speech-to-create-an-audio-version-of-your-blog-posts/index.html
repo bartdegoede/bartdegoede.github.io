@@ -334,7 +334,7 @@ from pydub import AudioSegment
 
 <h1 id="include-audio-in-the-post">Include audio in the post</h1>
 
-<p>With this, we end up with a bunch of audio files a directory. In order to display them properly to our users so that they can actually consumee thee content, we have to do a little more work. <a href="https://gohugo.io/content-management/shortcodes/">Hugo provides <code>shortcodes</code></a>, which are effectively parameterized macro&rsquo;s that expand into snippets of HTML that get embedded in your posts. There are many shortcodes included with standard Hugo (like <code>figure</code>, <code>gist</code> or <code>tweet</code>), but you can also create your own. We&rsquo;ll leverage that to include <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio">some swanky HTML5 audio tags</a> in our blog posts<sup class="footnote-ref" id="fnref:compatibility"><a href="#fn:compatibility">9</a></sup>.</p>
+<p>With this, we end up with a bunch of audio files a directory. In order to display them properly to our users so that they can actually consume the content, we have to do a little more work. <a href="https://gohugo.io/content-management/shortcodes/">Hugo provides <code>shortcodes</code></a>, which are effectively parameterized macro&rsquo;s that expand into snippets of HTML that get embedded in your posts. There are many shortcodes included with standard Hugo (like <code>figure</code>, <code>gist</code> or <code>tweet</code>), but you can also create your own. We&rsquo;ll leverage that to include <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio">some swanky HTML5 audio tags</a> in our blog posts<sup class="footnote-ref" id="fnref:compatibility"><a href="#fn:compatibility">9</a></sup>.</p>
 
 <pre><code class="language-html">&lt;audio controls
     class=&quot;audio_controls {{ .Get &quot;class&quot; }}&quot;
@@ -395,7 +395,7 @@ Some more words, this time not in Latin.
  <a class="footnote-return" href="#fnref:prs-welcome"><sup>[return]</sup></a></li>
 <li id="fn:ffmpeg"><a href="https://github.com/jiaaro/pydub#dependencies"><code>pydub</code></a> requires <code>ffmpeg</code> or <code>libav</code> to be installed to open, convert and save non-WAV files (such as MP3 or OGG)
  <a class="footnote-return" href="#fnref:ffmpeg"><sup>[return]</sup></a></li>
-<li id="fn:compatibility">Not all browswers support all file types and audio codecs, which is why we&rsquo;ve generated the OGG files as backup.
+<li id="fn:compatibility">Not all browsers support all file types and audio codecs, which is why we&rsquo;ve generated the OGG files as backup.
  <a class="footnote-return" href="#fnref:compatibility"><sup>[return]</sup></a></li>
 </ol>
 </div>
