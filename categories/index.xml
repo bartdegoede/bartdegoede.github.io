@@ -1,139 +1,139 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Bart de Goede</title>
-    <link>https://bart.degoe.de/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 29 Oct 2019 08:00:00 -0700</lastBuildDate>
     
-	<atom:link href="https://bart.degoe.de/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Blog</title>
-      <link>https://bart.degoe.de/categories/blog/</link>
+      <title>blog</title>
+      <link>/categories/blog/</link>
       <pubDate>Tue, 29 Oct 2019 08:00:00 -0700</pubDate>
       
-      <guid>https://bart.degoe.de/categories/blog/</guid>
+      <guid>/categories/blog/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Bloom Filter</title>
-      <link>https://bart.degoe.de/categories/bloom-filter/</link>
-      <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
-      
-      <guid>https://bart.degoe.de/categories/bloom-filter/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gh Pages</title>
-      <link>https://bart.degoe.de/categories/gh-pages/</link>
-      <pubDate>Wed, 02 May 2018 22:34:06 +0200</pubDate>
-      
-      <guid>https://bart.degoe.de/categories/gh-pages/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>How To</title>
-      <link>https://bart.degoe.de/categories/how-to/</link>
+      <title>how-to</title>
+      <link>/categories/how-to/</link>
       <pubDate>Tue, 29 Oct 2019 08:00:00 -0700</pubDate>
       
-      <guid>https://bart.degoe.de/categories/how-to/</guid>
+      <guid>/categories/how-to/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Https</title>
-      <link>https://bart.degoe.de/categories/https/</link>
-      <pubDate>Wed, 02 May 2018 22:34:06 +0200</pubDate>
-      
-      <guid>https://bart.degoe.de/categories/https/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hugo</title>
-      <link>https://bart.degoe.de/categories/hugo/</link>
+      <title>hugo</title>
+      <link>/categories/hugo/</link>
       <pubDate>Tue, 29 Oct 2019 08:00:00 -0700</pubDate>
       
-      <guid>https://bart.degoe.de/categories/hugo/</guid>
+      <guid>/categories/hugo/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Javascript</title>
-      <link>https://bart.degoe.de/categories/javascript/</link>
-      <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
+      <title>text-to-speech</title>
+      <link>/categories/text-to-speech/</link>
+      <pubDate>Tue, 29 Oct 2019 08:00:00 -0700</pubDate>
       
-      <guid>https://bart.degoe.de/categories/javascript/</guid>
+      <guid>/categories/text-to-speech/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Lets Encrypt</title>
-      <link>https://bart.degoe.de/categories/lets-encrypt/</link>
-      <pubDate>Wed, 02 May 2018 22:34:06 +0200</pubDate>
-      
-      <guid>https://bart.degoe.de/categories/lets-encrypt/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Lunr</title>
-      <link>https://bart.degoe.de/categories/lunr/</link>
+      <title>lunr</title>
+      <link>/categories/lunr/</link>
       <pubDate>Fri, 12 Jul 2019 15:27:40 -0700</pubDate>
       
-      <guid>https://bart.degoe.de/categories/lunr/</guid>
+      <guid>/categories/lunr/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Opensearch</title>
-      <link>https://bart.degoe.de/categories/opensearch/</link>
+      <title>search</title>
+      <link>/categories/search/</link>
+      <pubDate>Fri, 12 Jul 2019 15:27:40 -0700</pubDate>
+      
+      <guid>/categories/search/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>opensearch</title>
+      <link>/categories/opensearch/</link>
       <pubDate>Wed, 21 Nov 2018 11:00:00 -0800</pubDate>
       
-      <guid>https://bart.degoe.de/categories/opensearch/</guid>
+      <guid>/categories/opensearch/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Python</title>
-      <link>https://bart.degoe.de/categories/python/</link>
-      <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
-      
-      <guid>https://bart.degoe.de/categories/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Search</title>
-      <link>https://bart.degoe.de/categories/search/</link>
-      <pubDate>Fri, 12 Jul 2019 15:27:40 -0700</pubDate>
-      
-      <guid>https://bart.degoe.de/categories/search/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ssl</title>
-      <link>https://bart.degoe.de/categories/ssl/</link>
+      <title>gh-pages</title>
+      <link>/categories/gh-pages/</link>
       <pubDate>Wed, 02 May 2018 22:34:06 +0200</pubDate>
       
-      <guid>https://bart.degoe.de/categories/ssl/</guid>
+      <guid>/categories/gh-pages/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Text to Speech</title>
-      <link>https://bart.degoe.de/categories/text-to-speech/</link>
-      <pubDate>Tue, 29 Oct 2019 08:00:00 -0700</pubDate>
+      <title>https</title>
+      <link>/categories/https/</link>
+      <pubDate>Wed, 02 May 2018 22:34:06 +0200</pubDate>
       
-      <guid>https://bart.degoe.de/categories/text-to-speech/</guid>
+      <guid>/categories/https/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lets-encrypt</title>
+      <link>/categories/lets-encrypt/</link>
+      <pubDate>Wed, 02 May 2018 22:34:06 +0200</pubDate>
+      
+      <guid>/categories/lets-encrypt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssl</title>
+      <link>/categories/ssl/</link>
+      <pubDate>Wed, 02 May 2018 22:34:06 +0200</pubDate>
+      
+      <guid>/categories/ssl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bloom filter</title>
+      <link>/categories/bloom-filter/</link>
+      <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
+      
+      <guid>/categories/bloom-filter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>/categories/python/</link>
+      <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
+      
+      <guid>/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>javascript</title>
+      <link>/categories/javascript/</link>
+      <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
+      
+      <guid>/categories/javascript/</guid>
       <description></description>
     </item>
     

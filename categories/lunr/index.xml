@@ -1,31 +1,31 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Lunr on Bart de Goede</title>
-    <link>https://bart.degoe.de/categories/lunr/</link>
-    <description>Recent content in Lunr on Bart de Goede</description>
+    <title>lunr on Bart de Goede</title>
+    <link>/categories/lunr/</link>
+    <description>Recent content in lunr on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 12 Jul 2019 15:27:40 -0700</lastBuildDate>
     
-	<atom:link href="https://bart.degoe.de/categories/lunr/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/lunr/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Use Hugo Output Formats to generate Lunr index files for your static site search</title>
-      <link>https://bart.degoe.de/use-hugo-output-formats-to-generate-lunr-index-files/</link>
+      <link>/use-hugo-output-formats-to-generate-lunr-index-files/</link>
       <pubDate>Fri, 12 Jul 2019 15:27:40 -0700</pubDate>
       
-      <guid>https://bart.degoe.de/use-hugo-output-formats-to-generate-lunr-index-files/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://bart.degoe.de/searching-your-hugo-site-with-lunr/&#34;&gt;I&amp;rsquo;ve been using Lunr.js&lt;/a&gt; to enable some basic site search on this blog. Lunr.js requires an &lt;a href=&#34;https://bart.degoe.de/index.json&#34;&gt;index file&lt;/a&gt; that contains all the content you want to make available for search. In order to generate that file, I had a kind of hacky setup, depending on running a &lt;a href=&#34;https://github.com/bartdegoede/blog/blob/7eccae434335c6ab6ec5e10240dbc89884a194ad/Gruntfile.js&#34;&gt;Grunt script&lt;/a&gt; on &lt;a href=&#34;https://github.com/bartdegoede/blog/commit/335d19e81016633823ccfb6fbb2038c891182bbb#diff-60254338249f657a0a83f98258a56bfeL9&#34;&gt;every deploy&lt;/a&gt;, which introduces a dependency on node, and nobody really wants any of that for just a static HTML website.&lt;/p&gt;</description>
+      <guid>/use-hugo-output-formats-to-generate-lunr-index-files/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;/searching-your-hugo-site-with-lunr/&#34;&gt;I&amp;rsquo;ve been using Lunr.js&lt;/a&gt; to enable some basic site search on this blog. Lunr.js requires an &lt;a href=&#34;/index.json&#34;&gt;index file&lt;/a&gt; that contains all the content you want to make available for search. In order to generate that file, I had a kind of hacky setup, depending on running a &lt;a href=&#34;https://github.com/bartdegoede/blog/blob/7eccae434335c6ab6ec5e10240dbc89884a194ad/Gruntfile.js&#34;&gt;Grunt script&lt;/a&gt; on &lt;a href=&#34;https://github.com/bartdegoede/blog/commit/335d19e81016633823ccfb6fbb2038c891182bbb#diff-60254338249f657a0a83f98258a56bfeL9&#34;&gt;every deploy&lt;/a&gt;, which introduces a dependency on node, and nobody really wants any of that for just a static HTML website.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Searching your Hugo site with Lunr</title>
-      <link>https://bart.degoe.de/searching-your-hugo-site-with-lunr/</link>
+      <link>/searching-your-hugo-site-with-lunr/</link>
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
-      <guid>https://bart.degoe.de/searching-your-hugo-site-with-lunr/</guid>
+      <guid>/searching-your-hugo-site-with-lunr/</guid>
       <description>&lt;p&gt;Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &amp;ldquo;How To Do Things™&amp;rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.&lt;/p&gt;</description>
     </item>
     

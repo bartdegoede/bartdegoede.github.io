@@ -22,14 +22,14 @@
   
   
 
-  <link rel="stylesheet" href="https://bart.degoe.de/bundle.min.ad3f1481a1de9cc7bfdfed6a226ff207ee34a5b3c5ce4f86bf1863f136b6596c.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface&display=swap">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/bundle.min.62aa224aae09f7f0b271cdcd7c1dd2fac0c084963f32b89b4322eb4fe744d848.css">
   <link rel="search" href="https://bart.degoe.de/opensearch.xml" type="application/opensearchdescription+xml" title="Search bart.degoe.de">
 
   
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://bart.degoe.de/touch-icon-144-precomposed.png">
-  <link href="https://bart.degoe.de/favicon.png" rel="icon">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+  <link href="/favicon.png" rel="icon">
 
   
   
@@ -54,15 +54,15 @@
 <div class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <a href="https://bart.degoe.de/">
+      <a href="/">
         <h1>Bart de Goede</h1>
       </a>
     </div>
 
     <ul class="sidebar-nav">
-      <li class="sidebar-nav-item"><a href="https://bart.degoe.de/">Home</a></li>
+      <li class="sidebar-nav-item"><a href="/">Home</a></li>
       
-      <li class="sidebar-nav-item"><a href="https://bart.degoe.de/about/">About</a></li>
+      <li class="sidebar-nav-item"><a href="/about/">About</a></li>
       
     </ul>
 
@@ -74,7 +74,7 @@
       
       
       <a href="https://twitter.com/bartdegoede"><i class="fa fa-twitter-square fa-3x"></i></a>
-      <a href="https://bart.degoe.de/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
+      <a href="/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
       </li>
     </ul>
 
@@ -93,15 +93,14 @@
     <span class="post-date">Mar 4, 2018
     
     <br/>
-    <a class="label" href="https://bart.degoe.de/categories/hugo">hugo</a><a class="label" href="https://bart.degoe.de/categories/search">search</a><a class="label" href="https://bart.degoe.de/categories/lunr">lunr</a><a class="label" href="https://bart.degoe.de/categories/javascript">javascript</a><a class="label" href="https://bart.degoe.de/categories/how-to">how-to</a>
+    <a class="label" href="/categories/hugo">hugo</a><a class="label" href="/categories/search">search</a><a class="label" href="/categories/lunr">lunr</a><a class="label" href="/categories/javascript">javascript</a><a class="label" href="/categories/how-to">how-to</a>
     </span>
     <p>Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &ldquo;How To Do Things™&rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.</p>
-
 <div id="player">
     <div class="listen">Listen to this article instead</div>
     <div id="waveform">
         
-        <img src="https://bart.degoe.de/img/waveform.min.svg" alt="waveform">
+        <img src="/img/waveform.min.svg" alt="waveform">
     </div>
     <audio controls
         class="audio_controls "
@@ -119,32 +118,22 @@
     </audio>
 </div>
 
-
-<p>Because I&rsquo;m trying to get more familiar with <a href="https://golang.org/">Go</a>, I opted to use the awesome <a href="https://gohugo.io/">Hugo</a><sup class="footnote-ref" id="fnref:hugo"><a href="#fn:hugo">1</a></sup> framework to build myself a static site hosted on <a href="https://pages.github.com/">Github Pages</a>.</p>
-
+<p>Because I&rsquo;m trying to get more familiar with <a href="https://golang.org/">Go</a>, I opted to use the awesome <a href="https://gohugo.io/">Hugo</a><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> framework to build myself a static site hosted on <a href="https://pages.github.com/">Github Pages</a>.</p>
 <p>In my day job I work on our search engine, so the first thing that I wanted to have was some basic search functionality for all the blog posts I haven&rsquo;t written yet, preferably something that <del>I can mess with</del> is extensible and configurable.</p>
-
 <p>There are three options if you want to add search functionality to a static website, each with their pros and cons:</p>
-
 <ol>
 <li><strong>Third-party service (i.e. Google CSE):</strong>
-<br>There are a bunch of services that provide basic search widgets for your site, such as <a href="https://cse.google.com/cse/">Google Custom Search Engine (CSE)</a>. Those are difficult to customise, break your UI with their Google-styled widgets, and (in some cases) will display ads on your website<sup class="footnote-ref" id="fnref:google-ads"><a href="#fn:google-ads">2</a></sup>.</li>
+<br>There are a bunch of services that provide basic search widgets for your site, such as <a href="https://cse.google.com/cse/">Google Custom Search Engine (CSE)</a>. Those are difficult to customise, break your UI with their Google-styled widgets, and (in some cases) will display ads on your website<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</li>
 <li><strong>Run a server-side search engine:</strong>
 <br>You can set up a backend that indexes your data and can process the queries your users submit in the search box on your website. The obvious downside is that you throw away all the benefits of having a static site (free hosting, complex infrastructure).</li>
 <li><strong>Search client-side</strong>:
-<br>Having a static site, it makes sense to move all the user interaction to the client. We depend on the users&rsquo; browser to run Javascript<sup class="footnote-ref" id="fnref:my-users"><a href="#fn:my-users">3</a></sup> and download the searchable data in order to run queries against it, but the upside is that you can control how data is processed and how that data is queried. Fortunately for us, <a href="https://blog.codinghorror.com/the-principle-of-least-power/">Atwood&rsquo;s Law</a> holds true; there&rsquo;s a full-text search library inspired by Lucene/Solr written in Javascript we can use to implement our search engine: <a href="https://lunrjs.com/">Lunr.js</a>.</li>
+<br>Having a static site, it makes sense to move all the user interaction to the client. We depend on the users&rsquo; browser to run Javascript<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> and download the searchable data in order to run queries against it, but the upside is that you can control how data is processed and how that data is queried. Fortunately for us, <a href="https://blog.codinghorror.com/the-principle-of-least-power/">Atwood&rsquo;s Law</a> holds true; there&rsquo;s a full-text search library inspired by Lucene/Solr written in Javascript we can use to implement our search engine: <a href="https://lunrjs.com/">Lunr.js</a>.</li>
 </ol>
-
 <h1 id="relevance">Relevance</h1>
-
 <p>When thinking about search, the most important question is what users want to find. This sounds very much like an open door, but you&rsquo;d be surprised how often this gets overlooked; what are we looking for (tweets, products, (the fastest route to) a destination?), who is doing the search (lawyers, software engineers, my mom?), what do we hope to get out of it (money, page views?).</p>
-
-<p>In our case, we&rsquo;re searching blog posts that have titles, tags and content (in decreasing order of value to relevance); queries matching titles should be more important than matches in post content<sup class="footnote-ref" id="fnref:relevance"><a href="#fn:relevance">4</a></sup>.</p>
-
+<p>In our case, we&rsquo;re searching blog posts that have titles, tags and content (in decreasing order of value to relevance); queries matching titles should be more important than matches in post content<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>.</p>
 <h1 id="indexing">Indexing</h1>
-
-<p>The project folder for my blog<sup class="footnote-ref" id="fnref:github"><a href="#fn:github">5</a></sup> looks roughly like this:</p>
-
+<p>The project folder for my blog<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> looks roughly like this:</p>
 <pre><code>blog/ &lt;= Hugo project root folder
 |- content/ &lt;- this is where the pages I want to be searchable live
     |- about.md
@@ -166,18 +155,12 @@
 |- ...
 |- Gruntfile.js &lt;- This will build our index
 |- ...
-</code></pre>
-
-<p>The idea is that we build an index on site generation time, and fetch that file when a user loads the page.</p>
-
-<p>I use <a href="https://gruntjs.com/"><code>Gruntjs</code></a><sup class="footnote-ref" id="fnref:grunt-to-go"><a href="#fn:grunt-to-go">6</a></sup> to build the index file, and some dependencies that make life a little easier. Install them with <code>npm</code>:</p>
-
-<p><code class="bash">
-$ npm install &ndash;save-dev grunt string gray-matter
-</code></p>
-
+</code></pre><p>The idea is that we build an index on site generation time, and fetch that file when a user loads the page.</p>
+<p>I use <a href="https://gruntjs.com/"><code>Gruntjs</code></a><sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup> to build the index file, and some dependencies that make life a little easier. Install them with <code>npm</code>:</p>
+<code class="bash">
+$ npm install --save-dev grunt string gray-matter
+</code>
 <p>This is my <a href="https://github.com/bartdegoede/blog/blob/master/Gruntfile.js"><code>Gruntfile.js</code></a> that lives in the root of my project. It will walk through the <code>content/</code> directory and parse all the markdown files it finds. It will parse out <code>title</code>, <code>categories</code> and <code>href</code> (this will be the reference to the post; i.e. the URL of the page we want to point to) from the front matter, and the <code>content</code> from the rest of the post. It also skips posts that are labeled <code>draft</code>, because I don&rsquo;t want the posts I&rsquo;m still working on to already show up in the search results.</p>
-
 <pre><code>var matter = require('gray-matter');
 var S = require('string');
 
@@ -218,10 +201,7 @@ module.exports = function(grunt) {
         grunt.log.ok('Index built');
     });
 };
-</code></pre>
-
-<p>To run this task, simply run <code>grunt search-index</code> in the directory where <code>Gruntfile.js</code> is located<sup class="footnote-ref" id="fnref:deploy"><a href="#fn:deploy">7</a></sup>. This will generate a JSON index file looking like this:</p>
-
+</code></pre><p>To run this task, simply run <code>grunt search-index</code> in the directory where <code>Gruntfile.js</code> is located<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>. This will generate a JSON index file looking like this:</p>
 <pre><code>[
     {
         &quot;content&quot;: &quot;Hi My name is Bart de Goede and ...&quot;,
@@ -236,24 +216,16 @@ module.exports = function(grunt) {
     },
     ...
 ]
-</code></pre>
-
-<h1 id="querying">Querying</h1>
-
+</code></pre><h1 id="querying">Querying</h1>
 <p>Now we&rsquo;ve built the index, we need a way of obtaining it client-side, and then query it. To do that, I have two partials that include <a href="https://github.com/bartdegoede/blog/blob/master/layouts/partials/search.html">the markup for the search input box</a> and the links to the <a href="https://github.com/bartdegoede/blog/blob/master/layouts/partials/search_scripts.html">relevant Javascript</a>:</p>
-
 <pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-2.1.3.min.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;js/vendor/lunr.min.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot; src=&quot;js/search/search.js&quot;&gt;&lt;/script&gt;
 &lt;!-- js/search/search.js contains the code that downloads and initialises the index --&gt;
 ...
 &lt;input type=&quot;text&quot; id=&quot;search&quot;&gt;
-</code></pre>
-
-<p>For my blog, I have one <a href="https://github.com/bartdegoede/blog/blob/master/static/js/search/search.js"><code>search.js</code> file</a> that will download the index file, initialise the UI, and run the searches. For the sake of readability, I&rsquo;ve split up the relevant functions below and added some comments to the code.</p>
-
+</code></pre><p>For my blog, I have one <a href="https://github.com/bartdegoede/blog/blob/master/static/js/search/search.js"><code>search.js</code> file</a> that will download the index file, initialise the UI, and run the searches. For the sake of readability, I&rsquo;ve split up the relevant functions below and added some comments to the code.</p>
 <p>This function fetches the index file we&rsquo;ve generated with the Grunt task, initialises the relevant fields, and then adds the each of the documents to the index. The <code>pagesIndex</code> variable will store the documents as we indexed them, and the <code>searchIndex</code> variable will store the statistics and data structures we need to rank our documents for a query efficiently.</p>
-
 <pre><code>function initSearchIndex() {
   // this file is built by the Grunt task, and
   $.getJSON('js/search/index.json')
@@ -281,10 +253,7 @@ module.exports = function(grunt) {
 }
 
 initSearchIndex();
-</code></pre>
-
-<p>Then, we need to sprinkle some jQuery magic on the input box. In my case, I want to start searching once a user has typed at least two characters, and support a typeahead style of searching, so everytime a character is entered, I want to empty the current search results (if any), run the <code>searchSite</code> function with whatever is in the input box, and render the results.</p>
-
+</code></pre><p>Then, we need to sprinkle some jQuery magic on the input box. In my case, I want to start searching once a user has typed at least two characters, and support a typeahead style of searching, so everytime a character is entered, I want to empty the current search results (if any), run the <code>searchSite</code> function with whatever is in the input box, and render the results.</p>
 <pre><code>function initUI() {
   $results = $('.posts');
   // or whatever element is supposed to hold your results
@@ -303,10 +272,7 @@ initSearchIndex();
 $(document).ready(function() {
   initUI();
 });
-</code></pre>
-
-<p>The <code>searchSite</code> function will take the <code>query_string</code> the user typed in and build a <code>lunr.Query</code> object and run it against the index (stored in the <code>searchIndex</code> variable). The <code>lunr</code> index will return a ranked list of <code>ref</code>s (these are the identifiers we assigned to the documents in the <code>Gruntfile</code>). The second part of this method maps these identifiers to the original documents we stored in the <code>pagesIndex</code> variable.</p>
-
+</code></pre><p>The <code>searchSite</code> function will take the <code>query_string</code> the user typed in and build a <code>lunr.Query</code> object and run it against the index (stored in the <code>searchIndex</code> variable). The <code>lunr</code> index will return a ranked list of <code>ref</code>s (these are the identifiers we assigned to the documents in the <code>Gruntfile</code>). The second part of this method maps these identifiers to the original documents we stored in the <code>pagesIndex</code> variable.</p>
 <pre><code>// this function will parse the query_string, which will you
 // to run queries like &quot;title:lunr&quot; (search the title field),
 // &quot;lunr^10&quot; (boost hits with this term by a factor 10) or
@@ -335,14 +301,9 @@ function searchSite(query_string) {
     })[0];
   });
 }
-</code></pre>
-
-<p>The snippet above lists two methods. The first shows an example of a search using the default <code>lunr.Index#search</code> method, which uses the <code>lunr</code> query syntax.</p>
-
-<p>In my case, I want to support a typeahead search, where we show the user results for partial queries too; if the user types <code>&quot;pyth&quot;</code>, we should display results that have the word <code>&quot;python&quot;</code> in the post. To do that, we tell Lunr to combine two queries: the first <code>q.term</code> provides <em>exact matches</em> with a high boost to relevance (because we it&rsquo;s likely that these matches are relevant to the user), the second appends a trailing wildcard to the query<sup class="footnote-ref" id="fnref:trie"><a href="#fn:trie">8</a></sup>, providing prefix matches with a (lower) boost.</p>
-
+</code></pre><p>The snippet above lists two methods. The first shows an example of a search using the default <code>lunr.Index#search</code> method, which uses the <code>lunr</code> query syntax.</p>
+<p>In my case, I want to support a typeahead search, where we show the user results for partial queries too; if the user types <code>&quot;pyth&quot;</code>, we should display results that have the word <code>&quot;python&quot;</code> in the post. To do that, we tell Lunr to combine two queries: the first <code>q.term</code> provides <em>exact matches</em> with a high boost to relevance (because we it&rsquo;s likely that these matches are relevant to the user), the second appends a trailing wildcard to the query<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup>, providing prefix matches with a (lower) boost.</p>
 <p>Finally, given the ranked list of results (containing <em>all</em> pages in the <code>content/</code> directory), we want to render those somewhere on the page. The <code>renderResults</code> method slices the result list to the first ten results, creates a link to the appropriate post based on the <code>href</code>, and creates a (crude) snippet based on the 100 first characters of the content.</p>
-
 <pre><code>function renderResults(results) {
   if (!results.length) {
     return;
@@ -358,32 +319,36 @@ function searchSite(query_string) {
     $results.append($result);
   });
 }
-</code></pre>
-
-<p>This is a pretty naive approach to introducing full-text search to a static site (I use Hugo, but this will work with static site generators like Jekyll or Hyde too); it completely ignores other languages than English (there&rsquo;s <a href="https://lunrjs.com/guides/language_support.html">support for other languages</a> too), let alone non whitespace languages like Chinese, and it requires users to download the full index that contains all your searchable pages, so it won&rsquo;t scale as nicely if you have thousands of pages. For my personal blog though, it&rsquo;s good enough 😇.</p>
-<div class="footnotes">
-
-<hr />
-
+</code></pre><p>This is a pretty naive approach to introducing full-text search to a static site (I use Hugo, but this will work with static site generators like Jekyll or Hyde too); it completely ignores other languages than English (there&rsquo;s <a href="https://lunrjs.com/guides/language_support.html">support for other languages</a> too), let alone non whitespace languages like Chinese, and it requires users to download the full index that contains all your searchable pages, so it won&rsquo;t scale as nicely if you have thousands of pages. For my personal blog though, it&rsquo;s good enough 😇.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:hugo">It&rsquo;s fast, it&rsquo;s written in Golang, it supports <a href="https://themes.gohugo.io/">fancy themes</a>, and it&rsquo;s <a href="https://github.com/gohugoio/hugo">open source</a>!
- <a class="footnote-return" href="#fnref:hugo"><sup>[return]</sup></a></li>
-<li id="fn:google-ads">You can <a href="https://support.google.com/adsense/answer/9879?visit_id=1-636557905318663395-3173001859&amp;ctx=as2&amp;hl=en&amp;rd=2&amp;ref_topic=1705820">make money</a> off theses ads, but the question is whether you want to show ads on your personal blog or not.
- <a class="footnote-return" href="#fnref:google-ads"><sup>[return]</sup></a></li>
-<li id="fn:my-users">I&rsquo;m assuming that the audience that&rsquo;ll land on these pages will have Javascript enabled in their browser 😄
- <a class="footnote-return" href="#fnref:my-users"><sup>[return]</sup></a></li>
-<li id="fn:relevance">In this case, I&rsquo;m totally assuming that if words from the query occur in the title or the manually assigned tags of a post are way more relevant than matches in the content of a post, if only because there&rsquo;s a lot more words in post content, so there&rsquo;s a higher probability of matching <em>any</em> word in the query.
- <a class="footnote-return" href="#fnref:relevance"><sup>[return]</sup></a></li>
-<li id="fn:github">It&rsquo;s also on <a href="https://github.com/bartdegoede/blog">GitHub</a>.
- <a class="footnote-return" href="#fnref:github"><sup>[return]</sup></a></li>
-<li id="fn:grunt-to-go">A port of this script to Golang is in the works.
- <a class="footnote-return" href="#fnref:grunt-to-go"><sup>[return]</sup></a></li>
-<li id="fn:deploy">The idea is to run the task before you deploy the latest version of your site. In my case, I have a <a href="https://github.com/bartdegoede/blog/blob/master/deploy.sh"><code>deploy.sh</code> script</a> that runs Hugo to build my static pages, runs <code>grunt search-index</code> and pushes the result to GitHub.
- <a class="footnote-return" href="#fnref:deploy"><sup>[return]</sup></a></li>
-<li id="fn:trie">Lunr uses tries to represent terms internally, giving us an efficient way of doing fast prefix lookups.
- <a class="footnote-return" href="#fnref:trie"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>It&rsquo;s fast, it&rsquo;s written in Golang, it supports <a href="https://themes.gohugo.io/">fancy themes</a>, and it&rsquo;s <a href="https://github.com/gohugoio/hugo">open source</a>! <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>You can <a href="https://support.google.com/adsense/answer/9879?visit_id=1-636557905318663395-3173001859&amp;ctx=as2&amp;hl=en&amp;rd=2&amp;ref_topic=1705820">make money</a> off theses ads, but the question is whether you want to show ads on your personal blog or not. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>I&rsquo;m assuming that the audience that&rsquo;ll land on these pages will have Javascript enabled in their browser 😄 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>In this case, I&rsquo;m totally assuming that if words from the query occur in the title or the manually assigned tags of a post are way more relevant than matches in the content of a post, if only because there&rsquo;s a lot more words in post content, so there&rsquo;s a higher probability of matching <em>any</em> word in the query. <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p>It&rsquo;s also on <a href="https://github.com/bartdegoede/blog">GitHub</a>. <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>A port of this script to Golang is in the works. <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p>The idea is to run the task before you deploy the latest version of your site. In my case, I have a <a href="https://github.com/bartdegoede/blog/blob/master/deploy.sh"><code>deploy.sh</code> script</a> that runs Hugo to build my static pages, runs <code>grunt search-index</code> and pushes the result to GitHub. <a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8" role="doc-endnote">
+<p>Lunr uses tries to represent terms internally, giving us an efficient way of doing fast prefix lookups. <a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
   </div>
   
 </div>
@@ -391,15 +356,9 @@ function searchSite(query_string) {
 
 
 
-<script src="https://bart.degoe.de/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 
-
-
-
-
-<script type="text/javascript" src="https://bart.degoe.de/search.min.bd398eeda45cfa16593454b794d6ce3029dddc09e1b8037d5745c8fd459f3c4b.js" integrity="sha256-vTmO7aRc&#43;hZZNFS3lNbOMCnd3AnhuAN9V0XI/UWfPEs="></script>
-
+    <script src="/js/highlight.pack.min.9fb14e2a1df0f115e1538850e856aa5f281fe701e6b7f43b74b2a8e6362fc5d7.js" integrity="sha256-n7FOKh3w8RXhU4hQ6FaqXygf5wHmt/Q7dLKo5jYvxdc="></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
 

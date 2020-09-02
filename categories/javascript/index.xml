@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Javascript on Bart de Goede</title>
-    <link>https://bart.degoe.de/categories/javascript/</link>
-    <description>Recent content in Javascript on Bart de Goede</description>
+    <title>javascript on Bart de Goede</title>
+    <link>/categories/javascript/</link>
+    <description>Recent content in javascript on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 04 Mar 2018 23:38:44 +0100</lastBuildDate>
     
-	<atom:link href="https://bart.degoe.de/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Searching your Hugo site with Lunr</title>
-      <link>https://bart.degoe.de/searching-your-hugo-site-with-lunr/</link>
+      <link>/searching-your-hugo-site-with-lunr/</link>
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
-      <guid>https://bart.degoe.de/searching-your-hugo-site-with-lunr/</guid>
+      <guid>/searching-your-hugo-site-with-lunr/</guid>
       <description>&lt;p&gt;Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &amp;ldquo;How To Do Things™&amp;rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.&lt;/p&gt;</description>
     </item>
     

@@ -22,21 +22,21 @@
   
   
 
-  <link rel="stylesheet" href="https://bart.degoe.de/bundle.min.ad3f1481a1de9cc7bfdfed6a226ff207ee34a5b3c5ce4f86bf1863f136b6596c.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface&display=swap">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/bundle.min.62aa224aae09f7f0b271cdcd7c1dd2fac0c084963f32b89b4322eb4fe744d848.css">
   <link rel="search" href="https://bart.degoe.de/opensearch.xml" type="application/opensearchdescription+xml" title="Search bart.degoe.de">
 
   
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://bart.degoe.de/touch-icon-144-precomposed.png">
-  <link href="https://bart.degoe.de/favicon.png" rel="icon">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/touch-icon-144-precomposed.png">
+  <link href="/favicon.png" rel="icon">
 
   
   
   
   
 
-  <meta name="description" content="Random ramblings about programming, tech, and anything else really.">
+  <meta name="description" content="I&#39;ve been using Lunr.js to enable some basic site search on this blog. Lunr.js requires an index file that contains all the content you want to make available for search. In order to generate that file, I had a kind of hacky setup, depending on running a Grunt script on every deploy, which introduces a dependency on node, and nobody really wants any of that for just a static HTML website.">
   <meta name="keywords" content="search,hugo,lunr,how-to">
   
   <script>
@@ -54,15 +54,15 @@
 <div class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <a href="https://bart.degoe.de/">
+      <a href="/">
         <h1>Bart de Goede</h1>
       </a>
     </div>
 
     <ul class="sidebar-nav">
-      <li class="sidebar-nav-item"><a href="https://bart.degoe.de/">Home</a></li>
+      <li class="sidebar-nav-item"><a href="/">Home</a></li>
       
-      <li class="sidebar-nav-item"><a href="https://bart.degoe.de/about/">About</a></li>
+      <li class="sidebar-nav-item"><a href="/about/">About</a></li>
       
     </ul>
 
@@ -74,7 +74,7 @@
       
       
       <a href="https://twitter.com/bartdegoede"><i class="fa fa-twitter-square fa-3x"></i></a>
-      <a href="https://bart.degoe.de/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
+      <a href="/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
       </li>
     </ul>
 
@@ -93,15 +93,14 @@
     <span class="post-date">Jul 12, 2019
     
     <br/>
-    <a class="label" href="https://bart.degoe.de/categories/hugo">hugo</a><a class="label" href="https://bart.degoe.de/categories/search">search</a><a class="label" href="https://bart.degoe.de/categories/lunr">lunr</a><a class="label" href="https://bart.degoe.de/categories/how-to">how-to</a>
+    <a class="label" href="/categories/hugo">hugo</a><a class="label" href="/categories/search">search</a><a class="label" href="/categories/lunr">lunr</a><a class="label" href="/categories/how-to">how-to</a>
     </span>
-    <p><a href="https://bart.degoe.de/searching-your-hugo-site-with-lunr/">I&rsquo;ve been using Lunr.js</a> to enable some basic site search on this blog. Lunr.js requires an <a href="/index.json">index file</a> that contains all the content you want to make available for search. In order to generate that file, I had a kind of hacky setup, depending on running a <a href="https://github.com/bartdegoede/blog/blob/7eccae434335c6ab6ec5e10240dbc89884a194ad/Gruntfile.js">Grunt script</a> on <a href="https://github.com/bartdegoede/blog/commit/335d19e81016633823ccfb6fbb2038c891182bbb#diff-60254338249f657a0a83f98258a56bfeL9">every deploy</a>, which introduces a dependency on node, and nobody really wants any of that for just a static HTML website.</p>
-
+    <p><a href="/searching-your-hugo-site-with-lunr/">I&rsquo;ve been using Lunr.js</a> to enable some basic site search on this blog. Lunr.js requires an <a href="/index.json">index file</a> that contains all the content you want to make available for search. In order to generate that file, I had a kind of hacky setup, depending on running a <a href="https://github.com/bartdegoede/blog/blob/7eccae434335c6ab6ec5e10240dbc89884a194ad/Gruntfile.js">Grunt script</a> on <a href="https://github.com/bartdegoede/blog/commit/335d19e81016633823ccfb6fbb2038c891182bbb#diff-60254338249f657a0a83f98258a56bfeL9">every deploy</a>, which introduces a dependency on node, and nobody really wants any of that for just a static HTML website.</p>
 <div id="player">
     <div class="listen">Listen to this article instead</div>
     <div id="waveform">
         
-        <img src="https://bart.degoe.de/img/waveform.min.svg" alt="waveform">
+        <img src="/img/waveform.min.svg" alt="waveform">
     </div>
     <audio controls
         class="audio_controls "
@@ -119,22 +118,14 @@
     </audio>
 </div>
 
-
-<p>I have been wanting forever to have Hugo build that file for me instead<sup class="footnote-ref" id="fnref:gh-issue"><a href="#fn:gh-issue">1</a></sup>. As it turns out, <a href="https://gohugo.io/templates/output-formats/#output-formats-for-pages">Output Formats</a><sup class="footnote-ref" id="fnref:hugo"><a href="#fn:hugo">2</a></sup> make building that index file <em>very</em> easy. Output formats let you generate your content in other formats than HTML, such as AMP or <a href="https://bart.degoe.de/index.xml">XML for an RSS feed</a>, and it also speaks JSON.</p>
-
+<p>I have been wanting forever to have Hugo build that file for me instead<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. As it turns out, <a href="https://gohugo.io/templates/output-formats/#output-formats-for-pages">Output Formats</a><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> make building that index file <em>very</em> easy. Output formats let you generate your content in other formats than HTML, such as AMP or <a href="https://bart.degoe.de/index.xml">XML for an RSS feed</a>, and it also speaks JSON.</p>
 <p>The search on my blog lives on the homepage, where some <a href="https://github.com/bartdegoede/blog/blob/335d19e81016633823ccfb6fbb2038c891182bbb/static/js/search/search.js">(very ugly) Javascript</a> downloads the index file, parses it contents into an <a href="https://en.wikipedia.org/wiki/Inverted_index">inverted index</a>, and replaces the content on the page with search results whenever someone starts typing. Essentially, I want to create some JSON output on my homepage (<a href="/index.json"><code>index.json</code></a> instead of <a href="/index.html"><code>index.html</code></a>).</p>
-
 <p>I added the following snippet to my <a href="https://github.com/bartdegoede/blog/blob/335d19e81016633823ccfb6fbb2038c891182bbb/config.toml#L24-L26"><code>config.toml</code></a>, that says that besides HTML, the homepage also has JSON output:</p>
-
-<pre><code class="language-toml">[outputs]
-    home = [&quot;HTML&quot;, &quot;JSON&quot;]
-    page = [&quot;HTML&quot;]
-</code></pre>
-
-<p><strong>N.B.:</strong> this means that there won&rsquo;t be a JSON version of the other pages; I just need it on my homepage, because that serves as the search results page too.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-toml" data-lang="toml">[<span style="color:#a6e22e">outputs</span>]
+    <span style="color:#a6e22e">home</span> = [<span style="color:#e6db74">&#34;HTML&#34;</span>, <span style="color:#e6db74">&#34;JSON&#34;</span>]
+    <span style="color:#a6e22e">page</span> = [<span style="color:#e6db74">&#34;HTML&#34;</span>]
+</code></pre></div><p><strong>N.B.:</strong> this means that there won&rsquo;t be a JSON version of the other pages; I just need it on my homepage, because that serves as the search results page too.</p>
 <p>Now, I don&rsquo;t want that <code>index.json</code> file to basically be the list of links it is in the HTML version and in the RSS feed, so I <a href="https://github.com/bartdegoede/blog/blob/335d19e81016633823ccfb6fbb2038c891182bbb/layouts/index.json">added an <code>index.json</code> file</a> in my <code>layouts</code> folder with the following content:</p>
-
 <pre><code>[
     {{ range $index, $page := .Site.Pages }}
     {{- if eq $page.Type &quot;post&quot; -}}
@@ -150,20 +141,18 @@
       {{- end -}}
     {{- end -}}
 ]
-</code></pre>
-
-<p>This will render a JSON file (named <a href="/index.json"><code>index.json</code></a>) with an array in the <a href="https://github.com/bartdegoede/bartdegoede.github.io/blob/master/index.json">root directory of my site</a>, and every item in that array is one of the <code>.Site.Pages</code> (i.e. my posts), whenever that page has text in it and it&rsquo;s not the homepage. I didn&rsquo;t bother with minification, because the file is tiny and will be served nicely gzipped by <a href="https://bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/">Cloudflare</a> anyway. Whenever Hugo builds the site, it will reindex all the data (i.e. rebuild this file), and I don&rsquo;t have a dependency on Node and Grunt scripts anymore.</p>
-<div class="footnotes">
-
-<hr />
-
+</code></pre><p>This will render a JSON file (named <a href="/index.json"><code>index.json</code></a>) with an array in the <a href="https://github.com/bartdegoede/bartdegoede.github.io/blob/master/index.json">root directory of my site</a>, and every item in that array is one of the <code>.Site.Pages</code> (i.e. my posts), whenever that page has text in it and it&rsquo;s not the homepage. I didn&rsquo;t bother with minification, because the file is tiny and will be served nicely gzipped by <a href="/free-ssl-on-github-pages-with-a-custom-domain/">Cloudflare</a> anyway. Whenever Hugo builds the site, it will reindex all the data (i.e. rebuild this file), and I don&rsquo;t have a dependency on Node and Grunt scripts anymore.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:gh-issue">Ever since someone opened <a href="https://github.com/bartdegoede/blog/issues/1">a GitHub issue</a> about it 😄
- <a class="footnote-return" href="#fnref:gh-issue"><sup>[return]</sup></a></li>
-<li id="fn:hugo">Ships with Hugo version 0.20.0 or greater.
- <a class="footnote-return" href="#fnref:hugo"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>Ever since someone opened <a href="https://github.com/bartdegoede/blog/issues/1">a GitHub issue</a> about it 😄 <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Ships with Hugo version 0.20.0 or greater. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
   </div>
   
 </div>
@@ -171,15 +160,9 @@
 
 
 
-<script src="https://bart.degoe.de/js/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
 
-
-
-
-
-<script type="text/javascript" src="https://bart.degoe.de/search.min.bd398eeda45cfa16593454b794d6ce3029dddc09e1b8037d5745c8fd459f3c4b.js" integrity="sha256-vTmO7aRc&#43;hZZNFS3lNbOMCnd3AnhuAN9V0XI/UWfPEs="></script>
-
+    <script src="/js/highlight.pack.min.9fb14e2a1df0f115e1538850e856aa5f281fe701e6b7f43b74b2a8e6362fc5d7.js" integrity="sha256-n7FOKh3w8RXhU4hQ6FaqXygf5wHmt/Q7dLKo5jYvxdc="></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
 

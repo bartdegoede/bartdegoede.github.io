@@ -1,85 +1,85 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Bart de Goede</title>
-    <link>https://bart.degoe.de/</link>
+    <link>/</link>
     <description>Recent content on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 29 Oct 2019 08:00:00 -0700</lastBuildDate>
     
-	<atom:link href="https://bart.degoe.de/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Use Google Cloud Text-to-Speech to create an audio version of your blog posts</title>
-      <link>https://bart.degoe.de/use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/</link>
+      <link>/use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/</link>
       <pubDate>Tue, 29 Oct 2019 08:00:00 -0700</pubDate>
       
-      <guid>https://bart.degoe.de/use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/</guid>
+      <guid>/use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/</guid>
       <description>Audio is big. Like, really big, and growing fast, to the tune of &amp;ldquo;two-thirds of the population listens to online audio&amp;rdquo; and &amp;ldquo;weekly online listeners reporting an average nearly 17 hours of listening in the last week&amp;rdquo;1. These numbers include all kinds of audio, from online radio stations, audiobooks, streaming services and podcasts (hi Spotify!). It makes sense too. Consuming audio content is easier to consume and more engaging than written content while you&amp;rsquo;re on the go, exercising, commuting or doing household chores2.</description>
     </item>
     
     <item>
       <title>Use Hugo Output Formats to generate Lunr index files for your static site search</title>
-      <link>https://bart.degoe.de/use-hugo-output-formats-to-generate-lunr-index-files/</link>
+      <link>/use-hugo-output-formats-to-generate-lunr-index-files/</link>
       <pubDate>Fri, 12 Jul 2019 15:27:40 -0700</pubDate>
       
-      <guid>https://bart.degoe.de/use-hugo-output-formats-to-generate-lunr-index-files/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://bart.degoe.de/searching-your-hugo-site-with-lunr/&#34;&gt;I&amp;rsquo;ve been using Lunr.js&lt;/a&gt; to enable some basic site search on this blog. Lunr.js requires an &lt;a href=&#34;https://bart.degoe.de/index.json&#34;&gt;index file&lt;/a&gt; that contains all the content you want to make available for search. In order to generate that file, I had a kind of hacky setup, depending on running a &lt;a href=&#34;https://github.com/bartdegoede/blog/blob/7eccae434335c6ab6ec5e10240dbc89884a194ad/Gruntfile.js&#34;&gt;Grunt script&lt;/a&gt; on &lt;a href=&#34;https://github.com/bartdegoede/blog/commit/335d19e81016633823ccfb6fbb2038c891182bbb#diff-60254338249f657a0a83f98258a56bfeL9&#34;&gt;every deploy&lt;/a&gt;, which introduces a dependency on node, and nobody really wants any of that for just a static HTML website.&lt;/p&gt;</description>
+      <guid>/use-hugo-output-formats-to-generate-lunr-index-files/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;/searching-your-hugo-site-with-lunr/&#34;&gt;I&amp;rsquo;ve been using Lunr.js&lt;/a&gt; to enable some basic site search on this blog. Lunr.js requires an &lt;a href=&#34;/index.json&#34;&gt;index file&lt;/a&gt; that contains all the content you want to make available for search. In order to generate that file, I had a kind of hacky setup, depending on running a &lt;a href=&#34;https://github.com/bartdegoede/blog/blob/7eccae434335c6ab6ec5e10240dbc89884a194ad/Gruntfile.js&#34;&gt;Grunt script&lt;/a&gt; on &lt;a href=&#34;https://github.com/bartdegoede/blog/commit/335d19e81016633823ccfb6fbb2038c891182bbb#diff-60254338249f657a0a83f98258a56bfeL9&#34;&gt;every deploy&lt;/a&gt;, which introduces a dependency on node, and nobody really wants any of that for just a static HTML website.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Custom OpenSearch: search from your URL bar</title>
-      <link>https://bart.degoe.de/tab-plus-search-from-your-url-bar-with-opensearch/</link>
+      <link>/tab-plus-search-from-your-url-bar-with-opensearch/</link>
       <pubDate>Wed, 21 Nov 2018 11:00:00 -0800</pubDate>
       
-      <guid>https://bart.degoe.de/tab-plus-search-from-your-url-bar-with-opensearch/</guid>
+      <guid>/tab-plus-search-from-your-url-bar-with-opensearch/</guid>
       <description>&lt;p&gt;Almost all modern browsers enable websites to customize the built-in search feature to let the user access their search features directly, without going to your website first and finding the search input box. If your website has search functionality accessible through a basic GET request, it&amp;rsquo;s surprisingly simple to enable this for your website too.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Free SSL on Github Pages with a custom domain: Part 2 - Let&#39;s Encrypt</title>
-      <link>https://bart.degoe.de/github-pages-and-lets-encrypt/</link>
+      <link>/github-pages-and-lets-encrypt/</link>
       <pubDate>Wed, 02 May 2018 22:34:06 +0200</pubDate>
       
-      <guid>https://bart.degoe.de/github-pages-and-lets-encrypt/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub Pages&lt;/a&gt; has just become even more awesome. Since yesterday&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:yesterday&#34;&gt;&lt;a href=&#34;#fn:yesterday&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, GitHub Pages &lt;a href=&#34;https://blog.github.com/2018-05-01-github-pages-custom-domains-https/&#34;&gt;supports HTTPS for custom domains&lt;/a&gt;. And yes, it is still free!&lt;/p&gt;</description>
+      <guid>/github-pages-and-lets-encrypt/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub Pages&lt;/a&gt; has just become even more awesome. Since yesterday&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, GitHub Pages &lt;a href=&#34;https://blog.github.com/2018-05-01-github-pages-custom-domains-https/&#34;&gt;supports HTTPS for custom domains&lt;/a&gt;. And yes, it is still free!&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Free SSL with a custom domain on GitHub Pages</title>
-      <link>https://bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/</link>
+      <link>/free-ssl-on-github-pages-with-a-custom-domain/</link>
       <pubDate>Wed, 28 Mar 2018 23:55:40 +0200</pubDate>
       
-      <guid>https://bart.degoe.de/free-ssl-on-github-pages-with-a-custom-domain/</guid>
+      <guid>/free-ssl-on-github-pages-with-a-custom-domain/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://pages.github.com/&#34;&gt;GitHub Pages&lt;/a&gt; is pretty awesome. It lets you push a bunch of static HTML (and/or CSS and Javascript) to a GitHub repository, and they&amp;rsquo;ll host and serve it for you. For free!&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Bloom filters, using bit arrays for recommendations, caches and Bitcoin</title>
-      <link>https://bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</link>
+      <link>/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</link>
       <pubDate>Fri, 23 Mar 2018 15:00:00 +0100</pubDate>
       
-      <guid>https://bart.degoe.de/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</guid>
+      <guid>/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</guid>
       <description>&lt;p&gt;Bloom filters are cool. In my experience, it&amp;rsquo;s a somewhat underestimated data structure that sounds more complex than it actually is. In this post I&amp;rsquo;ll go over what they are, how they work (I&amp;rsquo;ve hacked together an &lt;a href=&#34;#interactive_example&#34;&gt;interactive example&lt;/a&gt; to help visualise what happens behind the scenes) and go over some of their usecases in the wild.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Searching your Hugo site with Lunr</title>
-      <link>https://bart.degoe.de/searching-your-hugo-site-with-lunr/</link>
+      <link>/searching-your-hugo-site-with-lunr/</link>
       <pubDate>Sun, 04 Mar 2018 23:38:44 +0100</pubDate>
       
-      <guid>https://bart.degoe.de/searching-your-hugo-site-with-lunr/</guid>
+      <guid>/searching-your-hugo-site-with-lunr/</guid>
       <description>&lt;p&gt;Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &amp;ldquo;How To Do Things™&amp;rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>https://bart.degoe.de/about/</link>
+      <link>/about/</link>
       <pubDate>Wed, 21 Feb 2018 22:40:33 +0100</pubDate>
       
-      <guid>https://bart.degoe.de/about/</guid>
+      <guid>/about/</guid>
       <description>Hi! My name is Bart de Goede, and I write software for a living. I live in the Bay Area and I&amp;rsquo;m a software engineer at Scribd on the search team, helping you find the things you want to read. In the two and a half years before that, I was an engineer on the search team at Catawiki, helping you find your unique and special objects. Besides tinkering with software, I like a lot of other things, such as traveling, eating (nice) food or go for a drink with my friends.</description>
     </item>
     
