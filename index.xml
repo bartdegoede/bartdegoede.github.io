@@ -6,10 +6,19 @@
     <description>Recent content on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 29 Oct 2019 08:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 24 Mar 2021 20:00:12 -0700</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Building a full-text search engine in 150 lines of Python code</title>
+      <link>/building-a-full-text-search-engine-150-lines-of-code/</link>
+      <pubDate>Wed, 24 Mar 2021 20:00:12 -0700</pubDate>
+      
+      <guid>/building-a-full-text-search-engine-150-lines-of-code/</guid>
+      <description>Full-text search is everywhere. From finding a book on Scribd, a movie on Netflix, toilet paper on Amazon, or anything else on the web through Google (like how to do your job as a software engineer), you&amp;rsquo;ve searched vast amounts of unstructured data multiple times today. What&amp;rsquo;s even more amazing, is that you&amp;rsquo;ve even though you searched millions (or billions) of records, you got a response in milliseconds. In this post, we are going to explore the basic components of a full-text search engine, and use them to build one that can search across millions of documents and rank them according to their relevance in milliseconds, in less than 150 lines of Python code!</description>
+    </item>
     
     <item>
       <title>Use Google Cloud Text-to-Speech to create an audio version of your blog posts</title>
