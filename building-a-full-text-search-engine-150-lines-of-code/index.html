@@ -201,7 +201,7 @@ STEMMER <span style="color:#f92672">=</span> Stemmer<span style="color:#f92672">
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tokenize</span>(text):
     <span style="color:#66d9ef">return</span> text<span style="color:#f92672">.</span>split()
 
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lowercase_filter</span>(text):
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lowercase_filter</span>(tokens):
     <span style="color:#66d9ef">return</span> [token<span style="color:#f92672">.</span>lower() <span style="color:#66d9ef">for</span> token <span style="color:#f92672">in</span> tokens]
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stem_filter</span>(tokens):
