@@ -6,11 +6,7 @@
     <description>Recent content in javascript on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Mar 2018 23:38:44 +0100</lastBuildDate>
-    
-	<atom:link href="/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 04 Mar 2018 23:38:44 +0100</lastBuildDate><atom:link href="/categories/javascript/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Searching your Hugo site with Lunr</title>
       <link>/searching-your-hugo-site-with-lunr/</link>

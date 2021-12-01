@@ -6,11 +6,7 @@
     <description>Recent content in https on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 May 2018 22:34:06 +0200</lastBuildDate>
-    
-	<atom:link href="/categories/https/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 02 May 2018 22:34:06 +0200</lastBuildDate><atom:link href="/categories/https/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Free SSL on Github Pages with a custom domain: Part 2 - Let&#39;s Encrypt</title>
       <link>/github-pages-and-lets-encrypt/</link>

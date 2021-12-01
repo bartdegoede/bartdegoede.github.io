@@ -24,7 +24,7 @@
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface&display=swap">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/bundle.min.425ab8b9fe249c1465f5deb5aca575f691aaf471c4b3b17ee4f00865028f50dc.css">
+  <link rel="stylesheet" href="/bundle.min.40cd836af893a6cf36a2a1c4449440271aeedfd724e0d279a85299283ec90c0f.css">
   <link rel="search" href="https://bart.degoe.de/opensearch.xml" type="application/opensearchdescription+xml" title="Search bart.degoe.de">
 
   
@@ -123,22 +123,19 @@
 <p>Well, you can always use a sophisticated deep learning text-to-speech model, train it on thousands of hours of audio content and endlessly tweak the model parameters, create an audio version of those occassional blog posts and host them on your website. Or, you know, you use the <a href="https://cloud.google.com/text-to-speech/">Google one</a><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>. The Cloud Text-to-Speech API is priced by character, and the first 1 million characters are free<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>! In this post, we&rsquo;ll go over how to set up a Google API, write a Python script to extract text from a Markdown file, and create a Hugo shortcode<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> to include the generated files in your static website.</p>
 <h1 id="set-up-a-google-api">Set up a Google API</h1>
 <p>In order to get started, we have to jump through <a href="use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts">a couple of hoops</a> to create a text-to-speech API. Most of these are pretty straightforward, and are easiest to follow when you&rsquo;re signed in to your Google account. It will be even easier if you&rsquo;ve <a href="use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts">enabled billing</a> which should be the default on a personal account (although you may have to add a payment method)<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>.</p>
-<figure>
-    <img src="/img/2019-10-29-use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/google-cloud-steps-to-get-started.png"/> <figcaption>
+<figure><img src="/img/2019-10-29-use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/google-cloud-steps-to-get-started.png"/><figcaption>
             <h4>There&#39;s some steps you&#39;ll have to follow to set up an API.</h4>
         </figcaption>
 </figure>
 
 <p>If you click that &ldquo;Enable the API&rdquo; button, you&rsquo;ll be taken to the project creation page. This project basically functions as a label and administrative container for everything ranging from authentication (API keys) to billing (so you can see what you spend on each Google product you&rsquo;re using). Give it a name (leave &ldquo;organization&rdquo; set to &ldquo;no organization&rdquo;).</p>
-<figure>
-    <img src="/img/2019-10-29-use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/gcp-create-new-project.png"/> <figcaption>
+<figure><img src="/img/2019-10-29-use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/gcp-create-new-project.png"/><figcaption>
             <h4>Create a new Google Cloud project</h4>
         </figcaption>
 </figure>
 
 <p>This will trigger some background jobs where Google will provision the resources necessary to run your very own text-to-speech API. Finally, we&rsquo;ll want to set up some authentication, so we can interact with this API. <a href="https://console.cloud.google.com/apis/credentials/serviceaccountkey">Create a service account</a> for this project:</p>
-<figure>
-    <img src="/img/2019-10-29-use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/gcp-create-service-account.png"/> <figcaption>
+<figure><img src="/img/2019-10-29-use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/gcp-create-service-account.png"/><figcaption>
             <h4>Create a service account for our text-to-speech project</h4>
         </figcaption>
 </figure>
@@ -173,8 +170,8 @@ logging<span style="color:#f92672">.</span>basicConfig(level<span style="color:#
                     format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%(asctime)s</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%(levelname)s</span><span style="color:#e6db74"> </span><span style="color:#e6db74">%(message)s</span><span style="color:#e6db74">&#39;</span>)
 
 
-<span style="color:#a6e22e">@click.command</span>()
-<span style="color:#a6e22e">@click.argument</span>(<span style="color:#e6db74">&#39;filename&#39;</span>, type<span style="color:#f92672">=</span>click<span style="color:#f92672">.</span>File(<span style="color:#e6db74">&#39;rb&#39;</span>))
+<span style="color:#a6e22e">@click</span><span style="color:#f92672">.</span>command()
+<span style="color:#a6e22e">@click</span><span style="color:#f92672">.</span>argument(<span style="color:#e6db74">&#39;filename&#39;</span>, type<span style="color:#f92672">=</span>click<span style="color:#f92672">.</span>File(<span style="color:#e6db74">&#39;rb&#39;</span>))
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">text_to_speech</span>(filename):
     name <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>basename(filename<span style="color:#f92672">.</span>name)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;.md&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
     data <span style="color:#f92672">=</span> filename<span style="color:#f92672">.</span>read()
@@ -206,13 +203,13 @@ logging<span style="color:#f92672">.</span>basicConfig(level<span style="color:#
     html <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;{{}}&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>, html)
     html <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\[\^.*?\]&#39;</span>, <span style="color:#e6db74">&#39; &#39;</span>, html)
     soup <span style="color:#f92672">=</span> BeautifulSoup(html, <span style="color:#e6db74">&#34;html.parser&#34;</span>)
-    text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(soup<span style="color:#f92672">.</span>findAll(text<span style="color:#f92672">=</span>True))
+    text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(soup<span style="color:#f92672">.</span>findAll(text<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>))
     <span style="color:#75715e"># get rid of superfluous whitespace</span>
     <span style="color:#66d9ef">return</span> re<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\s+&#39;</span>, <span style="color:#e6db74">&#39; &#39;</span>, text)
 
 
-<span style="color:#a6e22e">@click.command</span>()
-<span style="color:#a6e22e">@click.argument</span>(<span style="color:#e6db74">&#39;filename&#39;</span>, type<span style="color:#f92672">=</span>click<span style="color:#f92672">.</span>File(<span style="color:#e6db74">&#39;rb&#39;</span>))
+<span style="color:#a6e22e">@click</span><span style="color:#f92672">.</span>command()
+<span style="color:#a6e22e">@click</span><span style="color:#f92672">.</span>argument(<span style="color:#e6db74">&#39;filename&#39;</span>, type<span style="color:#f92672">=</span>click<span style="color:#f92672">.</span>File(<span style="color:#e6db74">&#39;rb&#39;</span>))
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">text_to_speech</span>(filename):
     name <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>basename(filename<span style="color:#f92672">.</span>name)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;.md&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
     data <span style="color:#f92672">=</span> filename<span style="color:#f92672">.</span>read()
@@ -222,8 +219,8 @@ logging<span style="color:#f92672">.</span>basicConfig(level<span style="color:#
 
 <span style="color:#f92672">...</span>
 
-<span style="color:#a6e22e">@click.command</span>()
-<span style="color:#a6e22e">@click.argument</span>(<span style="color:#e6db74">&#39;filename&#39;</span>, type<span style="color:#f92672">=</span>click<span style="color:#f92672">.</span>File(<span style="color:#e6db74">&#39;rb&#39;</span>))
+<span style="color:#a6e22e">@click</span><span style="color:#f92672">.</span>command()
+<span style="color:#a6e22e">@click</span><span style="color:#f92672">.</span>argument(<span style="color:#e6db74">&#39;filename&#39;</span>, type<span style="color:#f92672">=</span>click<span style="color:#f92672">.</span>File(<span style="color:#e6db74">&#39;rb&#39;</span>))
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">text_to_speech</span>(filename):
     name <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>basename(filename<span style="color:#f92672">.</span>name)<span style="color:#f92672">.</span>replace(<span style="color:#e6db74">&#39;.md&#39;</span>, <span style="color:#e6db74">&#39;&#39;</span>)
     data <span style="color:#f92672">=</span> filename<span style="color:#f92672">.</span>read()
@@ -243,13 +240,13 @@ logging<span style="color:#f92672">.</span>basicConfig(level<span style="color:#
         audio_config <span style="color:#f92672">=</span> texttospeech<span style="color:#f92672">.</span>types<span style="color:#f92672">.</span>AudioConfig(
             audio_encoding<span style="color:#f92672">=</span>texttospeech<span style="color:#f92672">.</span>enums<span style="color:#f92672">.</span>AudioEncoding<span style="color:#f92672">.</span>MP3
         )
-        logging<span style="color:#f92672">.</span>info(f<span style="color:#e6db74">&#39;Synthesizing speech for {name}_{j}&#39;</span>)
+        logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Synthesizing speech for </span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">{</span>j<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
         response <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>synthesize_speech(synthesis_input, voice,
                                             audio_config)
-        <span style="color:#66d9ef">with</span> open(f<span style="color:#e6db74">&#39;{name}_{j}.mp3&#39;</span>, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> out:
+        <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">{</span>j<span style="color:#e6db74">}</span><span style="color:#e6db74">.mp3&#39;</span>, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> out:
             <span style="color:#75715e"># Write the response to the output file.</span>
             out<span style="color:#f92672">.</span>write(response<span style="color:#f92672">.</span>audio_content)
-            logging<span style="color:#f92672">.</span>info(f<span style="color:#e6db74">&#39;Audio content written to file &#34;{name}_{j}.mp3&#34;&#39;</span>)
+            logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Audio content written to file &#34;</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">_</span><span style="color:#e6db74">{</span>j<span style="color:#e6db74">}</span><span style="color:#e6db74">.mp3&#34;&#39;</span>)
 </code></pre></div><p>Now, this is where we run into the first quirk of the API; it will only accept snippets of up to 5000 characters. My blog posts generally range between 12k to 15k characters, so I had to add some code that will chunk up the text into bits of 5000 characters each. Note that I don&rsquo;t make any effort to detect word boundaries, so it can happen that a chunk will end with half a word; I&rsquo;ll leave it up to the reader to improve upon my implementation<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>.</p>
 <p>We provide some configuration (I like the voice of robot <code>es-US-Wavenet-B</code>, but there are <a href="https://cloud.google.com/text-to-speech/docs/voices">loads of other voices and languages to choose from</a>), specify we want to receive an MP3 back, and write out the response MP3 into separate chunks in the current working directory.</p>
 <p>Next, we need to stitch the temporary MP3 chunks together (using the excellent <a href="https://github.com/jiaaro/pydub"><code>pydub</code> library</a>), write the completed file to a sensible directory and clean up after ourselves.</p>
@@ -259,16 +256,16 @@ logging<span style="color:#f92672">.</span>basicConfig(level<span style="color:#
 
 <span style="color:#f92672">...</span>
 
-    mp3_segments <span style="color:#f92672">=</span> sorted(glob(f<span style="color:#e6db74">&#39;{name}_*.mp3&#39;</span>))
+    mp3_segments <span style="color:#f92672">=</span> sorted(glob(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">_*.mp3&#39;</span>))
     segments <span style="color:#f92672">=</span> [AudioSegment<span style="color:#f92672">.</span>from_mp3(f) <span style="color:#66d9ef">for</span> f <span style="color:#f92672">in</span> mp3_segments]
 
-    logging<span style="color:#f92672">.</span>info(f<span style="color:#e6db74">&#39;Stitching together {len(segments)} mp3 files for {name}&#39;</span>)
+    logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Stitching together </span><span style="color:#e6db74">{</span>len(segments)<span style="color:#e6db74">}</span><span style="color:#e6db74"> mp3 files for </span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
     audio <span style="color:#f92672">=</span> functools<span style="color:#f92672">.</span>reduce(<span style="color:#66d9ef">lambda</span> a, b: a <span style="color:#f92672">+</span> b, segments)
 
-    logging<span style="color:#f92672">.</span>info(f<span style="color:#e6db74">&#39;Exporting {name}.mp3&#39;</span>)
-    audio<span style="color:#f92672">.</span>export(f<span style="color:#e6db74">&#39;static/audio/{name}.mp3&#39;</span>, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;mp3&#39;</span>)
-    logging<span style="color:#f92672">.</span>info(f<span style="color:#e6db74">&#39;Exporting {name}.ogg&#39;</span>)
-    audio<span style="color:#f92672">.</span>export(f<span style="color:#e6db74">&#39;static/audio/{name}.ogg&#39;</span>, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ogg&#39;</span>)
+    logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Exporting </span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">.mp3&#39;</span>)
+    audio<span style="color:#f92672">.</span>export(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;static/audio/</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">.mp3&#39;</span>, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;mp3&#39;</span>)
+    logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Exporting </span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">.ogg&#39;</span>)
+    audio<span style="color:#f92672">.</span>export(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;static/audio/</span><span style="color:#e6db74">{</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">.ogg&#39;</span>, format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ogg&#39;</span>)
 
     logging<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;Removing intermediate files&#39;</span>)
     <span style="color:#66d9ef">for</span> f <span style="color:#f92672">in</span> mp3_segments:
@@ -315,8 +312,7 @@ logging<span style="color:#f92672">.</span>basicConfig(level<span style="color:#
 
 Some more words, this time not in Latin.
 </code></pre></div><p>This will include an audio player looking like this in your blog post. I&rsquo;ve added some <a href="https://github.com/bartdegoede/blog/blob/master/layouts/shortcodes/audio.html">bells and whistles to mine</a>, with <a href="https://github.com/bartdegoede/blog/commit/745e8ede74ee4d391fa16f648290210cc4296c61#diff-41d825e73cdbde165483f850749fb480">some additional styling</a> for all the UX points.</p>
-<figure>
-    <img src="/img/2019-10-29-use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/audio-player.png"/> <figcaption>
+<figure><img src="/img/2019-10-29-use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/audio-player.png"/><figcaption>
             <h4>Basic HTML5 audio player</h4>
         </figcaption>
 </figure>
@@ -325,31 +321,31 @@ Some more words, this time not in Latin.
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p><a href="https://www.edisonresearch.com/infinite-dial-2019/">https://www.edisonresearch.com/infinite-dial-2019/</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="https://www.edisonresearch.com/infinite-dial-2019/">https://www.edisonresearch.com/infinite-dial-2019/</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p>Not to mention that audio content is more easily accessible for people that suffer from dyslexia or poor sight, or seems to be a lot better for <a href="https://play.ht/blog/increasing-user-engagement-with-text-to-speech-case-study-by-play-ht/">user engagement</a>. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Not to mention that audio content is more easily accessible for people that suffer from dyslexia or poor sight, or seems to be a lot better for <a href="https://play.ht/blog/increasing-user-engagement-with-text-to-speech-case-study-by-play-ht/">user engagement</a>.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3" role="doc-endnote">
-<p>It has all kinds of funky stuff, like multiple languages, API clients in your favorite programming language, pitch, speaking rates and volume controls, and even optimizations around where your audio is going to play, such as headphones or phone lines. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>It has all kinds of funky stuff, like multiple languages, API clients in your favorite programming language, pitch, speaking rates and volume controls, and even optimizations around where your audio is going to play, such as headphones or phone lines.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:4" role="doc-endnote">
-<p>Free is my favorite price. <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Free is my favorite price.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:5" role="doc-endnote">
-<p>My website is a static website generated from Markdown files with <a href="https://gohugo.io/">Hugo</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a>, so you may need to make some small changes to make it work with <a href="https://jekyllrb.com/">Jekyll</a>, <a href="https://nextjs.org/">Next.js</a> or <a href="https://www.staticgen.com/">whichever other static site generator you&rsquo;re using</a>. <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>My website is a static website generated from Markdown files with <a href="https://gohugo.io/">Hugo</a>, hosted on <a href="https://pages.github.com/">GitHub Pages</a>, so you may need to make some small changes to make it work with <a href="https://jekyllrb.com/">Jekyll</a>, <a href="https://nextjs.org/">Next.js</a> or <a href="https://www.staticgen.com/">whichever other static site generator you&rsquo;re using</a>.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:6" role="doc-endnote">
-<p>Don&rsquo;t worry, the API is free for the first 4 million characters per month for standard voices, or 1 million characters for fancy WaveNet voices. <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Don&rsquo;t worry, the API is free for the first 4 million characters per month for standard voices, or 1 million characters for fancy WaveNet voices.&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:7" role="doc-endnote">
-<p><a href="https://github.com/bartdegoede/blog">Pull requests</a> are always welcome! 😄 <a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="https://github.com/bartdegoede/blog">Pull requests</a> are always welcome! 😄&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:8" role="doc-endnote">
-<p><a href="https://github.com/jiaaro/pydub#dependencies"><code>pydub</code></a> requires <code>ffmpeg</code> or <code>libav</code> to be installed to open, convert and save non-WAV files (such as MP3 or OGG) <a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="https://github.com/jiaaro/pydub#dependencies"><code>pydub</code></a> requires <code>ffmpeg</code> or <code>libav</code> to be installed to open, convert and save non-WAV files (such as MP3 or OGG)&#160;<a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:9" role="doc-endnote">
-<p>Not all browsers support all file types and audio codecs, which is why we&rsquo;ve generated the OGG files as backup. <a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Not all browsers support all file types and audio codecs, which is why we&rsquo;ve generated the OGG files as backup.&#160;<a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -363,7 +359,7 @@ Some more words, this time not in Latin.
 
 
 <script src="/js/vendor/jquery-3.6.0.min.ff1523fb7389539c84c65aba19260648793bb4f5e29329d2ee8804bc37a3fe6e.js"></script>
-    <script src="/js/highlight.pack.min.9fb14e2a1df0f115e1538850e856aa5f281fe701e6b7f43b74b2a8e6362fc5d7.js" integrity="sha256-n7FOKh3w8RXhU4hQ6FaqXygf5wHmt/Q7dLKo5jYvxdc="></script>
+    <script src="/js/highlight.pack.min.ba8d300c7a9547ed756a1c48936b2b44ce050a14aabbe399c0e432cb3208de7d.js" integrity="sha256-uo0wDHqVR&#43;11ahxIk2srRM4FChSqu&#43;OZwOQyyzII3n0="></script>
     <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

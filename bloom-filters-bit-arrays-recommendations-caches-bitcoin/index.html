@@ -24,7 +24,7 @@
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface&display=swap">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/bundle.min.425ab8b9fe249c1465f5deb5aca575f691aaf471c4b3b17ee4f00865028f50dc.css">
+  <link rel="stylesheet" href="/bundle.min.40cd836af893a6cf36a2a1c4449440271aeedfd724e0d279a85299283ec90c0f.css">
   <link rel="search" href="https://bart.degoe.de/opensearch.xml" type="application/opensearchdescription+xml" title="Search bart.degoe.de">
 
   
@@ -227,25 +227,25 @@ Out[6]: 9
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>The runtime for both inserting and checking is defined by the number of hash functions (<code>k</code>) we have to execute. So, <code>O(k)</code>. Space complexity is more difficult to quantify, because that depends on how many false positives you&rsquo;re willing to tolerate; allocating more space will lower the false positive rate. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>The runtime for both inserting and checking is defined by the number of hash functions (<code>k</code>) we have to execute. So, <code>O(k)</code>. Space complexity is more difficult to quantify, because that depends on how many false positives you&rsquo;re willing to tolerate; allocating more space will lower the false positive rate.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p>Going over the math is a bit much for this post, so check <a href="https://en.wikipedia.org/wiki/Bloom_filter#Optimal_number_of_hash_functions">Wikipedia</a> for all the formulas 😄. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Going over the math is a bit much for this post, so check <a href="https://en.wikipedia.org/wiki/Bloom_filter#Optimal_number_of_hash_functions">Wikipedia</a> for all the formulas 😄.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3" role="doc-endnote">
-<p>Full implementation on <a href="https://gist.github.com/bartdegoede/42ef7a265d946a9a75617a89ecbaf674">GitHub</a>. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Full implementation on <a href="https://gist.github.com/bartdegoede/42ef7a265d946a9a75617a89ecbaf674">GitHub</a>.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:4" role="doc-endnote">
-<p>Our implementation won&rsquo;t use an actual bit array but a Python list containing Booleans for the sake of readability. <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Our implementation won&rsquo;t use an actual bit array but a Python list containing Booleans for the sake of readability.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:5" role="doc-endnote">
-<p>Note that there&rsquo;s a slight difference between the Python and Javascript Murmurhash implementation in the libraries I&rsquo;ve used; the <a href="https://pid.github.io/murmurHash3js/">Javascript library I used</a> returns a 32 bit <em>unsigned</em> integer, where the <a href="https://github.com/hajimes/mmh3">Python library</a> returns a 32 bit <em>signed</em> integer by default. To keep the Python example consistent with the Javascript, I opted to use unsigned integers there too; there is no impact for the working of the Bloom filter. <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Note that there&rsquo;s a slight difference between the Python and Javascript Murmurhash implementation in the libraries I&rsquo;ve used; the <a href="https://pid.github.io/murmurHash3js/">Javascript library I used</a> returns a 32 bit <em>unsigned</em> integer, where the <a href="https://github.com/hajimes/mmh3">Python library</a> returns a 32 bit <em>signed</em> integer by default. To keep the Python example consistent with the Javascript, I opted to use unsigned integers there too; there is no impact for the working of the Bloom filter.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:6" role="doc-endnote">
-<p>Maggs, Bruce M.; Sitaraman, Ramesh K. (July 2015), &ldquo;Algorithmic nuggets in content delivery&rdquo;, <em>SIGCOMM Computer Communication Review</em>, New York, NY, USA: ACM, 45 (3): 52–66, <a href="https://doi.org/10.1145%2F2805789.2805800"><code>doi:10.1145/2805789.2805800</code></a> <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Maggs, Bruce M.; Sitaraman, Ramesh K. (July 2015), &ldquo;Algorithmic nuggets in content delivery&rdquo;, <em>SIGCOMM Computer Communication Review</em>, New York, NY, USA: ACM, 45 (3): 52–66, <a href="https://doi.org/10.1145%2F2805789.2805800"><code>doi:10.1145/2805789.2805800</code></a>&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:7" role="doc-endnote">
-<p>Read the article. It&rsquo;s really good. <a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Read the article. It&rsquo;s really good.&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -258,12 +258,12 @@ Out[6]: 9
 
 
 <script src="/js/vendor/jquery-3.6.0.min.ff1523fb7389539c84c65aba19260648793bb4f5e29329d2ee8804bc37a3fe6e.js"></script>
-    <script src="/js/highlight.pack.min.9fb14e2a1df0f115e1538850e856aa5f281fe701e6b7f43b74b2a8e6362fc5d7.js" integrity="sha256-n7FOKh3w8RXhU4hQ6FaqXygf5wHmt/Q7dLKo5jYvxdc="></script>
+    <script src="/js/highlight.pack.min.ba8d300c7a9547ed756a1c48936b2b44ce050a14aabbe399c0e432cb3208de7d.js" integrity="sha256-uo0wDHqVR&#43;11ahxIk2srRM4FChSqu&#43;OZwOQyyzII3n0="></script>
     <script>hljs.initHighlightingOnLoad();</script>
     
-    <script src="/js/posts/2018-03-22-bloom-filters-bit-arrays-recommendations-caches-bitcoin/murmurhash3js.min.min.b339ca5cadeeb344e9bce2ff13052a5b4e88c3b3de7a362df1dad4b6f602d558.js" integrity="sha256-sznKXK3us0TpvOL/EwUqW06Iw7PeejYt8drUtvYC1Vg="></script>
+    <script src="/js/posts/2018-03-22-bloom-filters-bit-arrays-recommendations-caches-bitcoin/murmurhash3js.min.min.c3af412ffb41026672237d41b99a5491d7c96b57f497f72f924771a4cca6de9b.js" integrity="sha256-w69BL/tBAmZyI31BuZpUkdfJa1f0l/cvkkdxpMym3ps="></script>
     
-    <script src="/js/posts/2018-03-22-bloom-filters-bit-arrays-recommendations-caches-bitcoin/bloomfilters.min.d5e254d495dd8fd63d7cdbd5ef95631e56f8af9d35645a2c747a4cb9d209c838.js" integrity="sha256-1eJU1JXdj9Y9fNvV75VjHlb4r501ZFosdHpMudIJyDg="></script>
+    <script src="/js/posts/2018-03-22-bloom-filters-bit-arrays-recommendations-caches-bitcoin/bloomfilters.min.24a60a792650fb1e2634db71e1f9a2d1ce6e60dbb1072460780b6e5cc3d985c6.js" integrity="sha256-JKYKeSZQ&#43;x4mNNtx4fmi0c5uYNuxByRgeAtuXMPZhcY="></script>
 </body>
 </html>
 

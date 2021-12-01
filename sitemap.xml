@@ -1,140 +1,86 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>/</loc>
     <lastmod>2021-03-24T20:00:12-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/building-a-full-text-search-engine-150-lines-of-code/</loc>
     <lastmod>2021-03-24T20:00:12-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/</loc>
     <lastmod>2021-03-24T20:00:12-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/full-text-search/</loc>
     <lastmod>2021-03-24T20:00:12-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/how-to/</loc>
     <lastmod>2021-03-24T20:00:12-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/post/</loc>
     <lastmod>2021-03-24T20:00:12-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/python/</loc>
     <lastmod>2021-03-24T20:00:12-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/search/</loc>
     <lastmod>2021-03-24T20:00:12-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/blog/</loc>
     <lastmod>2019-10-29T08:00:00-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/hugo/</loc>
     <lastmod>2019-10-29T08:00:00-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/text-to-speech/</loc>
     <lastmod>2019-10-29T08:00:00-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/</loc>
     <lastmod>2019-10-29T08:00:00-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/lunr/</loc>
     <lastmod>2019-07-12T15:27:40-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/use-hugo-output-formats-to-generate-lunr-index-files/</loc>
     <lastmod>2019-07-12T15:27:40-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/tab-plus-search-from-your-url-bar-with-opensearch/</loc>
     <lastmod>2018-11-21T11:00:00-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/opensearch/</loc>
     <lastmod>2018-11-21T11:00:00-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/github-pages-and-lets-encrypt/</loc>
     <lastmod>2018-05-02T22:34:06+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/gh-pages/</loc>
     <lastmod>2018-05-02T22:34:06+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/https/</loc>
     <lastmod>2018-05-02T22:34:06+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/lets-encrypt/</loc>
     <lastmod>2018-05-02T22:34:06+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/ssl/</loc>
     <lastmod>2018-05-02T22:34:06+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/free-ssl-on-github-pages-with-a-custom-domain/</loc>
     <lastmod>2018-03-28T23:55:40+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/bloom-filter/</loc>
     <lastmod>2018-03-23T15:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/bloom-filters-bit-arrays-recommendations-caches-bitcoin/</loc>
     <lastmod>2018-03-23T15:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/categories/javascript/</loc>
     <lastmod>2018-03-04T23:38:44+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/searching-your-hugo-site-with-lunr/</loc>
     <lastmod>2018-03-04T23:38:44+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>/about/</loc>
     <lastmod>2018-02-21T22:40:33+01:00</lastmod>
   </url>
-  
 </urlset>

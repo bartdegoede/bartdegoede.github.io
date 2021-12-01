@@ -24,7 +24,7 @@
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface&display=swap">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/bundle.min.425ab8b9fe249c1465f5deb5aca575f691aaf471c4b3b17ee4f00865028f50dc.css">
+  <link rel="stylesheet" href="/bundle.min.40cd836af893a6cf36a2a1c4449440271aeedfd724e0d279a85299283ec90c0f.css">
   <link rel="search" href="https://bart.degoe.de/opensearch.xml" type="application/opensearchdescription+xml" title="Search bart.degoe.de">
 
   
@@ -128,15 +128,13 @@
 <h3 id="validating-a-domain">Validating a domain</h3>
 <p>Similar to a traditional process of obtaining a certificate for a domain, where you create an account with the CA and add domains you control, the certificate management agent needs to perform a test to prove that it controls the domain.</p>
 <p>The agent will ask the Let&rsquo;s Encrypt CA what it needs to do to prove that it is, effectively, in control of the domain. The CA will look at the domain, and issue one or more challenges to the agent it needs to complete to prove that it has control over the domain. For example, it can ask the agent to provision a particular DNS record under the domain, or make an HTTP resource available under a particular URL. With these challenges, it provides the agent with a <a href="https://en.wikipedia.org/wiki/Cryptographic_nonce">nonce</a> (some random number that can only be used once for verification purposes).</p>
-<figure>
-    <img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/howitworks_challenge.png"/> <figcaption>
+<figure><img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/howitworks_challenge.png"/><figcaption>
             <h4>CA issuing a challenge to the certificate management agent (image taken from https://letsencrypt.org/how-it-works/)</h4>
         </figcaption>
 </figure>
 
 <p>In the image above, the agent creates a file on a specified path on the web server (in this case, on <code>https://example.com/8303</code>). It creates a key pair it will use to identify itself with the CA, and signs the nonce received from the CA with the private key. Then, it notifies the CA that it has completed the challenge by sending back the signed nonce and is ready for validation. The CA then validates the completion of the challenge by attempting to download the file from the web server and verify that it contains the expected content.</p>
-<figure>
-    <img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/howitworks_authorization.png"/> <figcaption>
+<figure><img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/howitworks_authorization.png"/><figcaption>
             <h4>Certificate management agent completing a challenge (image taken from https://letsencrypt.org/how-it-works/)</h4>
         </figcaption>
 </figure>
@@ -145,8 +143,7 @@
 <h3 id="certificate-management">Certificate management</h3>
 <p>So, what does that mean? By having validated the agent by its public key, the CA can now validate that messages sent to the CA are actually sent by the certificate management agent.</p>
 <p>It can send a <a href="http://tools.ietf.org/html/rfc2986">Certificate Signing Request (CSR)</a> to the CA to request it to issue a SSL certificate for the domain, signed with the authorized key. Let&rsquo;s Encrypt will only have to validate the signatures, and if those check out, a certificate will be issued.</p>
-<figure>
-    <img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/howitworks_certificate.png"/> <figcaption>
+<figure><img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/howitworks_certificate.png"/><figcaption>
             <h4>Issuing a certificate (image taken from https://letsencrypt.org/how-it-works/)</h4>
         </figcaption>
 </figure>
@@ -156,8 +153,7 @@
 <p>Right, that&rsquo;s how we got started. The awesome thing about Let&rsquo;s Encrypt is that it is automated, so all this handshaking and verifying happens behind the scenes, without you having to be involved.</p>
 <p>In the <a href="/free-ssl-on-github-pages-with-a-custom-domain/">previous post</a> we saw how to set up a <a href="https://github.com/bartdegoede/bartdegoede.github.io/blob/master/CNAME"><code>CNAME</code> file</a> for your custom domain. That&rsquo;s it. Done. Works out of the box.</p>
 <p>Optionally, you can <a href="https://help.github.com/articles/securing-your-github-pages-site-with-https/">enforce HTTPS</a> in the settings of your repository. This will upgrade all users requesting stuff from your site over HTTP to be automatically redirected to HTTPS.</p>
-<figure>
-    <img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/github-pages-enforce-https.png"/> 
+<figure><img src="/img/2018-05-02-free-ssl-on-github-pages-with-a-custom-domain-part-2/github-pages-enforce-https.png"/>
 </figure>
 
 <p>If you use <code>A</code> records to route traffic to your website, you need to update your <a href="https://help.github.com/articles/setting-up-an-apex-domain/">DNS settings</a> at your registrar. These IP addresses are new, and have an added benefit of putting your static site behind a CDN (just like we did with Cloudflare in the <a href="/free-ssl-on-github-pages-with-a-custom-domain/">previous post</a>).</p>
@@ -167,10 +163,10 @@
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>At time of writing, yesterday is May 1, 2018. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>At time of writing, yesterday is May 1, 2018.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p>One in <a href="https://en.wikipedia.org/wiki/Public-benefit_corporation#California">California</a>, to be specific. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>One in <a href="https://en.wikipedia.org/wiki/Public-benefit_corporation#California">California</a>, to be specific.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -183,7 +179,7 @@
 
 
 <script src="/js/vendor/jquery-3.6.0.min.ff1523fb7389539c84c65aba19260648793bb4f5e29329d2ee8804bc37a3fe6e.js"></script>
-    <script src="/js/highlight.pack.min.9fb14e2a1df0f115e1538850e856aa5f281fe701e6b7f43b74b2a8e6362fc5d7.js" integrity="sha256-n7FOKh3w8RXhU4hQ6FaqXygf5wHmt/Q7dLKo5jYvxdc="></script>
+    <script src="/js/highlight.pack.min.ba8d300c7a9547ed756a1c48936b2b44ce050a14aabbe399c0e432cb3208de7d.js" integrity="sha256-uo0wDHqVR&#43;11ahxIk2srRM4FChSqu&#43;OZwOQyyzII3n0="></script>
     <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

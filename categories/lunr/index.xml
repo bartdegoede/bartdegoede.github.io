@@ -6,11 +6,7 @@
     <description>Recent content in lunr on Bart de Goede</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 12 Jul 2019 15:27:40 -0700</lastBuildDate>
-    
-	<atom:link href="/categories/lunr/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 12 Jul 2019 15:27:40 -0700</lastBuildDate><atom:link href="/categories/lunr/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Use Hugo Output Formats to generate Lunr index files for your static site search</title>
       <link>/use-hugo-output-formats-to-generate-lunr-index-files/</link>

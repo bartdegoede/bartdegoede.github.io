@@ -24,7 +24,7 @@
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface&display=swap">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/bundle.min.425ab8b9fe249c1465f5deb5aca575f691aaf471c4b3b17ee4f00865028f50dc.css">
+  <link rel="stylesheet" href="/bundle.min.40cd836af893a6cf36a2a1c4449440271aeedfd724e0d279a85299283ec90c0f.css">
   <link rel="search" href="https://bart.degoe.de/opensearch.xml" type="application/opensearchdescription+xml" title="Search bart.degoe.de">
 
   
@@ -129,7 +129,7 @@
 <li><strong>Run a server-side search engine:</strong>
 <br>You can set up a backend that indexes your data and can process the queries your users submit in the search box on your website. The obvious downside is that you throw away all the benefits of having a static site (free hosting, complex infrastructure).</li>
 <li><strong>Search client-side</strong>:
-<br>Having a static site, it makes sense to move all the user interaction to the client. We depend on the users&rsquo; browser to run Javascript<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> and download the searchable data in order to run queries against it, but the upside is that you can control how data is processed and how that data is queried. Fortunately for us, <a href="https://blog.codinghorror.com/the-principle-of-least-power/">Atwood&rsquo;s Law</a> holds true; there&rsquo;s a full-text search library inspired by Lucene/Solr written in Javascript we can use to implement our search engine: <a href="https://lunrjs.com/">Lunr.js</a>.</li>
+<br>Having a static site, it makes sense to move all the user interaction to the client. We depend on the users' browser to run Javascript<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> and download the searchable data in order to run queries against it, but the upside is that you can control how data is processed and how that data is queried. Fortunately for us, <a href="https://blog.codinghorror.com/the-principle-of-least-power/">Atwood&rsquo;s Law</a> holds true; there&rsquo;s a full-text search library inspired by Lucene/Solr written in Javascript we can use to implement our search engine: <a href="https://lunrjs.com/">Lunr.js</a>.</li>
 </ol>
 <h1 id="relevance">Relevance</h1>
 <p>When thinking about search, the most important question is what users want to find. This sounds very much like an open door, but you&rsquo;d be surprised how often this gets overlooked; what are we looking for (tweets, products, (the fastest route to) a destination?), who is doing the search (lawyers, software engineers, my mom?), what do we hope to get out of it (money, page views?).</p>
@@ -326,28 +326,28 @@ function searchSite(query_string) {
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>It&rsquo;s fast, it&rsquo;s written in Golang, it supports <a href="https://themes.gohugo.io/">fancy themes</a>, and it&rsquo;s <a href="https://github.com/gohugoio/hugo">open source</a>! <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>It&rsquo;s fast, it&rsquo;s written in Golang, it supports <a href="https://themes.gohugo.io/">fancy themes</a>, and it&rsquo;s <a href="https://github.com/gohugoio/hugo">open source</a>!&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p>You can <a href="https://support.google.com/adsense/answer/9879?visit_id=1-636557905318663395-3173001859&amp;ctx=as2&amp;hl=en&amp;rd=2&amp;ref_topic=1705820">make money</a> off theses ads, but the question is whether you want to show ads on your personal blog or not. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>You can <a href="https://support.google.com/adsense/answer/9879?visit_id=1-636557905318663395-3173001859&amp;ctx=as2&amp;hl=en&amp;rd=2&amp;ref_topic=1705820">make money</a> off theses ads, but the question is whether you want to show ads on your personal blog or not.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3" role="doc-endnote">
-<p>I&rsquo;m assuming that the audience that&rsquo;ll land on these pages will have Javascript enabled in their browser 😄 <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>I&rsquo;m assuming that the audience that&rsquo;ll land on these pages will have Javascript enabled in their browser 😄&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:4" role="doc-endnote">
-<p>In this case, I&rsquo;m totally assuming that if words from the query occur in the title or the manually assigned tags of a post are way more relevant than matches in the content of a post, if only because there&rsquo;s a lot more words in post content, so there&rsquo;s a higher probability of matching <em>any</em> word in the query. <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>In this case, I&rsquo;m totally assuming that if words from the query occur in the title or the manually assigned tags of a post are way more relevant than matches in the content of a post, if only because there&rsquo;s a lot more words in post content, so there&rsquo;s a higher probability of matching <em>any</em> word in the query.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:5" role="doc-endnote">
-<p>It&rsquo;s also on <a href="https://github.com/bartdegoede/blog">GitHub</a>. <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>It&rsquo;s also on <a href="https://github.com/bartdegoede/blog">GitHub</a>.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:6" role="doc-endnote">
-<p>A port of this script to Golang is in the works. <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>A port of this script to Golang is in the works.&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:7" role="doc-endnote">
-<p>The idea is to run the task before you deploy the latest version of your site. In my case, I have a <a href="https://github.com/bartdegoede/blog/blob/master/deploy.sh"><code>deploy.sh</code> script</a> that runs Hugo to build my static pages, runs <code>grunt search-index</code> and pushes the result to GitHub. <a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>The idea is to run the task before you deploy the latest version of your site. In my case, I have a <a href="https://github.com/bartdegoede/blog/blob/master/deploy.sh"><code>deploy.sh</code> script</a> that runs Hugo to build my static pages, runs <code>grunt search-index</code> and pushes the result to GitHub.&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:8" role="doc-endnote">
-<p>Lunr uses tries to represent terms internally, giving us an efficient way of doing fast prefix lookups. <a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Lunr uses tries to represent terms internally, giving us an efficient way of doing fast prefix lookups.&#160;<a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -360,7 +360,7 @@ function searchSite(query_string) {
 
 
 <script src="/js/vendor/jquery-3.6.0.min.ff1523fb7389539c84c65aba19260648793bb4f5e29329d2ee8804bc37a3fe6e.js"></script>
-    <script src="/js/highlight.pack.min.9fb14e2a1df0f115e1538850e856aa5f281fe701e6b7f43b74b2a8e6362fc5d7.js" integrity="sha256-n7FOKh3w8RXhU4hQ6FaqXygf5wHmt/Q7dLKo5jYvxdc="></script>
+    <script src="/js/highlight.pack.min.ba8d300c7a9547ed756a1c48936b2b44ce050a14aabbe399c0e432cb3208de7d.js" integrity="sha256-uo0wDHqVR&#43;11ahxIk2srRM4FChSqu&#43;OZwOQyyzII3n0="></script>
     <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

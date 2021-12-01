@@ -24,7 +24,7 @@
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface&display=swap">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/bundle.min.425ab8b9fe249c1465f5deb5aca575f691aaf471c4b3b17ee4f00865028f50dc.css">
+  <link rel="stylesheet" href="/bundle.min.40cd836af893a6cf36a2a1c4449440271aeedfd724e0d279a85299283ec90c0f.css">
   <link rel="search" href="https://bart.degoe.de/opensearch.xml" type="application/opensearchdescription+xml" title="Search bart.degoe.de">
 
   
@@ -120,8 +120,7 @@
     </audio>
 </div>
 
-<figure>
-    <img src="/img/2018-11-20-tab-plus-search-from-your-url-bar-with-opensearch/opensearch-on-bart-degoe-de.png"/> <figcaption>
+<figure><img src="/img/2018-11-20-tab-plus-search-from-your-url-bar-with-opensearch/opensearch-on-bart-degoe-de.png"/><figcaption>
             <h4>Typing &#39;bart&#39; and hitting tab in my Chrome browser lets me search the website directly.</h4>
         </figcaption>
 </figure>
@@ -131,8 +130,7 @@
 <pre><code>&lt;input autocapitalize=&quot;off&quot; autocorrect=&quot;off&quot; autocomplete=&quot;off&quot; name=&quot;q&quot; placeholder=&quot;Search&quot; type=&quot;search&quot;&gt;
 </code></pre><p>The <code>&quot;name&quot;</code> attribute gives the browser a hint as to what HTTP parameter will hold the query (it is a good idea to <a href="https://support.google.com/analytics/answer/1012264">configure your Google Analytics</a> to pick this up as well!).</p>
 <p>This will let the browser add some nice UI elements to the search input box, like a small &ldquo;x&rdquo; button on the right to clear the search input in Safari and Chrome. Enabling the <code>&quot;autocapitalize&quot;</code>, <code>&quot;autocorrect&quot;</code> and <code>&quot;autocomplete&quot;</code> attributes will instruct your browser to modify and correct the user input even further (think of the iOS autocorrect feature, for example).</p>
-<figure>
-    <img src="/img/2018-11-20-tab-plus-search-from-your-url-bar-with-opensearch/search-input-ui.png"/> <figcaption>
+<figure><img src="/img/2018-11-20-tab-plus-search-from-your-url-bar-with-opensearch/search-input-ui.png"/><figcaption>
             <h4>Just by changing the input type you can hook in to the browsers&#39; native UX.</h4>
         </figcaption>
 </figure>
@@ -165,8 +163,7 @@
 <p>Now we need to activate the automatic discovery of search engines in the browsers of your users. That sounds a lot cooler and more complicated than it actually is; the only thing you have to do is provide a <code>&lt;link&gt;</code> somewhere in the <code>&lt;head&gt;</code> of your webpages:</p>
 <pre><code>&lt;link rel=&quot;search&quot; href=&quot;https://bart.degoe.de/opensearch.xml&quot; type=&quot;application/opensearchdescription+xml&quot; title=&quot;Search bart.degoe.de&quot;&gt;
 </code></pre><p>This will alert browsers that load the page that there is a search feature available, described in the linked XML file. Make sure your OpenSearch XML file is available and can be loaded from your webserver, and refresh the page containing the <code>&lt;link&gt;</code>. This will tell the browser where to look, and enable custom search!</p>
-<figure>
-    <img src="/img/2018-11-20-tab-plus-search-from-your-url-bar-with-opensearch/opensearch-safari-bart-degoe-de.png"/> <figcaption>
+<figure><img src="/img/2018-11-20-tab-plus-search-from-your-url-bar-with-opensearch/opensearch-safari-bart-degoe-de.png"/><figcaption>
             <h4>Now tab-searching from the Safari URL bar works too!</h4>
         </figcaption>
 </figure>
@@ -176,10 +173,10 @@
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>The other attributes are to dis-/enable <a href="https://developer.mozilla.org/en-US/docs/Web/OpenSearch">features</a> certain other browsers like Safari have that automatically correct what you type into the search box. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>The other attributes are to dis-/enable <a href="https://developer.mozilla.org/en-US/docs/Web/OpenSearch">features</a> certain other browsers like Safari have that automatically correct what you type into the search box.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p>Yes, you could absolutely point your search input to my website, but that&rsquo;s not a requirement 😉 <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Yes, you could absolutely point your search input to my website, but that&rsquo;s not a requirement 😉&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -192,7 +189,7 @@
 
 
 <script src="/js/vendor/jquery-3.6.0.min.ff1523fb7389539c84c65aba19260648793bb4f5e29329d2ee8804bc37a3fe6e.js"></script>
-    <script src="/js/highlight.pack.min.9fb14e2a1df0f115e1538850e856aa5f281fe701e6b7f43b74b2a8e6362fc5d7.js" integrity="sha256-n7FOKh3w8RXhU4hQ6FaqXygf5wHmt/Q7dLKo5jYvxdc="></script>
+    <script src="/js/highlight.pack.min.ba8d300c7a9547ed756a1c48936b2b44ce050a14aabbe399c0e432cb3208de7d.js" integrity="sha256-uo0wDHqVR&#43;11ahxIk2srRM4FChSqu&#43;OZwOQyyzII3n0="></script>
     <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>
