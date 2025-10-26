@@ -2,22 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://bart.degoe.de/categories/ai/</loc>
+    <lastmod>2025-10-26T02:00:00-07:00</lastmod>
+  </url><url>
     <loc>https://bart.degoe.de/</loc>
-    <lastmod>2021-03-24T20:00:12-07:00</lastmod>
+    <lastmod>2025-10-26T02:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://bart.degoe.de/categories/blog/</loc>
+    <lastmod>2025-10-26T02:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://bart.degoe.de/categories/</loc>
+    <lastmod>2025-10-26T02:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://bart.degoe.de/categories/how-to/</loc>
+    <lastmod>2025-10-26T02:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://bart.degoe.de/categories/hugo/</loc>
+    <lastmod>2025-10-26T02:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://bart.degoe.de/migrating-hugo-blog-with-claude-code/</loc>
+    <lastmod>2025-10-26T02:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://bart.degoe.de/post/</loc>
+    <lastmod>2025-10-26T02:00:00-07:00</lastmod>
   </url><url>
     <loc>https://bart.degoe.de/building-a-full-text-search-engine-150-lines-of-code/</loc>
     <lastmod>2021-03-24T20:00:12-07:00</lastmod>
   </url><url>
-    <loc>https://bart.degoe.de/categories/</loc>
-    <lastmod>2021-03-24T20:00:12-07:00</lastmod>
-  </url><url>
     <loc>https://bart.degoe.de/categories/full-text-search/</loc>
-    <lastmod>2021-03-24T20:00:12-07:00</lastmod>
-  </url><url>
-    <loc>https://bart.degoe.de/categories/how-to/</loc>
-    <lastmod>2021-03-24T20:00:12-07:00</lastmod>
-  </url><url>
-    <loc>https://bart.degoe.de/post/</loc>
     <lastmod>2021-03-24T20:00:12-07:00</lastmod>
   </url><url>
     <loc>https://bart.degoe.de/categories/python/</loc>
@@ -25,12 +37,6 @@
   </url><url>
     <loc>https://bart.degoe.de/categories/search/</loc>
     <lastmod>2021-03-24T20:00:12-07:00</lastmod>
-  </url><url>
-    <loc>https://bart.degoe.de/categories/blog/</loc>
-    <lastmod>2019-10-29T08:00:00-07:00</lastmod>
-  </url><url>
-    <loc>https://bart.degoe.de/categories/hugo/</loc>
-    <lastmod>2019-10-29T08:00:00-07:00</lastmod>
   </url><url>
     <loc>https://bart.degoe.de/categories/text-to-speech/</loc>
     <lastmod>2019-10-29T08:00:00-07:00</lastmod>
