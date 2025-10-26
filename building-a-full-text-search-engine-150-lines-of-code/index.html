@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Building a full-text search engine in 150 lines of Python code | Bart de Goede</title>
+<meta name="keywords" content="how-to, search, full-text search, python">
+<meta name="description" content="Full-text search is everywhere. From finding a book on Scribd, a movie on Netflix, toilet paper on Amazon, or anything else on the web through Google (like [how to do your job as a software engineer](https://localghost.dev/2019/09/everything-i-googled-in-a-week-as-a-professional-software-engineer/)), you&#39;ve searched vast amounts of unstructured data multiple times today. What&#39;s even more amazing, is that you&#39;ve even though you searched millions (or [billions](https://www.worldwidewebsize.com/)) of records, you got a response in milliseconds. In this post, we are going to build a basic full-text search engine that can search across millions of documents and rank them according to their relevance to the query in milliseconds, in less than 150 lines of code!">
+<meta name="author" content="Bart de Goede">
+<link rel="canonical" href="https://bart.degoe.de/building-a-full-text-search-engine-150-lines-of-code/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.410c1446ea708ec1ebe32059fa42c4acd4087fcd2634226ebfcf0ef5820b7739.css" integrity="sha256-QQwURupwjsHr4yBZ&#43;kLErNQIf80mNCJuv88O9YILdzk=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://bart.degoe.de/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://bart.degoe.de/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://bart.degoe.de/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://bart.degoe.de/apple-touch-icon.png">
+<link rel="mask-icon" href="https://bart.degoe.de/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://bart.degoe.de/building-a-full-text-search-engine-150-lines-of-code/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><link rel="search" href="/opensearch.xml" type="application/opensearchdescription+xml" title="Search bart.degoe.de">
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-6JBRP5YVDB"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-6JBRP5YVDB');
+        }
+      </script><meta property="og:url" content="https://bart.degoe.de/building-a-full-text-search-engine-150-lines-of-code/">
+  <meta property="og:site_name" content="Bart de Goede">
+  <meta property="og:title" content="Building a full-text search engine in 150 lines of Python code">
+  <meta property="og:description" content="Full-text search is everywhere. From finding a book on Scribd, a movie on Netflix, toilet paper on Amazon, or anything else on the web through Google (like [how to do your job as a software engineer](https://localghost.dev/2019/09/everything-i-googled-in-a-week-as-a-professional-software-engineer/)), you&#39;ve searched vast amounts of unstructured data multiple times today. What&#39;s even more amazing, is that you&#39;ve even though you searched millions (or [billions](https://www.worldwidewebsize.com/)) of records, you got a response in milliseconds. In this post, we are going to build a basic full-text search engine that can search across millions of documents and rank them according to their relevance to the query in milliseconds, in less than 150 lines of code!">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2021-03-24T20:00:12-07:00">
+    <meta property="article:modified_time" content="2021-03-24T20:00:12-07:00">
+      <meta property="og:image" content="https://www.gravatar.com/avatar/af61db828941976309aaa8d7d76554fb">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://www.gravatar.com/avatar/af61db828941976309aaa8d7d76554fb">
+<meta name="twitter:title" content="Building a full-text search engine in 150 lines of Python code">
+<meta name="twitter:description" content="Full-text search is everywhere. From finding a book on Scribd, a movie on Netflix, toilet paper on Amazon, or anything else on the web through Google (like [how to do your job as a software engineer](https://localghost.dev/2019/09/everything-i-googled-in-a-week-as-a-professional-software-engineer/)), you&#39;ve searched vast amounts of unstructured data multiple times today. What&#39;s even more amazing, is that you&#39;ve even though you searched millions (or [billions](https://www.worldwidewebsize.com/)) of records, you got a response in milliseconds. In this post, we are going to build a basic full-text search engine that can search across millions of documents and rank them according to their relevance to the query in milliseconds, in less than 150 lines of code!">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://bart.degoe.de/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Building a full-text search engine in 150 lines of Python code",
+      "item": "https://bart.degoe.de/building-a-full-text-search-engine-150-lines-of-code/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Building a full-text search engine in 150 lines of Python code",
+  "name": "Building a full-text search engine in 150 lines of Python code",
+  "description": "Full-text search is everywhere. From finding a book on Scribd, a movie on Netflix, toilet paper on Amazon, or anything else on the web through Google (like [how to do your job as a software engineer](https://localghost.dev/2019/09/everything-i-googled-in-a-week-as-a-professional-software-engineer/)), you've searched vast amounts of unstructured data multiple times today. What's even more amazing, is that you've even though you searched millions (or [billions](https://www.worldwidewebsize.com/)) of records, you got a response in milliseconds. In this post, we are going to build a basic full-text search engine that can search across millions of documents and rank them according to their relevance to the query in milliseconds, in less than 150 lines of code!",
+  "keywords": [
+    "how-to", "search", "full-text search", "python"
+  ],
+  "articleBody": "Full-text search is everywhere. From finding a book on Scribd, a movie on Netflix, toilet paper on Amazon, or anything else on the web through Google (like how to do your job as a software engineer), you’ve searched vast amounts of unstructured data multiple times today. What’s even more amazing, is that you’ve even though you searched millions (or billions) of records, you got a response in milliseconds. In this post, we are going to explore the basic components of a full-text search engine, and use them to build one that can search across millions of documents and rank them according to their relevance in milliseconds, in less than 150 lines of Python code!\nListen to this article instead Your browser does not support the audio element Data All the code you in this blog post can be found on Github. I’ll provide links with the code snippets here, so you can try running this yourself. You can run the full example by installing the requirements (pip install -r requirements.txt) and run python run.py. This will download all the data and execute the example query with and without rankings.\nBefore we’re jumping into building a search engine, we first need some full-text, unstructured data to search. We are going to be searching abstracts of articles from the English Wikipedia, which is currently a gzipped XML file of about 785mb and contains about 6.27 million abstracts1. I’ve written a simple function to download the gzipped XML, but you can also just manually download the file.\nData preparation The file is one large XML file that contains all abstracts. One abstract in this file is contained by a element, and looks roughly like this (I’ve omitted elements we’re not interested in):\n\u003c/span\u003eWikipedia: London Beer Flood https://en.wikipedia.org/wiki/London_Beer_Flood The London Beer Flood was an accident at Meux \u0026 Co's Horse Shoe Brewery, London, on 17 October 1814. It took place when one of the wooden vats of fermenting porter burst. ... The bits were interested in are the title, the url and the abstract text itself. We’ll represent documents with a Python dataclass for convenient data access. We’ll add a property that concatenates the title and the contents of the abstract. You can find the code here.\nfrom dataclasses import dataclass @dataclass class Abstract: \"\"\"Wikipedia abstract\"\"\" ID: int title: str abstract: str url: str @property def fulltext(self): return ' '.join([self.title, self.abstract]) Then, we’ll want to extract the abstracts data from the XML and parse it so we can create instances of our Abstract object. We are going to stream through the gzipped XML without loading the entire file into memory first2. We’ll assign each document an ID in order of loading (ie the first document will have ID=1, the second one will have ID=2, etcetera). You can find the code here.\nimport gzip from lxml import etree from search.documents import Abstract def load_documents(): # open a filehandle to the gzipped Wikipedia dump with gzip.open('data/enwiki.latest-abstract.xml.gz', 'rb') as f: doc_id = 1 # iterparse will yield the entire `doc` element once it finds the # closing `` tag for _, element in etree.iterparse(f, events=('end',), tag='doc'): title = element.findtext('./title') url = element.findtext('./url') abstract = element.findtext('./abstract') yield Abstract(ID=doc_id, title=title, url=url, abstract=abstract) doc_id += 1 # the `element.clear()` call will explicitly free up the memory # used to store the element element.clear() Indexing We are going to store this in a data structure known as an “inverted index” or a “postings list”. Think of it as the index in the back of a book that has an alphabetized list of relevant words and concepts, and on what page number a reader can find them.\nBack of the book index Practically, what this means is that we’re going to create a dictionary where we map all the words in our corpus to the IDs of the documents they occur in. That will look something like this:\n{ ... \"london\": [5245250, 2623812, 133455, 3672401, ...], \"beer\": [1921376, 4411744, 684389, 2019685, ...], \"flood\": [3772355, 2895814, 3461065, 5132238, ...], ... } Note that in the example above the words in the dictionary are lowercased; before building the index we are going to break down or analyze the raw text into a list of words or tokens. The idea is that we first break up or tokenize the text into words, and then apply zero or more filters (such as lowercasing or stemming) on each token to improve the odds of matching queries to text.\nTokenization Analysis We are going to apply very simple tokenization, by just splitting the text on whitespace. Then, we are going to apply a couple of filters on each of the tokens: we are going to lowercase each token, remove any punctuation, remove the 25 most common words in the English language (and the word “wikipedia” because it occurs in every title in every abstract) and apply stemming to every word (ensuring that different forms of a word map to the same stem, like brewery and breweries3).\nThe tokenization and lowercase filter are very simple:\nimport Stemmer STEMMER = Stemmer.Stemmer('english') def tokenize(text): return text.split() def lowercase_filter(tokens): return [token.lower() for token in tokens] def stem_filter(tokens): return STEMMER.stemWords(tokens) Punctuation is nothing more than a regular expression on the set of punctuation:\nimport re import string PUNCTUATION = re.compile('[%s]' % re.escape(string.punctuation)) def punctuation_filter(tokens): return [PUNCTUATION.sub('', token) for token in tokens] Stopwords are words that are very common and we would expect to occcur in (almost) every document in the corpus. As such, they won’t contribute much when we search for them (i.e. (almost) every document will match when we search for those terms) and will just take up space, so we will filter them out at index time. The Wikipedia abstract corpus includes the word “Wikipedia” in every title, so we’ll add that word to the stopword list as well. We drop the 25 most common words in English.\n# top 25 most common words in English and \"wikipedia\": # https://en.wikipedia.org/wiki/Most_common_words_in_English STOPWORDS = set(['the', 'be', 'to', 'of', 'and', 'a', 'in', 'that', 'have', 'I', 'it', 'for', 'not', 'on', 'with', 'he', 'as', 'you', 'do', 'at', 'this', 'but', 'his', 'by', 'from', 'wikipedia']) def stopword_filter(tokens): return [token for token in tokens if token not in STOPWORDS] Bringing all these filters together, we’ll construct an analyze function that will operate on the text in each abstract; it will tokenize the text into individual words (or rather, tokens), and then apply each filter in succession to the list of tokens. The order is important, because we use a non-stemmed list of stopwords, so we should apply the stopword_filter before the stem_filter.\ndef analyze(text): tokens = tokenize(text) tokens = lowercase_filter(tokens) tokens = punctuation_filter(tokens) tokens = stopword_filter(tokens) tokens = stem_filter(tokens) return [token for token in tokens if token] Indexing the corpus We’ll create an Index class that will store the index and the documents. The documents dictionary stores the dataclasses by ID, and the index keys will be the tokens, with the values being the document IDs the token occurs in:\nclass Index: def __init__(self): self.index = {} self.documents = {} def index_document(self, document): if document.ID not in self.documents: self.documents[document.ID] = document for token in analyze(document.fulltext): if token not in self.index: self.index[token] = set() self.index[token].add(document.ID) Searching Now we have all tokens indexed, searching for a query becomes a matter of analyzing the query text with the same analyzer as we applied to the documents; this way we’ll end up with tokens that should match the tokens we have in the index. For each token, we’ll do a lookup in the dictionary, finding the document IDs that the token occurs in. We do this for every token, and then find the IDs of documents in all these sets (i.e. for a document to match the query, it needs to contain all the tokens in the query). We will then take the resulting list of document IDs, and fetch the actual data from our documents store4.\ndef _results(self, analyzed_query): return [self.index.get(token, set()) for token in analyzed_query] def search(self, query): \"\"\" Boolean search; this will return documents that contain all words from the query, but not rank them (sets are fast, but unordered). \"\"\" analyzed_query = analyze(query) results = self._results(analyzed_query) documents = [self.documents[doc_id] for doc_id in set.intersection(*results)] return documents In [1]: index.search('London Beer Flood') search took 0.16307830810546875 milliseconds Out[1]: [Abstract(ID=1501027, title='Wikipedia: Horse Shoe Brewery', abstract='The Horse Shoe Brewery was an English brewery in the City of Westminster that was established in 1764 and became a major producer of porter, from 1809 as Henry Meux \u0026 Co. It was the site of the London Beer Flood in 1814, which killed eight people after a porter vat burst.', url='https://en.wikipedia.org/wiki/Horse_Shoe_Brewery'), Abstract(ID=1828015, title='Wikipedia: London Beer Flood', abstract=\"The London Beer Flood was an accident at Meux \u0026 Co's Horse Shoe Brewery, London, on 17 October 1814. It took place when one of the wooden vats of fermenting porter burst.\", url='https://en.wikipedia.org/wiki/London_Beer_Flood')] Now, this will make our queries very precise, especially for long query strings (the more tokens our query contains, the less likely it’ll be that there will be a document that has all of these tokens). We could optimize our search function for recall rather than precision by allowing users to specify that only one occurrence of a token is enough to match our query:\ndef search(self, query, search_type='AND'): \"\"\" Still boolean search; this will return documents that contain either all words from the query or just one of them, depending on the search_type specified. We are still not ranking the results (sets are fast, but unordered). \"\"\" if search_type not in ('AND', 'OR'): return [] analyzed_query = analyze(query) results = self._results(analyzed_query) if search_type == 'AND': # all tokens must be in the document documents = [self.documents[doc_id] for doc_id in set.intersection(*results)] if search_type == 'OR': # only one token has to be in the document documents = [self.documents[doc_id] for doc_id in set.union(*results)] return documents In [2]: index.search('London Beer Flood', search_type='OR') search took 0.02816295623779297 seconds Out[2]: [Abstract(ID=5505026, title='Wikipedia: Addie Pryor', abstract='| birth_place = London, England', url='https://en.wikipedia.org/wiki/Addie_Pryor'), Abstract(ID=1572868, title='Wikipedia: Tim Steward', abstract='|birth_place = London, United Kingdom', url='https://en.wikipedia.org/wiki/Tim_Steward'), Abstract(ID=5111814, title='Wikipedia: 1877 Birthday Honours', abstract='The 1877 Birthday Honours were appointments by Queen Victoria to various orders and honours to reward and highlight good works by citizens of the British Empire. The appointments were made to celebrate the official birthday of the Queen, and were published in The London Gazette on 30 May and 2 June 1877.', url='https://en.wikipedia.org/wiki/1877_Birthday_Honours'), ... In [3]: len(index.search('London Beer Flood', search_type='OR')) search took 0.029065370559692383 seconds Out[3]: 49627 Relevancy We have implemented a pretty quick search engine with just some basic Python, but there’s one aspect that’s obviously missing from our little engine, and that’s the idea of relevance. Right now we just return an unordered list of documents, and we leave it up to the user to figure out which of those (s)he is actually interested in. Especially for large result sets, that is painful or just impossible (in our OR example, there are almost 50,000 results).\nThis is where the idea of relevancy comes in; what if we could assign each document a score that would indicate how well it matches the query, and just order by that score? A naive and simple way of assigning a score to a document for a given query is to just count how often that document mentions that particular word. After all, the more that document mentions that term, the more likely it is that it is about our query!\nTerm frequency Let’s expand our Abstract dataclass to compute and store it’s term frequencies when we index it. That way, we’ll have easy access to those numbers when we want to rank our unordered list of documents:\n# in documents.py from collections import Counter from .analysis import analyze @dataclass class Abstract: # snip def analyze(self): # Counter will create a dictionary counting the unique values in an array: # {'london': 12, 'beer': 3, ...} self.term_frequencies = Counter(analyze(self.fulltext)) def term_frequency(self, term): return self.term_frequencies.get(term, 0) We need to make sure to generate these frequency counts when we index our data:\n# in index.py we add `document.analyze() def index_document(self, document): if document.ID not in self.documents: self.documents[document.ID] = document document.analyze() We’ll modify our search function so we can apply a ranking to the documents in our result set. We’ll fetch the documents using the same Boolean query from the index and document store, and then we’ll for every document in that result set, we’ll simply sum up how often each term occurs in that document\ndef search(self, query, search_type='AND', rank=True): # snip if rank: return self.rank(analyzed_query, documents) return documents def rank(self, analyzed_query, documents): results = [] if not documents: return results for document in documents: score = sum([document.term_frequency(token) for token in analyzed_query]) results.append((document, score)) return sorted(results, key=lambda doc: doc[1], reverse=True) Inverse Document Frequency That’s already a lot better, but there are some obvious short-comings. We’re considering all query terms to be of equivalent value when assessing the relevancy for the query. However, it’s likely that certain terms have very little to no discriminating power when determining relevancy; for example, a collection with lots of documents about beer would be expected to have the term “beer” appear often in almost every document (in fact, we’re already trying to address that by dropping the 25 most common English words from the index). Searching for the word “beer” in such a case would essentially do another random sort.\nIn order to address that, we’ll add another component to our scoring algorithm that will reduce the contribution of terms that occur very often in the index to the final score. We could use the collection frequency of a term (i.e. how often does this term occur across all documents), but in practice the document frequency is used instead (i.e. how many documents in the index contain this term). We’re trying to rank documents after all, so it makes sense to have a document level statistic.\nWe’ll compute the inverse document frequency for a term by dividing the number of documents (N) in the index by the amount of documents that contain the term, and take a logarithm of that.\nIDF; taken from https://moz.com/blog/inverse-document-frequency-and-the-importance-of-uniqueness We’ll then simply multiple the term frequency with the inverse document frequency during our ranking, so matches on terms that are rare in the corpus will contribute more to the relevancy score5. We can easily compute the inverse document frequency from the data available in our index:\n# index.py import math def document_frequency(self, token): return len(self.index.get(token, set())) def inverse_document_frequency(self, token): # Manning, Hinrich and Schütze use log10, so we do too, even though it # doesn't really matter which log we use anyway # https://nlp.stanford.edu/IR-book/html/htmledition/inverse-document-frequency-1.html return math.log10(len(self.documents) / self.document_frequency(token)) def rank(self, analyzed_query, documents): results = [] if not documents: return results for document in documents: score = 0.0 for token in analyzed_query: tf = document.term_frequency(token) idf = self.inverse_document_frequency(token) score += tf * idf results.append((document, score)) return sorted(results, key=lambda doc: doc[1], reverse=True) Future Work™ And that’s a basic search engine in just a few lines of Python code! You can find all the code on Github, and I’ve provided a utility function that will download the Wikipedia abstracts and build an index. Install the requirements, run it in your Python console of choice and have fun messing with the data structures and searching.\nNow, obviously this is a project to illustrate the concepts of search and how it can be so fast (even with ranking, I can search and rank 6.27m documents on my laptop with a “slow” language like Python) and not production grade software. It runs entirely in memory on my laptop, whereas libraries like Lucene utilize hyper-efficient data structures and even optimize disk seeks, and software like Elasticsearch and Solr scale Lucene to hundreds if not thousands of machines.\nThat doesn’t mean that we can’t think about fun expansions on this basic functionality though; for example, we assume that every field in the document has the same contribution to relevancy, whereas a query term match in the title should probably be weighted more strongly than a match in the description. Another fun project could be to expand the query parsing; there’s no reason why either all or just one term need to match. Why not exclude certain terms, or do AND and OR between individual terms? Can we persist the index to disk and make it scale beyond the confines of my laptop RAM?\nAn abstract is generally the first paragraph or the first couple of sentences of a Wikipedia article. The entire dataset is currently about ±796mb of gzipped XML. There’s smaller dumps with a subset of articles available if you want to experiment and mess with the code yourself; parsing XML and indexing will take a while, and require a substantial amount of memory. ↩︎\nWe’re going to have the entire dataset and index in memory as well, so we may as well skip keeping the raw data in memory. ↩︎\nWhether or not stemming is a good idea is subject of debate. It will decrease the total size of your index (ie fewer unique words), but stemming is based on heuristics; we’re throwing away information that could very well be valuable. For example, think about the words university, universal, universities, and universe that are stemmed to univers. We are losing the ability to distinguish between the meaning of these words, which would negatively impact relevance. For a more detailed article about stemming (and lemmatization), read this excellent article. ↩︎\nWe obviously just use our laptop’s RAM for this, but it’s a pretty common practice to not store your actual data in the index. Elasticsearch stores it’s data as plain old JSON on disk, and only stores indexed data in Lucene (the underlying search and indexing library) itself, and many other search engines will simply return an ordered list of document IDs which are then used to retrieve the data to display to users from a database or other service. This is especially relevant for large corpora, where doing a full reindex of all your data is expensive, and you generally only want to store data relevant to relevancy in your search engine (and not attributes that are only relevant for presentation purposes). ↩︎\nFor a more in-depth post about the algorithm, I recommend reading https://monkeylearn.com/blog/what-is-tf-idf/ and https://nlp.stanford.edu/IR-book/html/htmledition/term-frequency-and-weighting-1.html ↩︎\n",
+  "wordCount" : "3035",
+  "inLanguage": "en",
+  "image": "https://www.gravatar.com/avatar/af61db828941976309aaa8d7d76554fb","datePublished": "2021-03-24T20:00:12-07:00",
+  "dateModified": "2021-03-24T20:00:12-07:00",
+  "author":{
+    "@type": "Person",
+    "name": "Bart de Goede"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://bart.degoe.de/building-a-full-text-search-engine-150-lines-of-code/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Bart de Goede",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://bart.degoe.de/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://bart.degoe.de/" accesskey="h" title="Bart de Goede (Alt + H)">Bart de Goede</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://bart.degoe.de/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://bart.degoe.de/">Home</a>&nbsp;»&nbsp;<a href="https://bart.degoe.de/post/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Building a full-text search engine in 150 lines of Python code
+    </h1>
+    <div class="post-description">
+      Full-text search is everywhere. From finding a book on Scribd, a movie on Netflix, toilet paper on Amazon, or anything else on the web through Google (like [how to do your job as a software engineer](https://localghost.dev/2019/09/everything-i-googled-in-a-week-as-a-professional-software-engineer/)), you&#39;ve searched vast amounts of unstructured data multiple times today. What&#39;s even more amazing, is that you&#39;ve even though you searched millions (or [billions](https://www.worldwidewebsize.com/)) of records, you got a response in milliseconds. In this post, we are going to build a basic full-text search engine that can search across millions of documents and rank them according to their relevance to the query in milliseconds, in less than 150 lines of code!
+    </div>
+    <div class="post-meta"><span title='2021-03-24 20:00:12 -0700 -0700'>March 24, 2021</span>&nbsp;·&nbsp;<span>15 min</span>&nbsp;·&nbsp;<span>Bart de Goede</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p>Full-text search is everywhere. From finding a book on Scribd, a movie on Netflix, toilet paper on Amazon, or anything else on the web through Google (like <a href="https://localghost.dev/2019/09/everything-i-googled-in-a-week-as-a-professional-software-engineer/">how to do your job as a software engineer</a>), you&rsquo;ve searched vast amounts of unstructured data multiple times today. What&rsquo;s even more amazing, is that you&rsquo;ve even though you searched millions (or <a href="https://www.worldwidewebsize.com/">billions</a>) of records, you got a response in milliseconds. In this post, we are going to explore the basic components of a full-text search engine, and use them to build one that can search across millions of documents and rank them according to their relevance in milliseconds, in less than 150 lines of Python code!<!-- more --></p>
+<div id="player">
+    <div class="listen">Listen to this article instead</div>
+    <div id="waveform">
+        
+        <img src="https://bart.degoe.de/img/waveform.min.svg" alt="waveform">
+    </div>
+    <audio controls
+        class="audio_controls "
+        
+        preload="metadata"
+
+        style=""
+        
+    >
+        
+        <source src="/audio/2021-03-24-python-full-text-search-engine.mp3"
+            type="audio/mp3">
+        
+        Your browser does not support the audio element
+    </audio>
+</div>
+
+<h1 id="data">Data<a hidden class="anchor" aria-hidden="true" href="#data">#</a></h1>
+<p>All the code you in this blog post can be found on <a href="https://github.com/bartdegoede/python-searchengine/">Github</a>. I&rsquo;ll provide links with the code snippets here, so you can try running this yourself. You can run the full example by installing <a href="https://github.com/bartdegoede/python-searchengine/blob/master/requirements.txt">the requirements</a> (<code>pip install -r requirements.txt</code>) and <a href="https://github.com/bartdegoede/python-searchengine/blob/master/run.py">run <code>python run.py</code></a>. This will download all the data and execute the example query with and without rankings.</p>
+<p>Before we&rsquo;re jumping into building a search engine, we first need some full-text, unstructured data to search. We are going to be searching abstracts of articles from the English Wikipedia, which is currently a gzipped XML file of about 785mb and contains about 6.27 million abstracts<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. I&rsquo;ve written <a href="https://github.com/bartdegoede/python-searchengine/blob/master/download.py">a simple function to download</a> the gzipped XML, but you can also just manually download the file.</p>
+<h2 id="data-preparation">Data preparation<a hidden class="anchor" aria-hidden="true" href="#data-preparation">#</a></h2>
+<p>The file is one large XML file that contains all abstracts. One abstract in this file is contained by a <code>&lt;doc&gt;</code> element, and looks roughly like this (I&rsquo;ve omitted elements we&rsquo;re not interested in):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;doc&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;title&gt;</span>Wikipedia: London Beer Flood<span class="nt">&lt;/title&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;url&gt;</span>https://en.wikipedia.org/wiki/London_Beer_Flood<span class="nt">&lt;/url&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;abstract&gt;</span>The London Beer Flood was an accident at Meux <span class="err">&amp;</span> Co&#39;s Horse Shoe Brewery, London, on 17 October 1814. It took place when one of the  wooden vats of fermenting porter burst.<span class="nt">&lt;/abstract&gt;</span>
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/doc&gt;</span>
+</span></span></code></pre></div><p>The bits were interested in are the <code>title</code>, the <code>url</code> and the <code>abstract</code> text itself. We&rsquo;ll represent documents with a <a href="https://realpython.com/python-data-classes/">Python dataclass</a> for convenient data access. We&rsquo;ll add a property that concatenates the title and the contents of the abstract. You can find the code <a href="https://github.com/bartdegoede/python-searchengine/blob/master/search/documents.py">here</a>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Abstract</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Wikipedia abstract&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ID</span><span class="p">:</span> <span class="nb">int</span>
+</span></span><span class="line"><span class="cl">    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+</span></span><span class="line"><span class="cl">    <span class="n">abstract</span><span class="p">:</span> <span class="nb">str</span>
+</span></span><span class="line"><span class="cl">    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@property</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">fulltext</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">abstract</span><span class="p">])</span>
+</span></span></code></pre></div><p>Then, we&rsquo;ll want to extract the abstracts data from the XML and parse it so we can create instances of our <code>Abstract</code> object. We are going to stream through the gzipped XML without loading the entire file into memory first<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. We&rsquo;ll assign each document an ID in order of loading (ie the first document will have ID=1, the second one will have ID=2, etcetera). You can find the code <a href="https://github.com/bartdegoede/python-searchengine/blob/master/load.py">here</a>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gzip</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">search.documents</span> <span class="kn">import</span> <span class="n">Abstract</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">load_documents</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># open a filehandle to the gzipped Wikipedia dump</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;data/enwiki.latest-abstract.xml.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">doc_id</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># iterparse will yield the entire `doc` element once it finds the</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># closing `&lt;/doc&gt;` tag</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">etree</span><span class="o">.</span><span class="n">iterparse</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">events</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,),</span> <span class="n">tag</span><span class="o">=</span><span class="s1">&#39;doc&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">title</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s1">&#39;./title&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">url</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s1">&#39;./url&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">abstract</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">findtext</span><span class="p">(</span><span class="s1">&#39;./abstract&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">yield</span> <span class="n">Abstract</span><span class="p">(</span><span class="n">ID</span><span class="o">=</span><span class="n">doc_id</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">abstract</span><span class="o">=</span><span class="n">abstract</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">doc_id</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># the `element.clear()` call will explicitly free up the memory</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># used to store the element</span>
+</span></span><span class="line"><span class="cl">            <span class="n">element</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</span></span></code></pre></div><h1 id="indexing">Indexing<a hidden class="anchor" aria-hidden="true" href="#indexing">#</a></h1>
+<p>We are going to store this in a data structure known as an <a href="https://en.wikipedia.org/wiki/Inverted_index">&ldquo;inverted index&rdquo; or a &ldquo;postings list&rdquo;</a>. Think of it as the index in the back of a book that has an alphabetized list of relevant words and concepts, and on what page number a reader can find them.</p>
+<figure>
+    <img loading="lazy" src="/img/2021-03-24-building-a-full-text-search-engine-150-lines-of-code/book-index-1080x675.png"/> <figcaption>
+            Back of the book index
+        </figcaption>
+</figure>
+
+<p>Practically, what this means is that we&rsquo;re going to create a dictionary where we map all the words in our corpus to the IDs of the documents they occur in. That will look something like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">...</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;london&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5245250</span><span class="p">,</span> <span class="mi">2623812</span><span class="p">,</span> <span class="mi">133455</span><span class="p">,</span> <span class="mi">3672401</span><span class="p">,</span> <span class="err">...</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;beer&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1921376</span><span class="p">,</span> <span class="mi">4411744</span><span class="p">,</span> <span class="mi">684389</span><span class="p">,</span> <span class="mi">2019685</span><span class="p">,</span> <span class="err">...</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;flood&#34;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3772355</span><span class="p">,</span> <span class="mi">2895814</span><span class="p">,</span> <span class="mi">3461065</span><span class="p">,</span> <span class="mi">5132238</span><span class="p">,</span> <span class="err">...</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="err">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Note that in the example above the words in the dictionary are lowercased; before building the index we are going to break down or <code>analyze</code> the raw text into a list of words or <code>tokens</code>. The idea is that we first break up or <code>tokenize</code> the text into words, and then apply zero or more <code>filters</code> (such as lowercasing or stemming) on each token to improve the odds of matching queries to text.</p>
+<figure>
+    <img loading="lazy" src="/img/2021-03-24-building-a-full-text-search-engine-150-lines-of-code/tokenization.png"/> <figcaption>
+            Tokenization
+        </figcaption>
+</figure>
+
+<h2 id="analysis">Analysis<a hidden class="anchor" aria-hidden="true" href="#analysis">#</a></h2>
+<p>We are going to apply very simple tokenization, by just splitting the text on whitespace. Then, we are going to apply a couple of filters on each of the tokens: we are going to lowercase each token, remove any punctuation, remove the 25 most common words in the English language (and the word &ldquo;wikipedia&rdquo; because it occurs in every title in every abstract) and apply <a href="https://en.wikipedia.org/wiki/Stemming">stemming</a> to every word (ensuring that different forms of a word map to the same stem, like <em>brewery</em> and <em>breweries</em><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>).</p>
+<p>The tokenization and lowercase filter are very simple:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">Stemmer</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">STEMMER</span> <span class="o">=</span> <span class="n">Stemmer</span><span class="o">.</span><span class="n">Stemmer</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">lowercase_filter</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">stem_filter</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">STEMMER</span><span class="o">.</span><span class="n">stemWords</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</span></span></code></pre></div><p>Punctuation is nothing more than a regular expression on the set of punctuation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">string</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">PUNCTUATION</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">punctuation_filter</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="n">PUNCTUATION</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+</span></span></code></pre></div><p>Stopwords are words that are very common and we would expect to occcur in (almost) every document in the corpus. As such, they won&rsquo;t contribute much when we search for them (i.e. (almost) every document will match when we search for those terms) and will just take up space, so we will filter them out at index time. The Wikipedia abstract corpus includes the word &ldquo;Wikipedia&rdquo; in every title, so we&rsquo;ll add that word to the stopword list as well. We drop the 25 most common words in English.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># top 25 most common words in English and &#34;wikipedia&#34;:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># https://en.wikipedia.org/wiki/Most_common_words_in_English</span>
+</span></span><span class="line"><span class="cl"><span class="n">STOPWORDS</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;the&#39;</span><span class="p">,</span> <span class="s1">&#39;be&#39;</span><span class="p">,</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="s1">&#39;of&#39;</span><span class="p">,</span> <span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;that&#39;</span><span class="p">,</span> <span class="s1">&#39;have&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                 <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;it&#39;</span><span class="p">,</span> <span class="s1">&#39;for&#39;</span><span class="p">,</span> <span class="s1">&#39;not&#39;</span><span class="p">,</span> <span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="s1">&#39;with&#39;</span><span class="p">,</span> <span class="s1">&#39;he&#39;</span><span class="p">,</span> <span class="s1">&#39;as&#39;</span><span class="p">,</span> <span class="s1">&#39;you&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                 <span class="s1">&#39;do&#39;</span><span class="p">,</span> <span class="s1">&#39;at&#39;</span><span class="p">,</span> <span class="s1">&#39;this&#39;</span><span class="p">,</span> <span class="s1">&#39;but&#39;</span><span class="p">,</span> <span class="s1">&#39;his&#39;</span><span class="p">,</span> <span class="s1">&#39;by&#39;</span><span class="p">,</span> <span class="s1">&#39;from&#39;</span><span class="p">,</span> <span class="s1">&#39;wikipedia&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">stopword_filter</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STOPWORDS</span><span class="p">]</span>
+</span></span></code></pre></div><p>Bringing all these filters together, we&rsquo;ll <a href="https://github.com/bartdegoede/python-searchengine/blob/master/search/analysis.py#L28-L35">construct an <code>analyze</code> function</a> that will operate on the <code>text</code> in each abstract; it will tokenize the text into individual words (or rather, <em>tokens</em>), and then apply each filter in succession to the list of tokens. The order is important, because we use a non-stemmed list of stopwords, so we should apply the <code>stopword_filter</code> before the <code>stem_filter</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tokens</span> <span class="o">=</span> <span class="n">lowercase_filter</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tokens</span> <span class="o">=</span> <span class="n">punctuation_filter</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tokens</span> <span class="o">=</span> <span class="n">stopword_filter</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tokens</span> <span class="o">=</span> <span class="n">stem_filter</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="n">token</span><span class="p">]</span>
+</span></span></code></pre></div><h2 id="indexing-the-corpus">Indexing the corpus<a hidden class="anchor" aria-hidden="true" href="#indexing-the-corpus">#</a></h2>
+<p>We&rsquo;ll create an <code>Index</code> class that will store the <code>index</code> and the <code>documents</code>. The <code>documents</code> dictionary stores the dataclasses by ID, and the <code>index</code> keys will be the tokens, with the values being the document IDs the token occurs in:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Index</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">documents</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">index_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">document</span><span class="o">.</span><span class="n">ID</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">documents</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">documents</span><span class="p">[</span><span class="n">document</span><span class="o">.</span><span class="n">ID</span><span class="p">]</span> <span class="o">=</span> <span class="n">document</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">analyze</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">fulltext</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">token</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">token</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">ID</span><span class="p">)</span>
+</span></span></code></pre></div><h1 id="searching">Searching<a hidden class="anchor" aria-hidden="true" href="#searching">#</a></h1>
+<p>Now we have all tokens indexed, searching for a query becomes a matter of analyzing the query text with the same analyzer as we applied to the documents; this way we&rsquo;ll end up with tokens that should match the tokens we have in the index. For each token, we&rsquo;ll do a lookup in the dictionary, finding the document IDs that the token occurs in. We do this for every token, and then find the IDs of documents in all these sets (i.e. for a document to match the query, it needs to contain all the tokens in the query). We will then take the resulting list of document IDs, and fetch the actual data from our <code>documents</code> store<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">analyzed_query</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="nb">set</span><span class="p">())</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">analyzed_query</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Boolean search; this will return documents that contain all words from the
+</span></span></span><span class="line"><span class="cl"><span class="s2">    query, but not rank them (sets are fast, but unordered).
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">analyzed_query</span> <span class="o">=</span> <span class="n">analyze</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">(</span><span class="n">analyzed_query</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">documents</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">documents</span><span class="p">[</span><span class="n">doc_id</span><span class="p">]</span> <span class="k">for</span> <span class="n">doc_id</span> <span class="ow">in</span> <span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="o">*</span><span class="n">results</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">documents</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">index</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;London Beer Flood&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">search</span> <span class="n">took</span> <span class="mf">0.16307830810546875</span> <span class="n">milliseconds</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">Abstract</span><span class="p">(</span><span class="n">ID</span><span class="o">=</span><span class="mi">1501027</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Wikipedia: Horse Shoe Brewery&#39;</span><span class="p">,</span> <span class="n">abstract</span><span class="o">=</span><span class="s1">&#39;The Horse Shoe Brewery was an English brewery in the City of Westminster that was established in 1764 and became a major producer of porter, from 1809 as Henry Meux &amp; Co. It was the site of the London Beer Flood in 1814, which killed eight people after a porter vat burst.&#39;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://en.wikipedia.org/wiki/Horse_Shoe_Brewery&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"> <span class="n">Abstract</span><span class="p">(</span><span class="n">ID</span><span class="o">=</span><span class="mi">1828015</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Wikipedia: London Beer Flood&#39;</span><span class="p">,</span> <span class="n">abstract</span><span class="o">=</span><span class="s2">&#34;The London Beer Flood was an accident at Meux &amp; Co&#39;s Horse Shoe Brewery, London, on 17 October 1814. It took place when one of the  wooden vats of fermenting porter burst.&#34;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://en.wikipedia.org/wiki/London_Beer_Flood&#39;</span><span class="p">)]</span>
+</span></span></code></pre></div><p>Now, this will make our queries very precise, especially for long query strings (the more tokens our query contains, the less likely it&rsquo;ll be that there will be a document that has all of these tokens). We could optimize our search function for <a href="https://en.wikipedia.org/wiki/Precision_and_recall">recall rather than precision</a> by allowing users to specify that only one occurrence of a token is enough to match our query:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">search_type</span><span class="o">=</span><span class="s1">&#39;AND&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Still boolean search; this will return documents that contain either all words
+</span></span></span><span class="line"><span class="cl"><span class="s2">    from the query or just one of them, depending on the search_type specified.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    We are still not ranking the results (sets are fast, but unordered).
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">search_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;AND&#39;</span><span class="p">,</span> <span class="s1">&#39;OR&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">analyzed_query</span> <span class="o">=</span> <span class="n">analyze</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">(</span><span class="n">analyzed_query</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">search_type</span> <span class="o">==</span> <span class="s1">&#39;AND&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># all tokens must be in the document</span>
+</span></span><span class="line"><span class="cl">        <span class="n">documents</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">documents</span><span class="p">[</span><span class="n">doc_id</span><span class="p">]</span> <span class="k">for</span> <span class="n">doc_id</span> <span class="ow">in</span> <span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="o">*</span><span class="n">results</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">search_type</span> <span class="o">==</span> <span class="s1">&#39;OR&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># only one token has to be in the document</span>
+</span></span><span class="line"><span class="cl">        <span class="n">documents</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">documents</span><span class="p">[</span><span class="n">doc_id</span><span class="p">]</span> <span class="k">for</span> <span class="n">doc_id</span> <span class="ow">in</span> <span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="o">*</span><span class="n">results</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">documents</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">index</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;London Beer Flood&#39;</span><span class="p">,</span> <span class="n">search_type</span><span class="o">=</span><span class="s1">&#39;OR&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">search</span> <span class="n">took</span> <span class="mf">0.02816295623779297</span> <span class="n">seconds</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">Abstract</span><span class="p">(</span><span class="n">ID</span><span class="o">=</span><span class="mi">5505026</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Wikipedia: Addie Pryor&#39;</span><span class="p">,</span> <span class="n">abstract</span><span class="o">=</span><span class="s1">&#39;| birth_place    = London, England&#39;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://en.wikipedia.org/wiki/Addie_Pryor&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"> <span class="n">Abstract</span><span class="p">(</span><span class="n">ID</span><span class="o">=</span><span class="mi">1572868</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Wikipedia: Tim Steward&#39;</span><span class="p">,</span> <span class="n">abstract</span><span class="o">=</span><span class="s1">&#39;|birth_place         = London, United Kingdom&#39;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://en.wikipedia.org/wiki/Tim_Steward&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"> <span class="n">Abstract</span><span class="p">(</span><span class="n">ID</span><span class="o">=</span><span class="mi">5111814</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Wikipedia: 1877 Birthday Honours&#39;</span><span class="p">,</span> <span class="n">abstract</span><span class="o">=</span><span class="s1">&#39;The 1877 Birthday Honours were appointments by Queen Victoria to various orders and honours to reward and highlight good works by citizens of the British Empire. The appointments were made to celebrate the official birthday of the Queen, and were published in The London Gazette on 30 May and 2 June 1877.&#39;</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://en.wikipedia.org/wiki/1877_Birthday_Honours&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;London Beer Flood&#39;</span><span class="p">,</span> <span class="n">search_type</span><span class="o">=</span><span class="s1">&#39;OR&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">search</span> <span class="n">took</span> <span class="mf">0.029065370559692383</span> <span class="n">seconds</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="mi">49627</span>
+</span></span></code></pre></div><h1 id="relevancy">Relevancy<a hidden class="anchor" aria-hidden="true" href="#relevancy">#</a></h1>
+<p>We have implemented a pretty quick search engine with just some basic Python, but there&rsquo;s one aspect that&rsquo;s obviously missing from our little engine, and that&rsquo;s the <a href="https://livebook.manning.com/book/relevant-search/chapter-1/13">idea of <strong>relevance</strong></a>. Right now we just return an unordered list of documents, and we leave it up to the user to figure out which of those (s)he is actually interested in. Especially for large result sets, that is painful or just impossible (in our <code>OR</code> example, there are almost 50,000 results).</p>
+<p>This is where the idea of relevancy comes in; what if we could assign each document a score that would indicate how well it matches the query, and just order by that score? A naive and simple way of assigning a score to a document for a given query is to just count how often that document mentions that particular word. After all, the more that document mentions that term, the more likely it is that it is about our query!</p>
+<h2 id="term-frequency">Term frequency<a hidden class="anchor" aria-hidden="true" href="#term-frequency">#</a></h2>
+<p>Let&rsquo;s expand our <code>Abstract</code> dataclass to compute and store it&rsquo;s term frequencies when we index it. That way, we&rsquo;ll have easy access to those numbers when we want to rank our unordered list of documents:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># in documents.py</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">.analysis</span> <span class="kn">import</span> <span class="n">analyze</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Abstract</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># snip</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Counter will create a dictionary counting the unique values in an array:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># {&#39;london&#39;: 12, &#39;beer&#39;: 3, ...}</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">term_frequencies</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">analyze</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fulltext</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">term_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">term</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">term_frequencies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></div><p>We need to make sure to generate these frequency counts when we index our data:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># in index.py we add `document.analyze()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">index_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">document</span><span class="o">.</span><span class="n">ID</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">documents</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">documents</span><span class="p">[</span><span class="n">document</span><span class="o">.</span><span class="n">ID</span><span class="p">]</span> <span class="o">=</span> <span class="n">document</span>
+</span></span><span class="line"><span class="cl">        <span class="n">document</span><span class="o">.</span><span class="n">analyze</span><span class="p">()</span>
+</span></span></code></pre></div><p>We&rsquo;ll modify our search function so we can apply a ranking to the documents in our result set. We&rsquo;ll fetch the documents using the same Boolean query from the index and document store, and then we&rsquo;ll for every document in that result set, we&rsquo;ll simply sum up how often each term occurs in that document</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">search_type</span><span class="o">=</span><span class="s1">&#39;AND&#39;</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># snip</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">rank</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">(</span><span class="n">analyzed_query</span><span class="p">,</span> <span class="n">documents</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">documents</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">rank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">analyzed_query</span><span class="p">,</span> <span class="n">documents</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">documents</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">results</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">score</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">document</span><span class="o">.</span><span class="n">term_frequency</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">analyzed_query</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">document</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">doc</span><span class="p">:</span> <span class="n">doc</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="inverse-document-frequency">Inverse Document Frequency<a hidden class="anchor" aria-hidden="true" href="#inverse-document-frequency">#</a></h2>
+<p>That&rsquo;s already a lot better, but there are some obvious short-comings. We&rsquo;re considering all query terms to be of equivalent value when assessing the relevancy for the query. However, it&rsquo;s likely that certain terms have very little to no discriminating power when determining relevancy; for example, a collection with lots of documents about beer would be expected to have the term &ldquo;beer&rdquo; appear often in almost every document (in fact, we&rsquo;re already trying to address that by dropping the 25 most common English words from the index). Searching for the word &ldquo;beer&rdquo; in such a case would essentially do another random sort.</p>
+<p>In order to address that, we&rsquo;ll add another component to our scoring algorithm that will reduce the contribution of terms that occur very often in the index to the final score. We could use the <em>collection frequency</em> of a term (i.e. how often does this term occur across <em>all</em> documents), but <a href="https://nlp.stanford.edu/IR-book/html/htmledition/inverse-document-frequency-1.html">in practice</a> the <em>document frequency</em> is used instead (i.e. how many <em>documents</em> in the index contain this term). We&rsquo;re trying to rank documents after all, so it makes sense to have a document level statistic.</p>
+<p>We&rsquo;ll compute the <em>inverse document frequency</em> for a term by dividing the number of documents (<em>N</em>) in the index by the amount of documents that contain the term, and take a logarithm of that.</p>
+<figure>
+    <img loading="lazy" src="/img/2021-03-24-building-a-full-text-search-engine-150-lines-of-code/idf.jpg"/> <figcaption>
+            IDF; taken from https://moz.com/blog/inverse-document-frequency-and-the-importance-of-uniqueness
+        </figcaption>
+</figure>
+
+<p>We&rsquo;ll then simply multiple the term frequency with the inverse document frequency during our ranking, so matches on terms that are rare in the corpus will contribute more to the relevancy score<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>. We can easily compute the inverse document frequency from the data available in our index:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># index.py</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">math</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">document_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="nb">set</span><span class="p">()))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">inverse_document_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Manning, Hinrich and Schütze use log10, so we do too, even though it</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># doesn&#39;t really matter which log we use anyway</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># https://nlp.stanford.edu/IR-book/html/htmledition/inverse-document-frequency-1.html</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">documents</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">document_frequency</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">rank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">analyzed_query</span><span class="p">,</span> <span class="n">documents</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">documents</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">results</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">score</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">analyzed_query</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tf</span> <span class="o">=</span> <span class="n">document</span><span class="o">.</span><span class="n">term_frequency</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">idf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse_document_frequency</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">score</span> <span class="o">+=</span> <span class="n">tf</span> <span class="o">*</span> <span class="n">idf</span>
+</span></span><span class="line"><span class="cl">        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">document</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">doc</span><span class="p">:</span> <span class="n">doc</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span></code></pre></div><h1 id="future-work">Future Work™<a hidden class="anchor" aria-hidden="true" href="#future-work">#</a></h1>
+<p>And that&rsquo;s a basic search engine in just a few lines of Python code! You can find all the code on <a href="https://github.com/bartdegoede/python-searchengine">Github</a>, and I&rsquo;ve provided a utility function that will download the Wikipedia abstracts and build an index. Install the requirements, run it in your Python console of choice and have fun messing with the data structures and searching.</p>
+<p>Now, obviously this is a project to illustrate the concepts of search and how it can be so fast (even with ranking, I can search and rank 6.27m documents on my laptop with a &ldquo;slow&rdquo; language like Python) and not production grade software. It runs entirely in memory on my laptop, whereas libraries like Lucene utilize hyper-efficient data structures and even optimize disk seeks, and software like Elasticsearch and Solr scale Lucene to hundreds if not thousands of machines.</p>
+<p>That doesn&rsquo;t mean that we can&rsquo;t think about fun expansions on this basic functionality though; for example, we assume that every field in the document has the same contribution to relevancy, whereas a query term match in the title should probably be weighted more strongly than a match in the description. Another fun project could be to expand the query parsing; there&rsquo;s no reason why either all or just one term need to match. Why not exclude certain terms, or do <code>AND</code> and <code>OR</code> between individual terms? Can we persist the index to disk and make it scale beyond the confines of my laptop RAM?</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>An abstract is generally the first paragraph or the first couple of sentences of a Wikipedia article. The <a href="https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-abstract.xml.gz">entire dataset</a> is currently about ±796mb of gzipped XML. There&rsquo;s smaller dumps with a subset of articles available if you want to experiment and mess with the code yourself; parsing XML and indexing will take a while, and require a substantial amount of memory.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>We&rsquo;re going to have the entire dataset and index in memory as well, so we may as well skip keeping the raw data in memory.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>Whether or not stemming is a good idea is subject of debate. It will decrease the total size of your index (ie fewer unique words), but stemming is based on heuristics; we&rsquo;re throwing away information that could very well be valuable. For example, think about the words <code>university</code>, <code>universal</code>, <code>universities</code>, and <code>universe</code> that are stemmed to <code>univers</code>. We are losing the ability to distinguish between the meaning of these words, which would negatively impact relevance. For a more detailed article about stemming (and lemmatization), read <a href="https://towardsdatascience.com/stemming-lemmatization-what-ba782b7c0bd8#6f14">this excellent article</a>.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>We obviously just use our laptop&rsquo;s RAM for this, but it&rsquo;s a pretty common practice to not store your actual data in the index. Elasticsearch stores it&rsquo;s data as plain old JSON on disk, and only stores indexed data in Lucene (the underlying search and indexing library) itself, and many other search engines will simply return an ordered list of document IDs which are then used to retrieve the data to display to users from a database or other service. This is especially relevant for large corpora, where doing a full reindex of all your data is expensive, and you generally only want to store data relevant to relevancy in your search engine (and not attributes that are only relevant for presentation purposes).&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>For a more in-depth post about the algorithm, I recommend reading <a href="https://monkeylearn.com/blog/what-is-tf-idf/">https://monkeylearn.com/blog/what-is-tf-idf/</a> and <a href="https://nlp.stanford.edu/IR-book/html/htmledition/term-frequency-and-weighting-1.html">https://nlp.stanford.edu/IR-book/html/htmledition/term-frequency-and-weighting-1.html</a>&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Building a full-text search engine in 150 lines of Python code on x"
+            href="https://x.com/intent/tweet/?text=Building%20a%20full-text%20search%20engine%20in%20150%20lines%20of%20Python%20code&amp;url=https%3a%2f%2fbart.degoe.de%2fbuilding-a-full-text-search-engine-150-lines-of-code%2f&amp;hashtags=">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Building a full-text search engine in 150 lines of Python code on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fbart.degoe.de%2fbuilding-a-full-text-search-engine-150-lines-of-code%2f&amp;title=Building%20a%20full-text%20search%20engine%20in%20150%20lines%20of%20Python%20code&amp;summary=Building%20a%20full-text%20search%20engine%20in%20150%20lines%20of%20Python%20code&amp;source=https%3a%2f%2fbart.degoe.de%2fbuilding-a-full-text-search-engine-150-lines-of-code%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Building a full-text search engine in 150 lines of Python code on reddit"
+            href="https://reddit.com/submit?url=https%3a%2f%2fbart.degoe.de%2fbuilding-a-full-text-search-engine-150-lines-of-code%2f&title=Building%20a%20full-text%20search%20engine%20in%20150%20lines%20of%20Python%20code">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Building a full-text search engine in 150 lines of Python code on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fbart.degoe.de%2fbuilding-a-full-text-search-engine-150-lines-of-code%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Building a full-text search engine in 150 lines of Python code on whatsapp"
+            href="https://api.whatsapp.com/send?text=Building%20a%20full-text%20search%20engine%20in%20150%20lines%20of%20Python%20code%20-%20https%3a%2f%2fbart.degoe.de%2fbuilding-a-full-text-search-engine-150-lines-of-code%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Building a full-text search engine in 150 lines of Python code on telegram"
+            href="https://telegram.me/share/url?text=Building%20a%20full-text%20search%20engine%20in%20150%20lines%20of%20Python%20code&amp;url=https%3a%2f%2fbart.degoe.de%2fbuilding-a-full-text-search-engine-150-lines-of-code%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Building a full-text search engine in 150 lines of Python code on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=Building%20a%20full-text%20search%20engine%20in%20150%20lines%20of%20Python%20code&u=https%3a%2f%2fbart.degoe.de%2fbuilding-a-full-text-search-engine-150-lines-of-code%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2025 <a href="https://bart.degoe.de/">Bart de Goede</a></span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

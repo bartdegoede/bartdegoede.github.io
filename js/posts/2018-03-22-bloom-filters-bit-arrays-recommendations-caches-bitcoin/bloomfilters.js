@@ -1,72 +1,107 @@
-var vectorLength = 15,
-    elements = [];
+const vectorLength = 15;
+const elements = [];
 
 function addToBloomFilter(element) {
-    if (elements.indexOf(element) == -1) {
+    if (!elements.includes(element)) {
         elements.push(element);
     }
-    $('#elements').html(elements.join(', '));
-    $('#bloom_input').val('');
-    var a = murmurHash3.x86.hash32(element, 0) % vectorLength;
-    var b = murmurHash3.x86.hash32(element, 1) % vectorLength;
-    var c = murmurHash3.x86.hash32(element, 2) % vectorLength;
-    $('#hash0').html(a);
-    $('#hash1').html(b);
-    $('#hash2').html(c);
 
-    $('#bits #' + a).css({ 'background-color': '#ac4142' }).addClass('set');
-    $('#bits #' + b).css({ 'background-color': '#ac4142' }).addClass('set');
-    $('#bits #' + c).css({ 'background-color': '#ac4142' }).addClass('set');
-    var probability = (Math.pow($('#bits .set').length / vectorLength, 2) * 100).toFixed(2);
-    $('#false_positive_probability').html(probability + '%');
+    document.getElementById('elements').textContent = elements.join(', ');
+    document.getElementById('bloom_input').value = '';
+
+    const a = murmurHash3.x86.hash32(element, 0) % vectorLength;
+    const b = murmurHash3.x86.hash32(element, 1) % vectorLength;
+    const c = murmurHash3.x86.hash32(element, 2) % vectorLength;
+
+    document.getElementById('hash0').textContent = a;
+    document.getElementById('hash1').textContent = b;
+    document.getElementById('hash2').textContent = c;
+
+    // Mark the bits as set
+    setBit(a);
+    setBit(b);
+    setBit(c);
+
+    // Calculate and display probability of false positives
+    const setBits = document.querySelectorAll('#bits .set').length;
+    const probability = (Math.pow(setBits / vectorLength, 3) * 100).toFixed(2);
+    document.getElementById('false_positive_probability').textContent = probability + '%';
+}
+
+function setBit(index) {
+    const cell = document.querySelector(`#bits td[data-index="${index}"]`);
+    if (cell) {
+        cell.classList.add('set');
+    }
 }
 
 function inBloomFilter(element) {
-    var a = murmurHash3.x86.hash32(element, 0) % vectorLength;
-    var b = murmurHash3.x86.hash32(element, 1) % vectorLength;
-    var c = murmurHash3.x86.hash32(element, 2) % vectorLength;
-    $('#hash0').html(a);
-    $('#hash1').html(b);
-    $('#hash2').html(c);
+    const a = murmurHash3.x86.hash32(element, 0) % vectorLength;
+    const b = murmurHash3.x86.hash32(element, 1) % vectorLength;
+    const c = murmurHash3.x86.hash32(element, 2) % vectorLength;
 
-    if ($('#bits #' + a).hasClass('set') && $('#bits #' + b).hasClass('set') && $('#bits #' + c).hasClass('set')) {
-        $('#in_bloom_filter span').html('Maybe');
+    document.getElementById('hash0').textContent = a;
+    document.getElementById('hash1').textContent = b;
+    document.getElementById('hash2').textContent = c;
+
+    const bitA = document.querySelector(`#bits td[data-index="${a}"]`);
+    const bitB = document.querySelector(`#bits td[data-index="${b}"]`);
+    const bitC = document.querySelector(`#bits td[data-index="${c}"]`);
+
+    const resultSpan = document.querySelector('#in_bloom_filter span');
+    if (bitA.classList.contains('set') &&
+        bitB.classList.contains('set') &&
+        bitC.classList.contains('set')) {
+        resultSpan.textContent = 'Maybe';
     } else {
-        $('#in_bloom_filter span').html('No');
+        resultSpan.textContent = 'No';
     }
 }
 
-$(function() {
-    $bits = $('#bits');
-    $labels = $('#labels');
-    for (var i = 0; i < vectorLength; i++) {
-        $bits.append($('<td>', { 'id': i }).css({ 'background-color': '#fff' }).html('&nbsp;'));
-        $labels.append($('<td>', { 'id': i }).css({ 'text-align': 'center'}).html(i));
+// Initialize the bloom filter visualization when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    const bitsRow = document.getElementById('bits');
+    const labelsRow = document.getElementById('labels');
+
+    // Create the bit array visualization
+    for (let i = 0; i < vectorLength; i++) {
+        const bitCell = document.createElement('td');
+        bitCell.setAttribute('data-index', i);
+        bitCell.innerHTML = '&nbsp;';
+        bitsRow.appendChild(bitCell);
+
+        const labelCell = document.createElement('td');
+        labelCell.textContent = i;
+        labelsRow.appendChild(labelCell);
     }
 
-    $('#add_value_to_bloom_filter').click(function() {
-        var element = $('#bloom_input').val();
+    // Add button click handler
+    document.getElementById('add_value_to_bloom_filter').addEventListener('click', () => {
+        const element = document.getElementById('bloom_input').value;
         if (element === '') return;
         addToBloomFilter(element);
     });
 
-    $('#bloom_input').keydown(function(e) {
-        if (e.keyCode == '13') {
+    // Add button on Enter key in input
+    document.getElementById('bloom_input').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
             e.preventDefault();
-            $('#add_value_to_bloom_filter').click();
+            document.getElementById('add_value_to_bloom_filter').click();
         }
     });
 
-    $('#test_value_in_bloom_filter').click(function() {
-        var element = $('#bloom_input_test').val();
+    // Test button click handler
+    document.getElementById('test_value_in_bloom_filter').addEventListener('click', () => {
+        const element = document.getElementById('bloom_input_test').value;
         if (element === '') return;
         inBloomFilter(element);
     });
 
-    $('#bloom_input_test').keydown(function(e) {
-        if (e.keyCode == '13') {
+    // Test button on Enter key in input
+    document.getElementById('bloom_input_test').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
             e.preventDefault();
-            $('#test_value_in_bloom_filter').click();
+            document.getElementById('test_value_in_bloom_filter').click();
         }
     });
 });

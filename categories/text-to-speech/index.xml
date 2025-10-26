@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Text-to-Speech on Bart de Goede</title>
+    <link>https://bart.degoe.de/categories/text-to-speech/</link>
+    <description>Recent content in Text-to-Speech on Bart de Goede</description>
+    <image>
+      <title>Bart de Goede</title>
+      <url>https://www.gravatar.com/avatar/af61db828941976309aaa8d7d76554fb</url>
+      <link>https://www.gravatar.com/avatar/af61db828941976309aaa8d7d76554fb</link>
+    </image>
+    <generator>Hugo -- 0.147.8</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 29 Oct 2019 08:00:00 -0700</lastBuildDate>
+    <atom:link href="https://bart.degoe.de/categories/text-to-speech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Use Google Cloud Text-to-Speech to create an audio version of your blog posts</title>
+      <link>https://bart.degoe.de/use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/</link>
+      <pubDate>Tue, 29 Oct 2019 08:00:00 -0700</pubDate>
+      <guid>https://bart.degoe.de/use-google-cloud-text-to-speech-to-create-an-audio-version-of-your-blog-posts/</guid>
+      <description>Audio is big. Like really big, and growing fast, to the tune of &amp;#34;two-thirds of the population listens to online audio&amp;#34; and &amp;#34;weekly online listeners reporting an average nearly 17 hours of listening in the last week&amp;#34;. These numbers include all kinds of audio, from online radio stations, audiobooks, streaming services and podcasts (hi Spotify!). It makes sense too. Consuming audio content is easier to consume and more engaging than written content while you&amp;#39;re on the go, exercising, commuting or doing household chores. But what do you do if you&amp;#39;re like me and don&amp;#39;t have the time or recording equipment to ride this podcasting wave, and just write the occasional blog post?</description>
+    </item>
+  </channel>
+</rss>
