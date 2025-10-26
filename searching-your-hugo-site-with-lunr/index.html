@@ -1,246 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" dir="auto">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Searching your Hugo site with Lunr | Bart de Goede</title>
-<meta name="keywords" content="hugo, search, lunr, javascript">
-<meta name="description" content="Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &ldquo;How To Do Things™&rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.">
-<meta name="author" content="Bart de Goede">
-<link rel="canonical" href="https://bart.degoe.de/searching-your-hugo-site-with-lunr/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.aa7fa40e4383c927e89501a480a6bdc90ae0256399320eff08bd92f128233bc6.css" integrity="sha256-qn&#43;kDkODySfolQGkgKa9yQrgJWOZMg7/CL2S8SgjO8Y=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://bart.degoe.de/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://bart.degoe.de/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://bart.degoe.de/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://bart.degoe.de/apple-touch-icon.png">
-<link rel="mask-icon" href="https://bart.degoe.de/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://bart.degoe.de/searching-your-hugo-site-with-lunr/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript><link rel="search" href="/opensearch.xml" type="application/opensearchdescription+xml" title="Search bart.degoe.de">
-
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-6JBRP5YVDB"></script>
-      <script>
-        var doNotTrack = false;
-        if ( false ) {
-          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
-          var doNotTrack = (dnt == "1" || dnt == "yes");
-        }
-        if (!doNotTrack) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-6JBRP5YVDB');
-        }
-      </script><meta property="og:url" content="https://bart.degoe.de/searching-your-hugo-site-with-lunr/">
-  <meta property="og:site_name" content="Bart de Goede">
-  <meta property="og:title" content="Searching your Hugo site with Lunr">
-  <meta property="og:description" content="Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on “How To Do Things™”, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.">
-  <meta property="og:locale" content="en-us">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2018-03-04T23:38:44+01:00">
-    <meta property="article:modified_time" content="2018-03-04T23:38:44+01:00">
-      <meta property="og:image" content="https://www.gravatar.com/avatar/af61db828941976309aaa8d7d76554fb">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.gravatar.com/avatar/af61db828941976309aaa8d7d76554fb">
-<meta name="twitter:title" content="Searching your Hugo site with Lunr">
-<meta name="twitter:description" content="Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &ldquo;How To Do Things™&rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://bart.degoe.de/post/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Searching your Hugo site with Lunr",
-      "item": "https://bart.degoe.de/searching-your-hugo-site-with-lunr/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Searching your Hugo site with Lunr",
-  "name": "Searching your Hugo site with Lunr",
-  "description": "Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on \u0026ldquo;How To Do Things™\u0026rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.\n",
-  "keywords": [
-    "hugo", "search", "lunr", "javascript"
-  ],
-  "articleBody": "Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on “How To Do Things™”, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.\nListen to this article instead Your browser does not support the audio element Because I’m trying to get more familiar with Go, I opted to use the awesome Hugo1 framework to build myself a static site hosted on Github Pages.\nIn my day job I work on our search engine, so the first thing that I wanted to have was some basic search functionality for all the blog posts I haven’t written yet, preferably something that I can mess with is extensible and configurable.\nThere are three options if you want to add search functionality to a static website, each with their pros and cons:\nThird-party service (i.e. Google CSE): There are a bunch of services that provide basic search widgets for your site, such as Google Custom Search Engine (CSE). Those are difficult to customise, break your UI with their Google-styled widgets, and (in some cases) will display ads on your website2. Run a server-side search engine: You can set up a backend that indexes your data and can process the queries your users submit in the search box on your website. The obvious downside is that you throw away all the benefits of having a static site (free hosting, complex infrastructure). Search client-side: Having a static site, it makes sense to move all the user interaction to the client. We depend on the users’ browser to run Javascript3 and download the searchable data in order to run queries against it, but the upside is that you can control how data is processed and how that data is queried. Fortunately for us, Atwood’s Law holds true; there’s a full-text search library inspired by Lucene/Solr written in Javascript we can use to implement our search engine: Lunr.js. Relevance When thinking about search, the most important question is what users want to find. This sounds very much like an open door, but you’d be surprised how often this gets overlooked; what are we looking for (tweets, products, (the fastest route to) a destination?), who is doing the search (lawyers, software engineers, my mom?), what do we hope to get out of it (money, page views?).\nIn our case, we’re searching blog posts that have titles, tags and content (in decreasing order of value to relevance); queries matching titles should be more important than matches in post content4.\nIndexing The project folder for my blog5 looks roughly like this:\nblog/ \u003c= Hugo project root folder |- content/ \u003c- this is where the pages I want to be searchable live |- about.md |- post/ |- 2018-01-01-first-post.md |- 2018-01-15-second-post.md |- ... |- layout/ |- partials/ \u003c- these contain the templates we need for search |- search.html |- search_scripts.html |- static/ |- js/ |- search/ \u003c- Where we generate the index file |- vendor/ |- lunrjs.min.js \u003c- lunrjs library; https://cdnjs.com/libraries/lunr.js/ |- ... |- config.toml |- ... |- Gruntfile.js \u003c- This will build our index |- ... The idea is that we build an index on site generation time, and fetch that file when a user loads the page.\nI use Gruntjs6 to build the index file, and some dependencies that make life a little easier. Install them with npm:\n$ npm install --save-dev grunt string gray-matter This is my Gruntfile.js that lives in the root of my project. It will walk through the content/ directory and parse all the markdown files it finds. It will parse out title, categories and href (this will be the reference to the post; i.e. the URL of the page we want to point to) from the front matter, and the content from the rest of the post. It also skips posts that are labeled draft, because I don’t want the posts I’m still working on to already show up in the search results.\nvar matter = require('gray-matter'); var S = require('string'); var CONTENT_PATH_PREFIX = 'content'; module.exports = function(grunt) { grunt.registerTask('search-index', function() { grunt.log.writeln('Build pages index'); var indexPages = function() { var pagesIndex = []; grunt.file.recurse(CONTENT_PATH_PREFIX, function(abspath, rootdir, subdir, filename) { grunt.verbose.writeln('Parse file:', abspath); d = processMDFile(abspath, filename); if (d !== undefined) { pagesIndex.push(d); } }); return pagesIndex; }; var processMDFile = function(abspath, filename) { var content = matter(grunt.file.read(abspath, filename)); if (content.data.draft) { // don't index draft posts return; } var pageIndex; return { title: content.data.title, categories: content.data.categories, href: content.data.slug, content: S(content.content).trim().stripTags().stripPunctuation().s }; }; grunt.file.write('static/js/search/index.json', JSON.stringify(indexPages())); grunt.log.ok('Index built'); }); }; To run this task, simply run grunt search-index in the directory where Gruntfile.js is located7. This will generate a JSON index file looking like this:\n[ { \"content\": \"Hi My name is Bart de Goede and ...\", \"href\": \"about\", \"title\": \"About\" }, { \"content\": \"Like many software engineers, I figured I needed a blog of sorts...\", \"href\": \"Searching-your-hugo-site-with-lunr\", \"title\": \"Searching your Hugo site with Lunr\", \"categories\": [ \"hugo\", \"search\", \"lunr\", \"javascript\" ] }, ... ] Querying Now we’ve built the index, we need a way of obtaining it client-side, and then query it. To do that, I have two partials that include the markup for the search input box and the links to the relevant Javascript:\n... For my blog, I have one search.js file that will download the index file, initialise the UI, and run the searches. For the sake of readability, I’ve split up the relevant functions below and added some comments to the code.\nThis function fetches the index file we’ve generated with the Grunt task, initialises the relevant fields, and then adds the each of the documents to the index. The pagesIndex variable will store the documents as we indexed them, and the searchIndex variable will store the statistics and data structures we need to rank our documents for a query efficiently.\nfunction initSearchIndex() { // this file is built by the Grunt task, and $.getJSON('js/search/index.json') .done(function(documents) { pagesIndex = documents; searchIndex = lunr(function() { this.field('title'); this.field('categories'); this.field('content'); this.ref('href'); // This will add all the documents to the index. This is // different compared to older versions of Lunr, where // documents could be added after index initialisation for (var i = 0; i \u003c documents.length; ++i) { this.add(documents[i]) } }); }) .fail(function(jqxhr, textStatus, error) { var err = textStatus + ', ' + error; console.error('Error getting index file:', err); } ); } initSearchIndex(); Then, we need to sprinkle some jQuery magic on the input box. In my case, I want to start searching once a user has typed at least two characters, and support a typeahead style of searching, so everytime a character is entered, I want to empty the current search results (if any), run the searchSite function with whatever is in the input box, and render the results.\nfunction initUI() { $results = $('.posts'); // or whatever element is supposed to hold your results $('#search').keyup(function() { $results.empty(); // only search when query has 2 characters or more var query = $(this).val(); if (query.length \u003c 2) { return; } var results = searchSite(query); renderResults(results); }); } $(document).ready(function() { initUI(); }); The searchSite function will take the query_string the user typed in and build a lunr.Query object and run it against the index (stored in the searchIndex variable). The lunr index will return a ranked list of refs (these are the identifiers we assigned to the documents in the Gruntfile). The second part of this method maps these identifiers to the original documents we stored in the pagesIndex variable.\n// this function will parse the query_string, which will you // to run queries like \"title:lunr\" (search the title field), // \"lunr^10\" (boost hits with this term by a factor 10) or // \"lunr~2\" (will match anything within an edit distance of 2, // i.e. \"losr\" will also match) function simpleSearchSite(query_string) { return searchIndex.search(query_string).map(function(result) { return pagesIndex.filter(function(page) { return page.href === result.ref; })[0]; }); } // I want a typeahead search, so if a user types a query like // \"pyth\", it should show results that contain the word \"Python\", // rather than just the entire word. function searchSite(query_string) { return searchIndex.query(function(q) { // look for an exact match and give that a massive positive boost q.term(query_string, { usePipeline: true, boost: 100 }); // prefix matches should not use stemming, and lower positive boost q.term(query_string, { usePipeline: false, boost: 10, wildcard: lunr.Query.wildcard.TRAILING }); }).map(function(result) { return pagesIndex.filter(function(page) { return page.href === result.ref; })[0]; }); } The snippet above lists two methods. The first shows an example of a search using the default lunr.Index#search method, which uses the lunr query syntax.\nIn my case, I want to support a typeahead search, where we show the user results for partial queries too; if the user types \"pyth\", we should display results that have the word \"python\" in the post. To do that, we tell Lunr to combine two queries: the first q.term provides exact matches with a high boost to relevance (because we it’s likely that these matches are relevant to the user), the second appends a trailing wildcard to the query8, providing prefix matches with a (lower) boost.\nFinally, given the ranked list of results (containing all pages in the content/ directory), we want to render those somewhere on the page. The renderResults method slices the result list to the first ten results, creates a link to the appropriate post based on the href, and creates a (crude) snippet based on the 100 first characters of the content.\nfunction renderResults(results) { if (!results.length) { return; } results.slice(0, 10).forEach(function(hit) { var $result = $(''); $result.append($('', { href: hit.href, text: '» ' + hit.title })); $result.append($('', { text: hit.content.slice(0, 100) + '...' })); $results.append($result); }); } This is a pretty naive approach to introducing full-text search to a static site (I use Hugo, but this will work with static site generators like Jekyll or Hyde too); it completely ignores other languages than English (there’s support for other languages too), let alone non whitespace languages like Chinese, and it requires users to download the full index that contains all your searchable pages, so it won’t scale as nicely if you have thousands of pages. For my personal blog though, it’s good enough 😇.\nIt’s fast, it’s written in Golang, it supports fancy themes, and it’s open source! ↩︎\nYou can make money off theses ads, but the question is whether you want to show ads on your personal blog or not. ↩︎\nI’m assuming that the audience that’ll land on these pages will have Javascript enabled in their browser 😄 ↩︎\nIn this case, I’m totally assuming that if words from the query occur in the title or the manually assigned tags of a post are way more relevant than matches in the content of a post, if only because there’s a lot more words in post content, so there’s a higher probability of matching any word in the query. ↩︎\nIt’s also on GitHub. ↩︎\nA port of this script to Golang is in the works. ↩︎\nThe idea is to run the task before you deploy the latest version of your site. In my case, I have a deploy.sh script that runs Hugo to build my static pages, runs grunt search-index and pushes the result to GitHub. ↩︎\nLunr uses tries to represent terms internally, giving us an efficient way of doing fast prefix lookups. ↩︎\n",
-  "wordCount" : "1927",
-  "inLanguage": "en",
-  "image": "https://www.gravatar.com/avatar/af61db828941976309aaa8d7d76554fb","datePublished": "2018-03-04T23:38:44+01:00",
-  "dateModified": "2018-03-04T23:38:44+01:00",
-  "author":{
-    "@type": "Person",
-    "name": "Bart de Goede"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://bart.degoe.de/searching-your-hugo-site-with-lunr/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Bart de Goede",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://bart.degoe.de/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-
-<body class="" id="top">
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
-
-</script>
-
-<header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="https://bart.degoe.de/" accesskey="h" title="Bart de Goede (Alt + H)">Bart de Goede</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="https://bart.degoe.de/about/" title="About">
-                    <span>About</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <div class="breadcrumbs"><a href="https://bart.degoe.de/">Home</a>&nbsp;»&nbsp;<a href="https://bart.degoe.de/post/">Posts</a></div>
-    <h1 class="post-title entry-hint-parent">
-      Searching your Hugo site with Lunr
-    </h1>
-    <div class="post-meta"><span title='2018-03-04 23:38:44 +0100 +0100'>March 4, 2018</span>&nbsp;·&nbsp;<span>10 min</span>&nbsp;·&nbsp;<span>Bart de Goede</span>
-
-</div>
-  </header> 
-  <div class="post-content"><p>Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &ldquo;How To Do Things™&rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.</p>
-<div id="player">
-    <div class="listen">Listen to this article instead</div>
-    <div id="waveform">
-        
-        <img src="https://bart.degoe.de/img/waveform.min.svg" alt="waveform">
-    </div>
-    <audio controls
-        class="audio_controls "
-        
-        preload="metadata"
-
-        style=""
-        
-    >
-        
-        <source src="/audio/2018-03-02-searching-your-hugo-site-with-lunr.mp3"
-            type="audio/mp3">
-        
-        Your browser does not support the audio element
-    </audio>
-</div>
-
-<p>Because I&rsquo;m trying to get more familiar with <a href="https://golang.org/">Go</a>, I opted to use the awesome <a href="https://gohugo.io/">Hugo</a><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> framework to build myself a static site hosted on <a href="https://pages.github.com/">Github Pages</a>.</p>
-<p>In my day job I work on our search engine, so the first thing that I wanted to have was some basic search functionality for all the blog posts I haven&rsquo;t written yet, preferably something that <del>I can mess with</del> is extensible and configurable.</p>
-<p>There are three options if you want to add search functionality to a static website, each with their pros and cons:</p>
-<ol>
-<li><strong>Third-party service (i.e. Google CSE):</strong>
-<br>There are a bunch of services that provide basic search widgets for your site, such as <a href="https://cse.google.com/cse/">Google Custom Search Engine (CSE)</a>. Those are difficult to customise, break your UI with their Google-styled widgets, and (in some cases) will display ads on your website<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</li>
-<li><strong>Run a server-side search engine:</strong>
-<br>You can set up a backend that indexes your data and can process the queries your users submit in the search box on your website. The obvious downside is that you throw away all the benefits of having a static site (free hosting, complex infrastructure).</li>
-<li><strong>Search client-side</strong>:
-<br>Having a static site, it makes sense to move all the user interaction to the client. We depend on the users&rsquo; browser to run Javascript<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> and download the searchable data in order to run queries against it, but the upside is that you can control how data is processed and how that data is queried. Fortunately for us, <a href="https://blog.codinghorror.com/the-principle-of-least-power/">Atwood&rsquo;s Law</a> holds true; there&rsquo;s a full-text search library inspired by Lucene/Solr written in Javascript we can use to implement our search engine: <a href="https://lunrjs.com/">Lunr.js</a>.</li>
-</ol>
-<h1 id="relevance">Relevance<a hidden class="anchor" aria-hidden="true" href="#relevance">#</a></h1>
-<p>When thinking about search, the most important question is what users want to find. This sounds very much like an open door, but you&rsquo;d be surprised how often this gets overlooked; what are we looking for (tweets, products, (the fastest route to) a destination?), who is doing the search (lawyers, software engineers, my mom?), what do we hope to get out of it (money, page views?).</p>
-<p>In our case, we&rsquo;re searching blog posts that have titles, tags and content (in decreasing order of value to relevance); queries matching titles should be more important than matches in post content<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>.</p>
-<h1 id="indexing">Indexing<a hidden class="anchor" aria-hidden="true" href="#indexing">#</a></h1>
-<p>The project folder for my blog<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> looks roughly like this:</p>
-<pre tabindex="0"><code>blog/ &lt;= Hugo project root folder
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Searching your Hugo site with Lunr | Bart de Goede</title><meta name=keywords content="hugo,search,lunr,javascript"><meta name=description content="Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &ldquo;How To Do Things™&rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them."><meta name=author content="Bart de Goede"><link rel=canonical href=https://bart.degoe.de/searching-your-hugo-site-with-lunr/><link crossorigin=anonymous href=/assets/css/stylesheet.aa7fa40e4383c927e89501a480a6bdc90ae0256399320eff08bd92f128233bc6.css integrity="sha256-qn+kDkODySfolQGkgKa9yQrgJWOZMg7/CL2S8SgjO8Y=" rel="preload stylesheet" as=style><link rel=icon href=https://bart.degoe.de/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://bart.degoe.de/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://bart.degoe.de/favicon-32x32.png><link rel=apple-touch-icon href=https://bart.degoe.de/apple-touch-icon.png><link rel=mask-icon href=https://bart.degoe.de/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://bart.degoe.de/searching-your-hugo-site-with-lunr/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><link rel=search href=/opensearch.xml type=application/opensearchdescription+xml title="Search bart.degoe.de"><script async src="https://www.googletagmanager.com/gtag/js?id=G-6JBRP5YVDB"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-6JBRP5YVDB")}</script><meta property="og:url" content="https://bart.degoe.de/searching-your-hugo-site-with-lunr/"><meta property="og:site_name" content="Bart de Goede"><meta property="og:title" content="Searching your Hugo site with Lunr"><meta property="og:description" content="Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on “How To Do Things™”, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them."><meta property="og:locale" content="en-us"><meta property="og:type" content="article"><meta property="article:section" content="post"><meta property="article:published_time" content="2018-03-04T23:38:44+01:00"><meta property="article:modified_time" content="2018-03-04T23:38:44+01:00"><meta property="og:image" content="https://www.gravatar.com/avatar/af61db828941976309aaa8d7d76554fb"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://www.gravatar.com/avatar/af61db828941976309aaa8d7d76554fb"><meta name=twitter:title content="Searching your Hugo site with Lunr"><meta name=twitter:description content="Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &ldquo;How To Do Things™&rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://bart.degoe.de/post/"},{"@type":"ListItem","position":2,"name":"Searching your Hugo site with Lunr","item":"https://bart.degoe.de/searching-your-hugo-site-with-lunr/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Searching your Hugo site with Lunr","name":"Searching your Hugo site with Lunr","description":"Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on \u0026ldquo;How To Do Things™\u0026rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.\n","keywords":["hugo","search","lunr","javascript"],"articleBody":"Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on “How To Do Things™”, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.\nListen to this article instead Your browser does not support the audio element Because I’m trying to get more familiar with Go, I opted to use the awesome Hugo1 framework to build myself a static site hosted on Github Pages.\nIn my day job I work on our search engine, so the first thing that I wanted to have was some basic search functionality for all the blog posts I haven’t written yet, preferably something that I can mess with is extensible and configurable.\nThere are three options if you want to add search functionality to a static website, each with their pros and cons:\nThird-party service (i.e. Google CSE): There are a bunch of services that provide basic search widgets for your site, such as Google Custom Search Engine (CSE). Those are difficult to customise, break your UI with their Google-styled widgets, and (in some cases) will display ads on your website2. Run a server-side search engine: You can set up a backend that indexes your data and can process the queries your users submit in the search box on your website. The obvious downside is that you throw away all the benefits of having a static site (free hosting, complex infrastructure). Search client-side: Having a static site, it makes sense to move all the user interaction to the client. We depend on the users’ browser to run Javascript3 and download the searchable data in order to run queries against it, but the upside is that you can control how data is processed and how that data is queried. Fortunately for us, Atwood’s Law holds true; there’s a full-text search library inspired by Lucene/Solr written in Javascript we can use to implement our search engine: Lunr.js. Relevance When thinking about search, the most important question is what users want to find. This sounds very much like an open door, but you’d be surprised how often this gets overlooked; what are we looking for (tweets, products, (the fastest route to) a destination?), who is doing the search (lawyers, software engineers, my mom?), what do we hope to get out of it (money, page views?).\nIn our case, we’re searching blog posts that have titles, tags and content (in decreasing order of value to relevance); queries matching titles should be more important than matches in post content4.\nIndexing The project folder for my blog5 looks roughly like this:\nblog/ \u003c= Hugo project root folder |- content/ \u003c- this is where the pages I want to be searchable live |- about.md |- post/ |- 2018-01-01-first-post.md |- 2018-01-15-second-post.md |- ... |- layout/ |- partials/ \u003c- these contain the templates we need for search |- search.html |- search_scripts.html |- static/ |- js/ |- search/ \u003c- Where we generate the index file |- vendor/ |- lunrjs.min.js \u003c- lunrjs library; https://cdnjs.com/libraries/lunr.js/ |- ... |- config.toml |- ... |- Gruntfile.js \u003c- This will build our index |- ... The idea is that we build an index on site generation time, and fetch that file when a user loads the page.\nI use Gruntjs6 to build the index file, and some dependencies that make life a little easier. Install them with npm:\n$ npm install --save-dev grunt string gray-matter This is my Gruntfile.js that lives in the root of my project. It will walk through the content/ directory and parse all the markdown files it finds. It will parse out title, categories and href (this will be the reference to the post; i.e. the URL of the page we want to point to) from the front matter, and the content from the rest of the post. It also skips posts that are labeled draft, because I don’t want the posts I’m still working on to already show up in the search results.\nvar matter = require('gray-matter'); var S = require('string'); var CONTENT_PATH_PREFIX = 'content'; module.exports = function(grunt) { grunt.registerTask('search-index', function() { grunt.log.writeln('Build pages index'); var indexPages = function() { var pagesIndex = []; grunt.file.recurse(CONTENT_PATH_PREFIX, function(abspath, rootdir, subdir, filename) { grunt.verbose.writeln('Parse file:', abspath); d = processMDFile(abspath, filename); if (d !== undefined) { pagesIndex.push(d); } }); return pagesIndex; }; var processMDFile = function(abspath, filename) { var content = matter(grunt.file.read(abspath, filename)); if (content.data.draft) { // don't index draft posts return; } var pageIndex; return { title: content.data.title, categories: content.data.categories, href: content.data.slug, content: S(content.content).trim().stripTags().stripPunctuation().s }; }; grunt.file.write('static/js/search/index.json', JSON.stringify(indexPages())); grunt.log.ok('Index built'); }); }; To run this task, simply run grunt search-index in the directory where Gruntfile.js is located7. This will generate a JSON index file looking like this:\n[ { \"content\": \"Hi My name is Bart de Goede and ...\", \"href\": \"about\", \"title\": \"About\" }, { \"content\": \"Like many software engineers, I figured I needed a blog of sorts...\", \"href\": \"Searching-your-hugo-site-with-lunr\", \"title\": \"Searching your Hugo site with Lunr\", \"categories\": [ \"hugo\", \"search\", \"lunr\", \"javascript\" ] }, ... ] Querying Now we’ve built the index, we need a way of obtaining it client-side, and then query it. To do that, I have two partials that include the markup for the search input box and the links to the relevant Javascript:\n... For my blog, I have one search.js file that will download the index file, initialise the UI, and run the searches. For the sake of readability, I’ve split up the relevant functions below and added some comments to the code.\nThis function fetches the index file we’ve generated with the Grunt task, initialises the relevant fields, and then adds the each of the documents to the index. The pagesIndex variable will store the documents as we indexed them, and the searchIndex variable will store the statistics and data structures we need to rank our documents for a query efficiently.\nfunction initSearchIndex() { // this file is built by the Grunt task, and $.getJSON('js/search/index.json') .done(function(documents) { pagesIndex = documents; searchIndex = lunr(function() { this.field('title'); this.field('categories'); this.field('content'); this.ref('href'); // This will add all the documents to the index. This is // different compared to older versions of Lunr, where // documents could be added after index initialisation for (var i = 0; i \u003c documents.length; ++i) { this.add(documents[i]) } }); }) .fail(function(jqxhr, textStatus, error) { var err = textStatus + ', ' + error; console.error('Error getting index file:', err); } ); } initSearchIndex(); Then, we need to sprinkle some jQuery magic on the input box. In my case, I want to start searching once a user has typed at least two characters, and support a typeahead style of searching, so everytime a character is entered, I want to empty the current search results (if any), run the searchSite function with whatever is in the input box, and render the results.\nfunction initUI() { $results = $('.posts'); // or whatever element is supposed to hold your results $('#search').keyup(function() { $results.empty(); // only search when query has 2 characters or more var query = $(this).val(); if (query.length \u003c 2) { return; } var results = searchSite(query); renderResults(results); }); } $(document).ready(function() { initUI(); }); The searchSite function will take the query_string the user typed in and build a lunr.Query object and run it against the index (stored in the searchIndex variable). The lunr index will return a ranked list of refs (these are the identifiers we assigned to the documents in the Gruntfile). The second part of this method maps these identifiers to the original documents we stored in the pagesIndex variable.\n// this function will parse the query_string, which will you // to run queries like \"title:lunr\" (search the title field), // \"lunr^10\" (boost hits with this term by a factor 10) or // \"lunr~2\" (will match anything within an edit distance of 2, // i.e. \"losr\" will also match) function simpleSearchSite(query_string) { return searchIndex.search(query_string).map(function(result) { return pagesIndex.filter(function(page) { return page.href === result.ref; })[0]; }); } // I want a typeahead search, so if a user types a query like // \"pyth\", it should show results that contain the word \"Python\", // rather than just the entire word. function searchSite(query_string) { return searchIndex.query(function(q) { // look for an exact match and give that a massive positive boost q.term(query_string, { usePipeline: true, boost: 100 }); // prefix matches should not use stemming, and lower positive boost q.term(query_string, { usePipeline: false, boost: 10, wildcard: lunr.Query.wildcard.TRAILING }); }).map(function(result) { return pagesIndex.filter(function(page) { return page.href === result.ref; })[0]; }); } The snippet above lists two methods. The first shows an example of a search using the default lunr.Index#search method, which uses the lunr query syntax.\nIn my case, I want to support a typeahead search, where we show the user results for partial queries too; if the user types \"pyth\", we should display results that have the word \"python\" in the post. To do that, we tell Lunr to combine two queries: the first q.term provides exact matches with a high boost to relevance (because we it’s likely that these matches are relevant to the user), the second appends a trailing wildcard to the query8, providing prefix matches with a (lower) boost.\nFinally, given the ranked list of results (containing all pages in the content/ directory), we want to render those somewhere on the page. The renderResults method slices the result list to the first ten results, creates a link to the appropriate post based on the href, and creates a (crude) snippet based on the 100 first characters of the content.\nfunction renderResults(results) { if (!results.length) { return; } results.slice(0, 10).forEach(function(hit) { var $result = $(''); $result.append($('', { href: hit.href, text: '» ' + hit.title })); $result.append($('', { text: hit.content.slice(0, 100) + '...' })); $results.append($result); }); } This is a pretty naive approach to introducing full-text search to a static site (I use Hugo, but this will work with static site generators like Jekyll or Hyde too); it completely ignores other languages than English (there’s support for other languages too), let alone non whitespace languages like Chinese, and it requires users to download the full index that contains all your searchable pages, so it won’t scale as nicely if you have thousands of pages. For my personal blog though, it’s good enough 😇.\nIt’s fast, it’s written in Golang, it supports fancy themes, and it’s open source! ↩︎\nYou can make money off theses ads, but the question is whether you want to show ads on your personal blog or not. ↩︎\nI’m assuming that the audience that’ll land on these pages will have Javascript enabled in their browser 😄 ↩︎\nIn this case, I’m totally assuming that if words from the query occur in the title or the manually assigned tags of a post are way more relevant than matches in the content of a post, if only because there’s a lot more words in post content, so there’s a higher probability of matching any word in the query. ↩︎\nIt’s also on GitHub. ↩︎\nA port of this script to Golang is in the works. ↩︎\nThe idea is to run the task before you deploy the latest version of your site. In my case, I have a deploy.sh script that runs Hugo to build my static pages, runs grunt search-index and pushes the result to GitHub. ↩︎\nLunr uses tries to represent terms internally, giving us an efficient way of doing fast prefix lookups. ↩︎\n","wordCount":"1927","inLanguage":"en","image":"https://www.gravatar.com/avatar/af61db828941976309aaa8d7d76554fb","datePublished":"2018-03-04T23:38:44+01:00","dateModified":"2018-03-04T23:38:44+01:00","author":{"@type":"Person","name":"Bart de Goede"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://bart.degoe.de/searching-your-hugo-site-with-lunr/"},"publisher":{"@type":"Organization","name":"Bart de Goede","logo":{"@type":"ImageObject","url":"https://bart.degoe.de/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://bart.degoe.de/ accesskey=h title="Bart de Goede (Alt + H)">Bart de Goede</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://bart.degoe.de/about/ title=About><span>About</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://bart.degoe.de/>Home</a>&nbsp;»&nbsp;<a href=https://bart.degoe.de/post/>Posts</a></div><h1 class="post-title entry-hint-parent">Searching your Hugo site with Lunr</h1><div class=post-meta><span title='2018-03-04 23:38:44 +0100 +0100'>March 4, 2018</span>&nbsp;·&nbsp;<span>10 min</span>&nbsp;·&nbsp;<span>Bart de Goede</span></div></header><div class=post-content><p>Like many software engineers, I figured I needed a blog of sorts, because it would give me a place for my own notes on &ldquo;How To Do Things™&rdquo;, let me have a URL to give people, and share my ramblings about Life, the Universe and Everything Else with whoever wants to read them.</p><div id=player><div class=listen>Listen to this article instead</div><div id=waveform><img src=https://bart.degoe.de/img/waveform.min.svg alt=waveform></div><audio controls class=audio_controls preload=metadata><source src=/audio/2018-03-02-searching-your-hugo-site-with-lunr.mp3 type=audio/mp3>Your browser does not support the audio element</audio></div><p>Because I&rsquo;m trying to get more familiar with <a href=https://golang.org/>Go</a>, I opted to use the awesome <a href=https://gohugo.io/>Hugo</a><sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> framework to build myself a static site hosted on <a href=https://pages.github.com/>Github Pages</a>.</p><p>In my day job I work on our search engine, so the first thing that I wanted to have was some basic search functionality for all the blog posts I haven&rsquo;t written yet, preferably something that <del>I can mess with</del> is extensible and configurable.</p><p>There are three options if you want to add search functionality to a static website, each with their pros and cons:</p><ol><li><strong>Third-party service (i.e. Google CSE):</strong><br>There are a bunch of services that provide basic search widgets for your site, such as <a href=https://cse.google.com/cse/>Google Custom Search Engine (CSE)</a>. Those are difficult to customise, break your UI with their Google-styled widgets, and (in some cases) will display ads on your website<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup>.</li><li><strong>Run a server-side search engine:</strong><br>You can set up a backend that indexes your data and can process the queries your users submit in the search box on your website. The obvious downside is that you throw away all the benefits of having a static site (free hosting, complex infrastructure).</li><li><strong>Search client-side</strong>:<br>Having a static site, it makes sense to move all the user interaction to the client. We depend on the users&rsquo; browser to run Javascript<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup> and download the searchable data in order to run queries against it, but the upside is that you can control how data is processed and how that data is queried. Fortunately for us, <a href=https://blog.codinghorror.com/the-principle-of-least-power/>Atwood&rsquo;s Law</a> holds true; there&rsquo;s a full-text search library inspired by Lucene/Solr written in Javascript we can use to implement our search engine: <a href=https://lunrjs.com/>Lunr.js</a>.</li></ol><h1 id=relevance>Relevance<a hidden class=anchor aria-hidden=true href=#relevance>#</a></h1><p>When thinking about search, the most important question is what users want to find. This sounds very much like an open door, but you&rsquo;d be surprised how often this gets overlooked; what are we looking for (tweets, products, (the fastest route to) a destination?), who is doing the search (lawyers, software engineers, my mom?), what do we hope to get out of it (money, page views?).</p><p>In our case, we&rsquo;re searching blog posts that have titles, tags and content (in decreasing order of value to relevance); queries matching titles should be more important than matches in post content<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup>.</p><h1 id=indexing>Indexing<a hidden class=anchor aria-hidden=true href=#indexing>#</a></h1><p>The project folder for my blog<sup id=fnref:5><a href=#fn:5 class=footnote-ref role=doc-noteref>5</a></sup> looks roughly like this:</p><pre tabindex=0><code>blog/ &lt;= Hugo project root folder
 |- content/ &lt;- this is where the pages I want to be searchable live
     |- about.md
     |- post/
@@ -261,13 +21,7 @@
 |- ...
 |- Gruntfile.js &lt;- This will build our index
 |- ...
-</code></pre><p>The idea is that we build an index on site generation time, and fetch that file when a user loads the page.</p>
-<p>I use <a href="https://gruntjs.com/"><code>Gruntjs</code></a><sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup> to build the index file, and some dependencies that make life a little easier. Install them with <code>npm</code>:</p>
-<code class="bash">
-$ npm install --save-dev grunt string gray-matter
-</code>
-<p>This is my <a href="https://github.com/bartdegoede/blog/blob/master/Gruntfile.js"><code>Gruntfile.js</code></a> that lives in the root of my project. It will walk through the <code>content/</code> directory and parse all the markdown files it finds. It will parse out <code>title</code>, <code>categories</code> and <code>href</code> (this will be the reference to the post; i.e. the URL of the page we want to point to) from the front matter, and the <code>content</code> from the rest of the post. It also skips posts that are labeled <code>draft</code>, because I don&rsquo;t want the posts I&rsquo;m still working on to already show up in the search results.</p>
-<pre tabindex="0"><code>var matter = require(&#39;gray-matter&#39;);
+</code></pre><p>The idea is that we build an index on site generation time, and fetch that file when a user loads the page.</p><p>I use <a href=https://gruntjs.com/><code>Gruntjs</code></a><sup id=fnref:6><a href=#fn:6 class=footnote-ref role=doc-noteref>6</a></sup> to build the index file, and some dependencies that make life a little easier. Install them with <code>npm</code>:</p><code class=bash>$ npm install --save-dev grunt string gray-matter</code><p>This is my <a href=https://github.com/bartdegoede/blog/blob/master/Gruntfile.js><code>Gruntfile.js</code></a> that lives in the root of my project. It will walk through the <code>content/</code> directory and parse all the markdown files it finds. It will parse out <code>title</code>, <code>categories</code> and <code>href</code> (this will be the reference to the post; i.e. the URL of the page we want to point to) from the front matter, and the <code>content</code> from the rest of the post. It also skips posts that are labeled <code>draft</code>, because I don&rsquo;t want the posts I&rsquo;m still working on to already show up in the search results.</p><pre tabindex=0><code>var matter = require(&#39;gray-matter&#39;);
 var S = require(&#39;string&#39;);
 
 var CONTENT_PATH_PREFIX = &#39;content&#39;;
@@ -307,8 +61,7 @@ module.exports = function(grunt) {
         grunt.log.ok(&#39;Index built&#39;);
     });
 };
-</code></pre><p>To run this task, simply run <code>grunt search-index</code> in the directory where <code>Gruntfile.js</code> is located<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup>. This will generate a JSON index file looking like this:</p>
-<pre tabindex="0"><code>[
+</code></pre><p>To run this task, simply run <code>grunt search-index</code> in the directory where <code>Gruntfile.js</code> is located<sup id=fnref:7><a href=#fn:7 class=footnote-ref role=doc-noteref>7</a></sup>. This will generate a JSON index file looking like this:</p><pre tabindex=0><code>[
     {
         &#34;content&#34;: &#34;Hi My name is Bart de Goede and ...&#34;,
         &#34;href&#34;: &#34;about&#34;,
@@ -322,17 +75,13 @@ module.exports = function(grunt) {
     },
     ...
 ]
-</code></pre><h1 id="querying">Querying<a hidden class="anchor" aria-hidden="true" href="#querying">#</a></h1>
-<p>Now we&rsquo;ve built the index, we need a way of obtaining it client-side, and then query it. To do that, I have two partials that include <a href="https://github.com/bartdegoede/blog/blob/master/layouts/partials/search.html">the markup for the search input box</a> and the links to the <a href="https://github.com/bartdegoede/blog/blob/master/layouts/partials/search_scripts.html">relevant Javascript</a>:</p>
-<pre tabindex="0"><code>&lt;script type=&#34;text/javascript&#34; src=&#34;https://code.jquery.com/jquery-2.1.3.min.js&#34;&gt;&lt;/script&gt;
+</code></pre><h1 id=querying>Querying<a hidden class=anchor aria-hidden=true href=#querying>#</a></h1><p>Now we&rsquo;ve built the index, we need a way of obtaining it client-side, and then query it. To do that, I have two partials that include <a href=https://github.com/bartdegoede/blog/blob/master/layouts/partials/search.html>the markup for the search input box</a> and the links to the <a href=https://github.com/bartdegoede/blog/blob/master/layouts/partials/search_scripts.html>relevant Javascript</a>:</p><pre tabindex=0><code>&lt;script type=&#34;text/javascript&#34; src=&#34;https://code.jquery.com/jquery-2.1.3.min.js&#34;&gt;&lt;/script&gt;
 &lt;script type=&#34;text/javascript&#34; src=&#34;js/vendor/lunr.min.js&#34;&gt;&lt;/script&gt;
 &lt;script type=&#34;text/javascript&#34; src=&#34;js/search/search.js&#34;&gt;&lt;/script&gt;
 &lt;!-- js/search/search.js contains the code that downloads and initialises the index --&gt;
 ...
 &lt;input type=&#34;text&#34; id=&#34;search&#34;&gt;
-</code></pre><p>For my blog, I have one <a href="https://github.com/bartdegoede/blog/blob/master/static/js/search/search.js"><code>search.js</code> file</a> that will download the index file, initialise the UI, and run the searches. For the sake of readability, I&rsquo;ve split up the relevant functions below and added some comments to the code.</p>
-<p>This function fetches the index file we&rsquo;ve generated with the Grunt task, initialises the relevant fields, and then adds the each of the documents to the index. The <code>pagesIndex</code> variable will store the documents as we indexed them, and the <code>searchIndex</code> variable will store the statistics and data structures we need to rank our documents for a query efficiently.</p>
-<pre tabindex="0"><code>function initSearchIndex() {
+</code></pre><p>For my blog, I have one <a href=https://github.com/bartdegoede/blog/blob/master/static/js/search/search.js><code>search.js</code> file</a> that will download the index file, initialise the UI, and run the searches. For the sake of readability, I&rsquo;ve split up the relevant functions below and added some comments to the code.</p><p>This function fetches the index file we&rsquo;ve generated with the Grunt task, initialises the relevant fields, and then adds the each of the documents to the index. The <code>pagesIndex</code> variable will store the documents as we indexed them, and the <code>searchIndex</code> variable will store the statistics and data structures we need to rank our documents for a query efficiently.</p><pre tabindex=0><code>function initSearchIndex() {
   // this file is built by the Grunt task, and
   $.getJSON(&#39;js/search/index.json&#39;)
     .done(function(documents) {
@@ -359,8 +108,7 @@ module.exports = function(grunt) {
 }
 
 initSearchIndex();
-</code></pre><p>Then, we need to sprinkle some jQuery magic on the input box. In my case, I want to start searching once a user has typed at least two characters, and support a typeahead style of searching, so everytime a character is entered, I want to empty the current search results (if any), run the <code>searchSite</code> function with whatever is in the input box, and render the results.</p>
-<pre tabindex="0"><code>function initUI() {
+</code></pre><p>Then, we need to sprinkle some jQuery magic on the input box. In my case, I want to start searching once a user has typed at least two characters, and support a typeahead style of searching, so everytime a character is entered, I want to empty the current search results (if any), run the <code>searchSite</code> function with whatever is in the input box, and render the results.</p><pre tabindex=0><code>function initUI() {
   $results = $(&#39;.posts&#39;);
   // or whatever element is supposed to hold your results
   $(&#39;#search&#39;).keyup(function() {
@@ -378,8 +126,7 @@ initSearchIndex();
 $(document).ready(function() {
   initUI();
 });
-</code></pre><p>The <code>searchSite</code> function will take the <code>query_string</code> the user typed in and build a <code>lunr.Query</code> object and run it against the index (stored in the <code>searchIndex</code> variable). The <code>lunr</code> index will return a ranked list of <code>ref</code>s (these are the identifiers we assigned to the documents in the <code>Gruntfile</code>). The second part of this method maps these identifiers to the original documents we stored in the <code>pagesIndex</code> variable.</p>
-<pre tabindex="0"><code>// this function will parse the query_string, which will you
+</code></pre><p>The <code>searchSite</code> function will take the <code>query_string</code> the user typed in and build a <code>lunr.Query</code> object and run it against the index (stored in the <code>searchIndex</code> variable). The <code>lunr</code> index will return a ranked list of <code>ref</code>s (these are the identifiers we assigned to the documents in the <code>Gruntfile</code>). The second part of this method maps these identifiers to the original documents we stored in the <code>pagesIndex</code> variable.</p><pre tabindex=0><code>// this function will parse the query_string, which will you
 // to run queries like &#34;title:lunr&#34; (search the title field),
 // &#34;lunr^10&#34; (boost hits with this term by a factor 10) or
 // &#34;lunr~2&#34; (will match anything within an edit distance of 2,
@@ -407,10 +154,7 @@ function searchSite(query_string) {
     })[0];
   });
 }
-</code></pre><p>The snippet above lists two methods. The first shows an example of a search using the default <code>lunr.Index#search</code> method, which uses the <code>lunr</code> query syntax.</p>
-<p>In my case, I want to support a typeahead search, where we show the user results for partial queries too; if the user types <code>&quot;pyth&quot;</code>, we should display results that have the word <code>&quot;python&quot;</code> in the post. To do that, we tell Lunr to combine two queries: the first <code>q.term</code> provides <em>exact matches</em> with a high boost to relevance (because we it&rsquo;s likely that these matches are relevant to the user), the second appends a trailing wildcard to the query<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup>, providing prefix matches with a (lower) boost.</p>
-<p>Finally, given the ranked list of results (containing <em>all</em> pages in the <code>content/</code> directory), we want to render those somewhere on the page. The <code>renderResults</code> method slices the result list to the first ten results, creates a link to the appropriate post based on the <code>href</code>, and creates a (crude) snippet based on the 100 first characters of the content.</p>
-<pre tabindex="0"><code>function renderResults(results) {
+</code></pre><p>The snippet above lists two methods. The first shows an example of a search using the default <code>lunr.Index#search</code> method, which uses the <code>lunr</code> query syntax.</p><p>In my case, I want to support a typeahead search, where we show the user results for partial queries too; if the user types <code>"pyth"</code>, we should display results that have the word <code>"python"</code> in the post. To do that, we tell Lunr to combine two queries: the first <code>q.term</code> provides <em>exact matches</em> with a high boost to relevance (because we it&rsquo;s likely that these matches are relevant to the user), the second appends a trailing wildcard to the query<sup id=fnref:8><a href=#fn:8 class=footnote-ref role=doc-noteref>8</a></sup>, providing prefix matches with a (lower) boost.</p><p>Finally, given the ranked list of results (containing <em>all</em> pages in the <code>content/</code> directory), we want to render those somewhere on the page. The <code>renderResults</code> method slices the result list to the first ten results, creates a link to the appropriate post based on the <code>href</code>, and creates a (crude) snippet based on the 100 first characters of the content.</p><pre tabindex=0><code>function renderResults(results) {
   if (!results.length) {
     return;
   }
@@ -425,232 +169,6 @@ function searchSite(query_string) {
     $results.append($result);
   });
 }
-</code></pre><p>This is a pretty naive approach to introducing full-text search to a static site (I use Hugo, but this will work with static site generators like Jekyll or Hyde too); it completely ignores other languages than English (there&rsquo;s <a href="https://lunrjs.com/guides/language_support.html">support for other languages</a> too), let alone non whitespace languages like Chinese, and it requires users to download the full index that contains all your searchable pages, so it won&rsquo;t scale as nicely if you have thousands of pages. For my personal blog though, it&rsquo;s good enough 😇.</p>
-<div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>It&rsquo;s fast, it&rsquo;s written in Golang, it supports <a href="https://themes.gohugo.io/">fancy themes</a>, and it&rsquo;s <a href="https://github.com/gohugoio/hugo">open source</a>!&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2">
-<p>You can <a href="https://support.google.com/adsense/answer/9879?visit_id=1-636557905318663395-3173001859&amp;ctx=as2&amp;hl=en&amp;rd=2&amp;ref_topic=1705820">make money</a> off theses ads, but the question is whether you want to show ads on your personal blog or not.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3">
-<p>I&rsquo;m assuming that the audience that&rsquo;ll land on these pages will have Javascript enabled in their browser 😄&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4">
-<p>In this case, I&rsquo;m totally assuming that if words from the query occur in the title or the manually assigned tags of a post are way more relevant than matches in the content of a post, if only because there&rsquo;s a lot more words in post content, so there&rsquo;s a higher probability of matching <em>any</em> word in the query.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:5">
-<p>It&rsquo;s also on <a href="https://github.com/bartdegoede/blog">GitHub</a>.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:6">
-<p>A port of this script to Golang is in the works.&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:7">
-<p>The idea is to run the task before you deploy the latest version of your site. In my case, I have a <a href="https://github.com/bartdegoede/blog/blob/master/deploy.sh"><code>deploy.sh</code> script</a> that runs Hugo to build my static pages, runs <code>grunt search-index</code> and pushes the result to GitHub.&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:8">
-<p>Lunr uses tries to represent terms internally, giving us an efficient way of doing fast prefix lookups.&#160;<a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
-
-  </div><div style="margin: 2rem 0; text-align: center;">
-      <style>.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#000000 !important;background-color:#FFFFFF !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 0px 9px !important;font-size: 17px !important;letter-spacing:-0.08px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Lato', sans-serif !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#000000 !important;}</style>
-      <link href="https://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext&display=swap" rel="stylesheet">
-      <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/bart">
-          <img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a coffee!">
-          <span style="margin-left:5px">Buy me a coffee!</span>
-      </a>
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-    </ul>
-
-<ul class="share-buttons">
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on x"
-            href="https://x.com/intent/tweet/?text=Searching%20your%20Hugo%20site%20with%20Lunr&amp;url=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f&amp;hashtags=">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f&amp;title=Searching%20your%20Hugo%20site%20with%20Lunr&amp;summary=Searching%20your%20Hugo%20site%20with%20Lunr&amp;source=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on reddit"
-            href="https://reddit.com/submit?url=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f&title=Searching%20your%20Hugo%20site%20with%20Lunr">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on facebook"
-            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on whatsapp"
-            href="https://api.whatsapp.com/send?text=Searching%20your%20Hugo%20site%20with%20Lunr%20-%20https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on telegram"
-            href="https://telegram.me/share/url?text=Searching%20your%20Hugo%20site%20with%20Lunr&amp;url=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f">
-            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=Searching%20your%20Hugo%20site%20with%20Lunr&u=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f">
-            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
-                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
-                <path
-                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
-            </svg>
-        </a>
-    </li>
-</ul>
-
-  </footer>
-</article>
-    </main>
-    
-<footer class="footer">
-    <span>&copy; 2025 <a href="https://bart.degoe.de/">Bart de Goede</a></span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
-
-
-<script>
-    let menu = document.getElementById('menu')
-    if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = 'copy';
-
-        function copyingDone() {
-            copybutton.innerHTML = 'copied!';
-            setTimeout(() => {
-                copybutton.innerHTML = 'copy';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
-
-</html>
+</code></pre><p>This is a pretty naive approach to introducing full-text search to a static site (I use Hugo, but this will work with static site generators like Jekyll or Hyde too); it completely ignores other languages than English (there&rsquo;s <a href=https://lunrjs.com/guides/language_support.html>support for other languages</a> too), let alone non whitespace languages like Chinese, and it requires users to download the full index that contains all your searchable pages, so it won&rsquo;t scale as nicely if you have thousands of pages. For my personal blog though, it&rsquo;s good enough 😇.</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>It&rsquo;s fast, it&rsquo;s written in Golang, it supports <a href=https://themes.gohugo.io/>fancy themes</a>, and it&rsquo;s <a href=https://github.com/gohugoio/hugo>open source</a>!&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2><p>You can <a href="https://support.google.com/adsense/answer/9879?visit_id=1-636557905318663395-3173001859&amp;ctx=as2&amp;hl=en&amp;rd=2&amp;ref_topic=1705820">make money</a> off theses ads, but the question is whether you want to show ads on your personal blog or not.&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:3><p>I&rsquo;m assuming that the audience that&rsquo;ll land on these pages will have Javascript enabled in their browser 😄&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:4><p>In this case, I&rsquo;m totally assuming that if words from the query occur in the title or the manually assigned tags of a post are way more relevant than matches in the content of a post, if only because there&rsquo;s a lot more words in post content, so there&rsquo;s a higher probability of matching <em>any</em> word in the query.&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:5><p>It&rsquo;s also on <a href=https://github.com/bartdegoede/blog>GitHub</a>.&#160;<a href=#fnref:5 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:6><p>A port of this script to Golang is in the works.&#160;<a href=#fnref:6 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:7><p>The idea is to run the task before you deploy the latest version of your site. In my case, I have a <a href=https://github.com/bartdegoede/blog/blob/master/deploy.sh><code>deploy.sh</code> script</a> that runs Hugo to build my static pages, runs <code>grunt search-index</code> and pushes the result to GitHub.&#160;<a href=#fnref:7 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:8><p>Lunr uses tries to represent terms internally, giving us an efficient way of doing fast prefix lookups.&#160;<a href=#fnref:8 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></div><div style="margin:2rem 0;text-align:center"><style>.bmc-button img{width:27px !important;margin-bottom:1px !important;box-shadow:none !important;border:none !important;vertical-align:middle !important}.bmc-button{line-height:36px !important;height:37px !important;text-decoration:none !important;display:inline-flex !important;color:#000 !important;background-color:#fff !important;border-radius:3px !important;border:1px solid transparent !important;padding:0 9px !important;font-size:17px !important;letter-spacing:-.08px !important;box-shadow:0 1px 2px rgba(190,190,190,.5) !important;-webkit-box-shadow:0 1px 2px 2px rgba(190,190,190,.5) !important;margin:0 auto !important;font-family:lato,sans-serif !important;-webkit-box-sizing:border-box !important;box-sizing:border-box !important;-o-transition:.3s all linear !important;-webkit-transition:.3s all linear !important;-moz-transition:.3s all linear !important;-ms-transition:.3s all linear !important;transition:.3s all linear !important}.bmc-button:hover,.bmc-button:active,.bmc-button:focus{-webkit-box-shadow:0 1px 2px 2px rgba(190,190,190,.5) !important;text-decoration:none !important;box-shadow:0 1px 2px 2px rgba(190,190,190,.5) !important;opacity:.85 !important;color:#000 !important}</style><link href="https://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext&display=swap" rel=stylesheet><a class=bmc-button target=_blank href=https://www.buymeacoffee.com/bart><img src=https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg alt="Buy me a coffee!">
+<span style=margin-left:5px>Buy me a coffee!</span></a></div><footer class=post-footer><ul class=post-tags></ul><ul class=share-buttons><li><a target=_blank rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on x" href="https://x.com/intent/tweet/?text=Searching%20your%20Hugo%20site%20with%20Lunr&amp;url=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f&amp;hashtags="><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446C483.971.0 512 28.03 512 62.554zM269.951 190.75 182.567 75.216H56L207.216 272.95 63.9 436.783h61.366L235.9 310.383l96.667 126.4H456L298.367 228.367l134-153.151H371.033zM127.633 110h36.468l219.38 290.065H349.5z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f&amp;title=Searching%20your%20Hugo%20site%20with%20Lunr&amp;summary=Searching%20your%20Hugo%20site%20with%20Lunr&amp;source=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f&title=Searching%20your%20Hugo%20site%20with%20Lunr"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on whatsapp" href="https://api.whatsapp.com/send?text=Searching%20your%20Hugo%20site%20with%20Lunr%20-%20https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on telegram" href="https://telegram.me/share/url?text=Searching%20your%20Hugo%20site%20with%20Lunr&amp;url=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f"><svg viewBox="2 2 28 28" height="30" width="30" fill="currentColor"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Searching your Hugo site with Lunr on ycombinator" href="https://news.ycombinator.com/submitlink?t=Searching%20your%20Hugo%20site%20with%20Lunr&u=https%3a%2f%2fbart.degoe.de%2fsearching-your-hugo-site-with-lunr%2f"><svg width="30" height="30" viewBox="0 0 512 512" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446zM183.8767 87.9921h-62.034L230.6673 292.4508V424.0079h50.6655V292.4508L390.1575 87.9921H328.1233L256 238.2489z"/></svg></a></li></ul></footer></article></main><footer class=footer><span>&copy; 2025 <a href=https://bart.degoe.de/>Bart de Goede</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>
+</a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
