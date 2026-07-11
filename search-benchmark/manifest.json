@@ -1,0 +1,29 @@
+{
+  "frozen": true,
+  "corpus_commit": "d48c7e884c7e4edaf9121051ce4173740cccfe6f",
+  "frozen_at": "2026-07-10",
+  "n_posts": 13,
+  "n_chunks": 313,
+  "chunk_size": 600,
+  "chunk_overlap": 120,
+  "title_prefix": true,
+  "doc_scale": 127.0,
+  "arms": {
+    "potion": {
+      "dims": 128,
+      "docs": null,
+      "model": "minishlab/potion-base-8M",
+      "note": "reuses the live /search/ index -- the arm the site actually ships"
+    },
+    "minilm": {
+      "dims": 384,
+      "docs": "minilm/docs.bin",
+      "model": "Xenova/all-MiniLM-L6-v2"
+    },
+    "ternlight": {
+      "dims": 384,
+      "docs": "ternlight/docs.bin",
+      "model": "@ternlight/base@0.1.0"
+    }
+  }
+}
