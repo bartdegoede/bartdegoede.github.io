@@ -2,7 +2,7 @@
   "model_id": "minishlab/potion-base-8M",
   "dims": 128,
   "vocab_size": 29528,
-  "n_chunks": 360,
+  "n_chunks": 376,
   "chunk_size": 600,
   "chunk_overlap": 120,
   "title_prefix": true,
@@ -10,8 +10,8 @@
   "sss_eval_version": "0.1.0",
   "doc_scale": 127.0,
   "files": {
-    "chunks": "chunks.9ed90d8e51e9.json",
-    "docs": "docs.b9939421bb21.bin",
+    "chunks": "chunks.31443ffd6ed5.json",
+    "docs": "docs.c1c4ee92048c.bin",
     "tokens": "tokens.5f3d9776bbef.bin",
     "scales": "scales.9dd8a81e1204.bin",
     "vocab": "vocab.00175329ae71.json"
